@@ -6,6 +6,10 @@
  *         licenseKey: "licenseKey"
  *     }
  */
-export interface GetApiV1EmpresasLicenseKeyRequest {
+export interface GetTempOrderDetailsRequest {
     licenseKey: string;
+    page?: number;
+    pageSize?: number;
+    folio?: number;
+    search?: string;
 }

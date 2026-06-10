@@ -25,7 +25,7 @@ export class EndpointsClient {
     /**
      * Devuelve el catálogo de productos de una sucursal, con paginación y filtros opcionales por grupo, clasificación y visibilidad en menú.
      *
-     * @param {WrestaurantApi.GetApiV1ProductosLicenseKeyRequest} request
+     * @param {WrestaurantApi.GetProductsRequest} request
      * @param {EndpointsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link WrestaurantApi.UnauthorizedError}
@@ -33,19 +33,19 @@ export class EndpointsClient {
      * @throws {@link WrestaurantApi.TooManyRequestsError}
      *
      * @example
-     *     await client.endpoints.listarProductos({
+     *     await client.endpoints.getProducts({
      *         licenseKey: "licenseKey"
      *     })
      */
-    public listarProductos(
-        request: WrestaurantApi.GetApiV1ProductosLicenseKeyRequest,
+    public getProducts(
+        request: WrestaurantApi.GetProductsRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): core.HttpResponsePromise<WrestaurantApi.ProductsQueryResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__listarProductos(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__getProducts(request, requestOptions));
     }
 
-    private async __listarProductos(
-        request: WrestaurantApi.GetApiV1ProductosLicenseKeyRequest,
+    private async __getProducts(
+        request: WrestaurantApi.GetProductsRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): Promise<core.WithRawResponse<WrestaurantApi.ProductsQueryResponse>> {
         const { licenseKey, page, pageSize, search, idGrupo, clasificacion, visibleMenu } = request;
@@ -128,7 +128,7 @@ export class EndpointsClient {
     /**
      * Devuelve las estaciones (mesas, áreas, terminales) configuradas en una sucursal, con paginación y búsqueda opcional.
      *
-     * @param {WrestaurantApi.GetApiV1EstacionesLicenseKeyRequest} request
+     * @param {WrestaurantApi.GetStationsRequest} request
      * @param {EndpointsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link WrestaurantApi.UnauthorizedError}
@@ -136,19 +136,19 @@ export class EndpointsClient {
      * @throws {@link WrestaurantApi.TooManyRequestsError}
      *
      * @example
-     *     await client.endpoints.listarEstaciones({
+     *     await client.endpoints.getStations({
      *         licenseKey: "licenseKey"
      *     })
      */
-    public listarEstaciones(
-        request: WrestaurantApi.GetApiV1EstacionesLicenseKeyRequest,
+    public getStations(
+        request: WrestaurantApi.GetStationsRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): core.HttpResponsePromise<WrestaurantApi.StationsQueryResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__listarEstaciones(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__getStations(request, requestOptions));
     }
 
-    private async __listarEstaciones(
-        request: WrestaurantApi.GetApiV1EstacionesLicenseKeyRequest,
+    private async __getStations(
+        request: WrestaurantApi.GetStationsRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): Promise<core.WithRawResponse<WrestaurantApi.StationsQueryResponse>> {
         const { licenseKey, page, pageSize, search } = request;
@@ -228,7 +228,7 @@ export class EndpointsClient {
     /**
      * Devuelve las órdenes abiertas del Punto de Venta de una sucursal, con filtro opcional por folio, número de cheque o total.
      *
-     * @param {WrestaurantApi.GetApiV1TempOrdenesLicenseKeyRequest} request
+     * @param {WrestaurantApi.GetTempOrdersRequest} request
      * @param {EndpointsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link WrestaurantApi.UnauthorizedError}
@@ -236,19 +236,19 @@ export class EndpointsClient {
      * @throws {@link WrestaurantApi.TooManyRequestsError}
      *
      * @example
-     *     await client.endpoints.listarOrdenesTemporales({
+     *     await client.endpoints.getTempOrders({
      *         licenseKey: "licenseKey"
      *     })
      */
-    public listarOrdenesTemporales(
-        request: WrestaurantApi.GetApiV1TempOrdenesLicenseKeyRequest,
+    public getTempOrders(
+        request: WrestaurantApi.GetTempOrdersRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): core.HttpResponsePromise<WrestaurantApi.OrdersResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__listarOrdenesTemporales(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__getTempOrders(request, requestOptions));
     }
 
-    private async __listarOrdenesTemporales(
-        request: WrestaurantApi.GetApiV1TempOrdenesLicenseKeyRequest,
+    private async __getTempOrders(
+        request: WrestaurantApi.GetTempOrdersRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): Promise<core.WithRawResponse<WrestaurantApi.OrdersResponse>> {
         const { licenseKey, search, page, pageSize } = request;
@@ -337,18 +337,18 @@ export class EndpointsClient {
      * @throws {@link WrestaurantApi.TooManyRequestsError}
      *
      * @example
-     *     await client.endpoints.crearUnaOrdenNuevaCuenta({
+     *     await client.endpoints.createTempOrders({
      *         licenseKey: "licenseKey"
      *     })
      */
-    public crearUnaOrdenNuevaCuenta(
+    public createTempOrders(
         request: WrestaurantApi.CreateOrderRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): core.HttpResponsePromise<WrestaurantApi.CreateOrderResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__crearUnaOrdenNuevaCuenta(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__createTempOrders(request, requestOptions));
     }
 
-    private async __crearUnaOrdenNuevaCuenta(
+    private async __createTempOrders(
         request: WrestaurantApi.CreateOrderRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): Promise<core.WithRawResponse<WrestaurantApi.CreateOrderResponse>> {
@@ -437,18 +437,18 @@ export class EndpointsClient {
      * @throws {@link WrestaurantApi.TooManyRequestsError}
      *
      * @example
-     *     await client.endpoints.crearUnaOrdenCerradaVentaRapida({
+     *     await client.endpoints.createClosedTempOrder({
      *         licenseKey: "licenseKey"
      *     })
      */
-    public crearUnaOrdenCerradaVentaRapida(
+    public createClosedTempOrder(
         request: WrestaurantApi.CreateClosedOrderRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): core.HttpResponsePromise<WrestaurantApi.CreateClosedOrderResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__crearUnaOrdenCerradaVentaRapida(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__createClosedTempOrder(request, requestOptions));
     }
 
-    private async __crearUnaOrdenCerradaVentaRapida(
+    private async __createClosedTempOrder(
         request: WrestaurantApi.CreateClosedOrderRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): Promise<core.WithRawResponse<WrestaurantApi.CreateClosedOrderResponse>> {
@@ -531,7 +531,7 @@ export class EndpointsClient {
     /**
      * Devuelve el listado de meseros configurados en una sucursal.
      *
-     * @param {WrestaurantApi.GetApiV1MeserosLicenseKeyRequest} request
+     * @param {WrestaurantApi.GetMeserosRequest} request
      * @param {EndpointsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link WrestaurantApi.UnauthorizedError}
@@ -539,19 +539,19 @@ export class EndpointsClient {
      * @throws {@link WrestaurantApi.TooManyRequestsError}
      *
      * @example
-     *     await client.endpoints.listarMeseros({
+     *     await client.endpoints.getMeseros({
      *         licenseKey: "licenseKey"
      *     })
      */
-    public listarMeseros(
-        request: WrestaurantApi.GetApiV1MeserosLicenseKeyRequest,
+    public getMeseros(
+        request: WrestaurantApi.GetMeserosRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): core.HttpResponsePromise<WrestaurantApi.MeserosResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__listarMeseros(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__getMeseros(request, requestOptions));
     }
 
-    private async __listarMeseros(
-        request: WrestaurantApi.GetApiV1MeserosLicenseKeyRequest,
+    private async __getMeseros(
+        request: WrestaurantApi.GetMeserosRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): Promise<core.WithRawResponse<WrestaurantApi.MeserosResponse>> {
         const { licenseKey, search } = request;
@@ -624,7 +624,7 @@ export class EndpointsClient {
     /**
      * Devuelve las empresas registradas en el Punto de Venta de una sucursal.
      *
-     * @param {WrestaurantApi.GetApiV1EmpresasLicenseKeyRequest} request
+     * @param {WrestaurantApi.GetEmpresasRequest} request
      * @param {EndpointsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link WrestaurantApi.UnauthorizedError}
@@ -632,19 +632,19 @@ export class EndpointsClient {
      * @throws {@link WrestaurantApi.TooManyRequestsError}
      *
      * @example
-     *     await client.endpoints.listarEmpresas({
+     *     await client.endpoints.getEmpresas({
      *         licenseKey: "licenseKey"
      *     })
      */
-    public listarEmpresas(
-        request: WrestaurantApi.GetApiV1EmpresasLicenseKeyRequest,
+    public getEmpresas(
+        request: WrestaurantApi.GetEmpresasRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): core.HttpResponsePromise<WrestaurantApi.EmpresasResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__listarEmpresas(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__getEmpresas(request, requestOptions));
     }
 
-    private async __listarEmpresas(
-        request: WrestaurantApi.GetApiV1EmpresasLicenseKeyRequest,
+    private async __getEmpresas(
+        request: WrestaurantApi.GetEmpresasRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): Promise<core.WithRawResponse<WrestaurantApi.EmpresasResponse>> {
         const { licenseKey } = request;
@@ -710,7 +710,7 @@ export class EndpointsClient {
     /**
      * Devuelve todas las cuentas activas (sin cancelar) del turno operativo actual (6:00 AM – 5:59:59 AM del día siguiente).
      *
-     * @param {WrestaurantApi.GetApiV1TempOrdenesAbiertasLicenseKeyRequest} request
+     * @param {WrestaurantApi.GetOpenOrdersRequest} request
      * @param {EndpointsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link WrestaurantApi.UnauthorizedError}
@@ -718,21 +718,19 @@ export class EndpointsClient {
      * @throws {@link WrestaurantApi.TooManyRequestsError}
      *
      * @example
-     *     await client.endpoints.listarOrdenesAbiertasDelTurnoActual({
+     *     await client.endpoints.getOpenOrders({
      *         licenseKey: "licenseKey"
      *     })
      */
-    public listarOrdenesAbiertasDelTurnoActual(
-        request: WrestaurantApi.GetApiV1TempOrdenesAbiertasLicenseKeyRequest,
+    public getOpenOrders(
+        request: WrestaurantApi.GetOpenOrdersRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): core.HttpResponsePromise<WrestaurantApi.OpenOrdersResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__listarOrdenesAbiertasDelTurnoActual(request, requestOptions),
-        );
+        return core.HttpResponsePromise.fromPromise(this.__getOpenOrders(request, requestOptions));
     }
 
-    private async __listarOrdenesAbiertasDelTurnoActual(
-        request: WrestaurantApi.GetApiV1TempOrdenesAbiertasLicenseKeyRequest,
+    private async __getOpenOrders(
+        request: WrestaurantApi.GetOpenOrdersRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): Promise<core.WithRawResponse<WrestaurantApi.OpenOrdersResponse>> {
         const { licenseKey } = request;
@@ -803,7 +801,7 @@ export class EndpointsClient {
     /**
      * Devuelve las líneas de productos temporales de una sucursal, con paginación y filtros opcionales por folio de orden o búsqueda por producto.
      *
-     * @param {WrestaurantApi.GetApiV1TempOrdenesDetLicenseKeyRequest} request
+     * @param {WrestaurantApi.GetTempOrderDetailsRequest} request
      * @param {EndpointsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link WrestaurantApi.UnauthorizedError}
@@ -811,19 +809,19 @@ export class EndpointsClient {
      * @throws {@link WrestaurantApi.TooManyRequestsError}
      *
      * @example
-     *     await client.endpoints.listarDetallesDeOrdenesTemporales({
+     *     await client.endpoints.getTempOrderDetails({
      *         licenseKey: "licenseKey"
      *     })
      */
-    public listarDetallesDeOrdenesTemporales(
-        request: WrestaurantApi.GetApiV1TempOrdenesDetLicenseKeyRequest,
+    public getTempOrderDetails(
+        request: WrestaurantApi.GetTempOrderDetailsRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): core.HttpResponsePromise<WrestaurantApi.OrderDetailsQueryResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__listarDetallesDeOrdenesTemporales(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__getTempOrderDetails(request, requestOptions));
     }
 
-    private async __listarDetallesDeOrdenesTemporales(
-        request: WrestaurantApi.GetApiV1TempOrdenesDetLicenseKeyRequest,
+    private async __getTempOrderDetails(
+        request: WrestaurantApi.GetTempOrderDetailsRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): Promise<core.WithRawResponse<WrestaurantApi.OrderDetailsQueryResponse>> {
         const { licenseKey, page, pageSize, folio, search } = request;
@@ -907,7 +905,7 @@ export class EndpointsClient {
     /**
      * Retorna todas las formas de pago disponibles en una sucursal específica.
      *
-     * @param {WrestaurantApi.GetApiV1FormasdepagoLicenseKeyRequest} request
+     * @param {WrestaurantApi.GetPaymentMethodsRequest} request
      * @param {EndpointsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link WrestaurantApi.UnauthorizedError}
@@ -915,21 +913,19 @@ export class EndpointsClient {
      * @throws {@link WrestaurantApi.TooManyRequestsError}
      *
      * @example
-     *     await client.endpoints.listarTodasLasFormasDePagoEnUnaSucursal({
+     *     await client.endpoints.getPaymentMethods({
      *         licenseKey: "licenseKey"
      *     })
      */
-    public listarTodasLasFormasDePagoEnUnaSucursal(
-        request: WrestaurantApi.GetApiV1FormasdepagoLicenseKeyRequest,
+    public getPaymentMethods(
+        request: WrestaurantApi.GetPaymentMethodsRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): core.HttpResponsePromise<WrestaurantApi.PaymentMethodsResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__listarTodasLasFormasDePagoEnUnaSucursal(request, requestOptions),
-        );
+        return core.HttpResponsePromise.fromPromise(this.__getPaymentMethods(request, requestOptions));
     }
 
-    private async __listarTodasLasFormasDePagoEnUnaSucursal(
-        request: WrestaurantApi.GetApiV1FormasdepagoLicenseKeyRequest,
+    private async __getPaymentMethods(
+        request: WrestaurantApi.GetPaymentMethodsRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): Promise<core.WithRawResponse<WrestaurantApi.PaymentMethodsResponse>> {
         const { licenseKey, page, pageSize, search } = request;

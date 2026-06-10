@@ -6,9 +6,6 @@
  *         licenseKey: "licenseKey"
  *     }
  */
-export interface GetApiV1TempOrdenesLicenseKeyRequest {
+export interface GetOpenOrdersRequest {
     licenseKey: string;
-    search?: string;
-    page?: number;
-    pageSize?: number;
 }

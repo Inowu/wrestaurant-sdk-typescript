@@ -6,7 +6,9 @@
  *         licenseKey: "licenseKey"
  *     }
  */
-export interface GetApiV1MeserosLicenseKeyRequest {
+export interface GetTempOrdersRequest {
     licenseKey: string;
     search?: string;
+    page?: number;
+    pageSize?: number;
 }

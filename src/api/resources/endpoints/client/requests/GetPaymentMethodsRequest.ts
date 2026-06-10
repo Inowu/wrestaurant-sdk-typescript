@@ -6,7 +6,7 @@
  *         licenseKey: "licenseKey"
  *     }
  */
-export interface GetApiV1EstacionesLicenseKeyRequest {
+export interface GetPaymentMethodsRequest {
     licenseKey: string;
     page?: number;
     pageSize?: number;

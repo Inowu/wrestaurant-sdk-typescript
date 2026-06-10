@@ -1,6 +1,6 @@
 # Reference
 ## Endpoints
-<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">listarProductos</a>({ ...params }) -> WrestaurantApi.ProductsQueryResponse</code></summary>
+<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">getProducts</a>({ ...params }) -> WrestaurantApi.ProductsQueryResponse</code></summary>
 <dl>
 <dd>
 
@@ -27,7 +27,7 @@ Devuelve el catálogo de productos de una sucursal, con paginación y filtros op
 <dd>
 
 ```typescript
-await client.endpoints.listarProductos({
+await client.endpoints.getProducts({
     licenseKey: "licenseKey"
 });
 
@@ -45,7 +45,7 @@ await client.endpoints.listarProductos({
 <dl>
 <dd>
 
-**request:** `WrestaurantApi.GetApiV1ProductosLicenseKeyRequest` 
+**request:** `WrestaurantApi.GetProductsRequest` 
     
 </dd>
 </dl>
@@ -65,7 +65,7 @@ await client.endpoints.listarProductos({
 </dl>
 </details>
 
-<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">listarEstaciones</a>({ ...params }) -> WrestaurantApi.StationsQueryResponse</code></summary>
+<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">getStations</a>({ ...params }) -> WrestaurantApi.StationsQueryResponse</code></summary>
 <dl>
 <dd>
 
@@ -92,7 +92,7 @@ Devuelve las estaciones (mesas, áreas, terminales) configuradas en una sucursal
 <dd>
 
 ```typescript
-await client.endpoints.listarEstaciones({
+await client.endpoints.getStations({
     licenseKey: "licenseKey"
 });
 
@@ -110,7 +110,7 @@ await client.endpoints.listarEstaciones({
 <dl>
 <dd>
 
-**request:** `WrestaurantApi.GetApiV1EstacionesLicenseKeyRequest` 
+**request:** `WrestaurantApi.GetStationsRequest` 
     
 </dd>
 </dl>
@@ -130,7 +130,7 @@ await client.endpoints.listarEstaciones({
 </dl>
 </details>
 
-<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">listarOrdenesTemporales</a>({ ...params }) -> WrestaurantApi.OrdersResponse</code></summary>
+<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">getTempOrders</a>({ ...params }) -> WrestaurantApi.OrdersResponse</code></summary>
 <dl>
 <dd>
 
@@ -157,7 +157,7 @@ Devuelve las órdenes abiertas del Punto de Venta de una sucursal, con filtro op
 <dd>
 
 ```typescript
-await client.endpoints.listarOrdenesTemporales({
+await client.endpoints.getTempOrders({
     licenseKey: "licenseKey"
 });
 
@@ -175,7 +175,7 @@ await client.endpoints.listarOrdenesTemporales({
 <dl>
 <dd>
 
-**request:** `WrestaurantApi.GetApiV1TempOrdenesLicenseKeyRequest` 
+**request:** `WrestaurantApi.GetTempOrdersRequest` 
     
 </dd>
 </dl>
@@ -195,7 +195,7 @@ await client.endpoints.listarOrdenesTemporales({
 </dl>
 </details>
 
-<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">crearUnaOrdenNuevaCuenta</a>({ ...params }) -> WrestaurantApi.CreateOrderResponse</code></summary>
+<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">createTempOrders</a>({ ...params }) -> WrestaurantApi.CreateOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -222,7 +222,7 @@ Crea una nueva cuenta y retorna el id.
 <dd>
 
 ```typescript
-await client.endpoints.crearUnaOrdenNuevaCuenta({
+await client.endpoints.createTempOrders({
     licenseKey: "licenseKey"
 });
 
@@ -260,7 +260,7 @@ await client.endpoints.crearUnaOrdenNuevaCuenta({
 </dl>
 </details>
 
-<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">crearUnaOrdenCerradaVentaRapida</a>({ ...params }) -> WrestaurantApi.CreateClosedOrderResponse</code></summary>
+<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">createClosedTempOrder</a>({ ...params }) -> WrestaurantApi.CreateClosedOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -287,7 +287,7 @@ Crea una nueva venta cerrada con su pago y retorna el folio generado.
 <dd>
 
 ```typescript
-await client.endpoints.crearUnaOrdenCerradaVentaRapida({
+await client.endpoints.createClosedTempOrder({
     licenseKey: "licenseKey"
 });
 
@@ -325,7 +325,7 @@ await client.endpoints.crearUnaOrdenCerradaVentaRapida({
 </dl>
 </details>
 
-<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">listarMeseros</a>({ ...params }) -> WrestaurantApi.MeserosResponse</code></summary>
+<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">getMeseros</a>({ ...params }) -> WrestaurantApi.MeserosResponse</code></summary>
 <dl>
 <dd>
 
@@ -352,7 +352,7 @@ Devuelve el listado de meseros configurados en una sucursal.
 <dd>
 
 ```typescript
-await client.endpoints.listarMeseros({
+await client.endpoints.getMeseros({
     licenseKey: "licenseKey"
 });
 
@@ -370,7 +370,7 @@ await client.endpoints.listarMeseros({
 <dl>
 <dd>
 
-**request:** `WrestaurantApi.GetApiV1MeserosLicenseKeyRequest` 
+**request:** `WrestaurantApi.GetMeserosRequest` 
     
 </dd>
 </dl>
@@ -390,7 +390,7 @@ await client.endpoints.listarMeseros({
 </dl>
 </details>
 
-<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">listarEmpresas</a>({ ...params }) -> WrestaurantApi.EmpresasResponse</code></summary>
+<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">getEmpresas</a>({ ...params }) -> WrestaurantApi.EmpresasResponse</code></summary>
 <dl>
 <dd>
 
@@ -417,7 +417,7 @@ Devuelve las empresas registradas en el Punto de Venta de una sucursal.
 <dd>
 
 ```typescript
-await client.endpoints.listarEmpresas({
+await client.endpoints.getEmpresas({
     licenseKey: "licenseKey"
 });
 
@@ -435,7 +435,7 @@ await client.endpoints.listarEmpresas({
 <dl>
 <dd>
 
-**request:** `WrestaurantApi.GetApiV1EmpresasLicenseKeyRequest` 
+**request:** `WrestaurantApi.GetEmpresasRequest` 
     
 </dd>
 </dl>
@@ -455,7 +455,7 @@ await client.endpoints.listarEmpresas({
 </dl>
 </details>
 
-<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">listarOrdenesAbiertasDelTurnoActual</a>({ ...params }) -> WrestaurantApi.OpenOrdersResponse</code></summary>
+<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">getOpenOrders</a>({ ...params }) -> WrestaurantApi.OpenOrdersResponse</code></summary>
 <dl>
 <dd>
 
@@ -482,7 +482,7 @@ Devuelve todas las cuentas activas (sin cancelar) del turno operativo actual (6:
 <dd>
 
 ```typescript
-await client.endpoints.listarOrdenesAbiertasDelTurnoActual({
+await client.endpoints.getOpenOrders({
     licenseKey: "licenseKey"
 });
 
@@ -500,7 +500,7 @@ await client.endpoints.listarOrdenesAbiertasDelTurnoActual({
 <dl>
 <dd>
 
-**request:** `WrestaurantApi.GetApiV1TempOrdenesAbiertasLicenseKeyRequest` 
+**request:** `WrestaurantApi.GetOpenOrdersRequest` 
     
 </dd>
 </dl>
@@ -520,7 +520,7 @@ await client.endpoints.listarOrdenesAbiertasDelTurnoActual({
 </dl>
 </details>
 
-<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">listarDetallesDeOrdenesTemporales</a>({ ...params }) -> WrestaurantApi.OrderDetailsQueryResponse</code></summary>
+<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">getTempOrderDetails</a>({ ...params }) -> WrestaurantApi.OrderDetailsQueryResponse</code></summary>
 <dl>
 <dd>
 
@@ -547,7 +547,7 @@ Devuelve las líneas de productos temporales de una sucursal, con paginación y 
 <dd>
 
 ```typescript
-await client.endpoints.listarDetallesDeOrdenesTemporales({
+await client.endpoints.getTempOrderDetails({
     licenseKey: "licenseKey"
 });
 
@@ -565,7 +565,7 @@ await client.endpoints.listarDetallesDeOrdenesTemporales({
 <dl>
 <dd>
 
-**request:** `WrestaurantApi.GetApiV1TempOrdenesDetLicenseKeyRequest` 
+**request:** `WrestaurantApi.GetTempOrderDetailsRequest` 
     
 </dd>
 </dl>
@@ -585,7 +585,7 @@ await client.endpoints.listarDetallesDeOrdenesTemporales({
 </dl>
 </details>
 
-<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">listarTodasLasFormasDePagoEnUnaSucursal</a>({ ...params }) -> WrestaurantApi.PaymentMethodsResponse</code></summary>
+<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">getPaymentMethods</a>({ ...params }) -> WrestaurantApi.PaymentMethodsResponse</code></summary>
 <dl>
 <dd>
 
@@ -612,7 +612,7 @@ Retorna todas las formas de pago disponibles en una sucursal específica.
 <dd>
 
 ```typescript
-await client.endpoints.listarTodasLasFormasDePagoEnUnaSucursal({
+await client.endpoints.getPaymentMethods({
     licenseKey: "licenseKey"
 });
 
@@ -630,7 +630,7 @@ await client.endpoints.listarTodasLasFormasDePagoEnUnaSucursal({
 <dl>
 <dd>
 
-**request:** `WrestaurantApi.GetApiV1FormasdepagoLicenseKeyRequest` 
+**request:** `WrestaurantApi.GetPaymentMethodsRequest` 
     
 </dd>
 </dl>

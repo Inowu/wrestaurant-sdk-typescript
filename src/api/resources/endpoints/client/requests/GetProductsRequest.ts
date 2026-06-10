@@ -6,9 +6,12 @@
  *         licenseKey: "licenseKey"
  *     }
  */
-export interface GetApiV1FormasdepagoLicenseKeyRequest {
+export interface GetProductsRequest {
     licenseKey: string;
     page?: number;
     pageSize?: number;
     search?: string;
+    idGrupo?: string;
+    clasificacion?: string;
+    visibleMenu?: boolean;
 }

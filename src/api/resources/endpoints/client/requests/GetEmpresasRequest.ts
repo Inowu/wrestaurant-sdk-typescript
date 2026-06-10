@@ -6,6 +6,6 @@
  *         licenseKey: "licenseKey"
  *     }
  */
-export interface GetApiV1TempOrdenesAbiertasLicenseKeyRequest {
+export interface GetEmpresasRequest {
     licenseKey: string;
 }

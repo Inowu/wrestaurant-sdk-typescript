@@ -6,12 +6,7 @@
  *         licenseKey: "licenseKey"
  *     }
  */
-export interface GetApiV1ProductosLicenseKeyRequest {
+export interface GetMeserosRequest {
     licenseKey: string;
-    page?: number;
-    pageSize?: number;
     search?: string;
-    idGrupo?: string;
-    clasificacion?: string;
-    visibleMenu?: boolean;
 }

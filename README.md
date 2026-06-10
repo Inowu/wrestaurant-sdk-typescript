@@ -44,7 +44,7 @@ Instantiate and use the client with the following:
 import { WrestaurantApiClient } from "@wrestaurant/sdk";
 
 const client = new WrestaurantApiClient({ apiKey: "YOUR_API_KEY", apiKey: "YOUR_API_KEY", licenseKey: "YOUR_LICENSE_KEY" });
-await client.endpoints.crearUnaOrdenNuevaCuenta({
+await client.endpoints.createTempOrders({
     licenseKey: "licenseKey"
 });
 ```
@@ -69,7 +69,7 @@ following namespace:
 ```typescript
 import { WrestaurantApi } from "@wrestaurant/sdk";
 
-const request: WrestaurantApi.GetApiV1ProductosLicenseKeyRequest = {
+const request: WrestaurantApi.GetProductsRequest = {
     ...
 };
 ```
@@ -83,7 +83,7 @@ will be thrown.
 import { WrestaurantApiError } from "@wrestaurant/sdk";
 
 try {
-    await client.endpoints.crearUnaOrdenNuevaCuenta(...);
+    await client.endpoints.createTempOrders(...);
 } catch (err) {
     if (err instanceof WrestaurantApiError) {
         console.log(err.statusCode);
@@ -120,7 +120,7 @@ const client = new WrestaurantApiClient({
     }
 });
 
-const response = await client.endpoints.crearUnaOrdenNuevaCuenta(..., {
+const response = await client.endpoints.createTempOrders(..., {
     headers: {
         'X-Custom-Header': 'custom value'
     }
@@ -132,7 +132,7 @@ const response = await client.endpoints.crearUnaOrdenNuevaCuenta(..., {
 If you would like to send additional query string parameters as part of the request, use the `queryParams` request option.
 
 ```typescript
-const response = await client.endpoints.crearUnaOrdenNuevaCuenta(..., {
+const response = await client.endpoints.createTempOrders(..., {
     queryParams: {
         'customQueryParamKey': 'custom query param value'
     }
@@ -162,7 +162,7 @@ Which status codes are retried depends on the `retryStatusCodes` generator confi
 Use the `maxRetries` request option to configure this behavior.
 
 ```typescript
-const response = await client.endpoints.crearUnaOrdenNuevaCuenta(..., {
+const response = await client.endpoints.createTempOrders(..., {
     maxRetries: 0 // override maxRetries at the request level
 });
 ```
@@ -172,7 +172,7 @@ const response = await client.endpoints.crearUnaOrdenNuevaCuenta(..., {
 The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
 
 ```typescript
-const response = await client.endpoints.crearUnaOrdenNuevaCuenta(..., {
+const response = await client.endpoints.createTempOrders(..., {
     timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
@@ -183,7 +183,7 @@ The SDK allows users to abort requests at any point by passing in an abort signa
 
 ```typescript
 const controller = new AbortController();
-const response = await client.endpoints.crearUnaOrdenNuevaCuenta(..., {
+const response = await client.endpoints.createTempOrders(..., {
     abortSignal: controller.signal
 });
 controller.abort(); // aborts the request
@@ -195,7 +195,7 @@ The SDK provides access to raw response data, including headers, through the `.w
 The `.withRawResponse()` method returns a promise that results to an object with a `data` and a `rawResponse` property.
 
 ```typescript
-const { data, rawResponse } = await client.endpoints.crearUnaOrdenNuevaCuenta(...).withRawResponse();
+const { data, rawResponse } = await client.endpoints.createTempOrders(...).withRawResponse();
 
 console.log(data);
 console.log(rawResponse.headers['X-My-Header']);

@@ -5,7 +5,7 @@ import { WrestaurantApiClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
 describe("EndpointsClient", () => {
-    test("listarProductos (1)", async () => {
+    test("GetProducts (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -54,13 +54,13 @@ describe("EndpointsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.endpoints.listarProductos({
+        const response = await client.endpoints.getProducts({
             licenseKey: "licenseKey",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("listarProductos (2)", async () => {
+    test("GetProducts (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -80,13 +80,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.listarProductos({
+            return await client.endpoints.getProducts({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
     });
 
-    test("listarProductos (3)", async () => {
+    test("GetProducts (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -106,13 +106,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.listarProductos({
+            return await client.endpoints.getProducts({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.NotFoundError);
     });
 
-    test("listarProductos (4)", async () => {
+    test("GetProducts (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -132,13 +132,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.listarProductos({
+            return await client.endpoints.getProducts({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
     });
 
-    test("listarEstaciones (1)", async () => {
+    test("GetStations (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -179,13 +179,13 @@ describe("EndpointsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.endpoints.listarEstaciones({
+        const response = await client.endpoints.getStations({
             licenseKey: "licenseKey",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("listarEstaciones (2)", async () => {
+    test("GetStations (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -205,13 +205,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.listarEstaciones({
+            return await client.endpoints.getStations({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
     });
 
-    test("listarEstaciones (3)", async () => {
+    test("GetStations (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -231,13 +231,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.listarEstaciones({
+            return await client.endpoints.getStations({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.NotFoundError);
     });
 
-    test("listarEstaciones (4)", async () => {
+    test("GetStations (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -257,13 +257,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.listarEstaciones({
+            return await client.endpoints.getStations({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
     });
 
-    test("listarOrdenesTemporales (1)", async () => {
+    test("GetTempOrders (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -335,13 +335,13 @@ describe("EndpointsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.endpoints.listarOrdenesTemporales({
+        const response = await client.endpoints.getTempOrders({
             licenseKey: "licenseKey",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("listarOrdenesTemporales (2)", async () => {
+    test("GetTempOrders (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -361,13 +361,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.listarOrdenesTemporales({
+            return await client.endpoints.getTempOrders({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
     });
 
-    test("listarOrdenesTemporales (3)", async () => {
+    test("GetTempOrders (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -387,13 +387,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.listarOrdenesTemporales({
+            return await client.endpoints.getTempOrders({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.NotFoundError);
     });
 
-    test("listarOrdenesTemporales (4)", async () => {
+    test("GetTempOrders (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -413,13 +413,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.listarOrdenesTemporales({
+            return await client.endpoints.getTempOrders({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
     });
 
-    test("crearUnaOrdenNuevaCuenta (1)", async () => {
+    test("CreateTempOrders (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -439,13 +439,13 @@ describe("EndpointsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.endpoints.crearUnaOrdenNuevaCuenta({
+        const response = await client.endpoints.createTempOrders({
             licenseKey: "licenseKey",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("crearUnaOrdenNuevaCuenta (2)", async () => {
+    test("CreateTempOrders (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -466,13 +466,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.crearUnaOrdenNuevaCuenta({
+            return await client.endpoints.createTempOrders({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.BadRequestError);
     });
 
-    test("crearUnaOrdenNuevaCuenta (3)", async () => {
+    test("CreateTempOrders (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -493,13 +493,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.crearUnaOrdenNuevaCuenta({
+            return await client.endpoints.createTempOrders({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
     });
 
-    test("crearUnaOrdenNuevaCuenta (4)", async () => {
+    test("CreateTempOrders (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -520,13 +520,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.crearUnaOrdenNuevaCuenta({
+            return await client.endpoints.createTempOrders({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.NotFoundError);
     });
 
-    test("crearUnaOrdenNuevaCuenta (5)", async () => {
+    test("CreateTempOrders (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -547,13 +547,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.crearUnaOrdenNuevaCuenta({
+            return await client.endpoints.createTempOrders({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
     });
 
-    test("crearUnaOrdenCerradaVentaRapida (1)", async () => {
+    test("CreateClosedTempOrder (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -573,13 +573,13 @@ describe("EndpointsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.endpoints.crearUnaOrdenCerradaVentaRapida({
+        const response = await client.endpoints.createClosedTempOrder({
             licenseKey: "licenseKey",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("crearUnaOrdenCerradaVentaRapida (2)", async () => {
+    test("CreateClosedTempOrder (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -600,13 +600,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.crearUnaOrdenCerradaVentaRapida({
+            return await client.endpoints.createClosedTempOrder({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.BadRequestError);
     });
 
-    test("crearUnaOrdenCerradaVentaRapida (3)", async () => {
+    test("CreateClosedTempOrder (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -627,13 +627,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.crearUnaOrdenCerradaVentaRapida({
+            return await client.endpoints.createClosedTempOrder({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
     });
 
-    test("crearUnaOrdenCerradaVentaRapida (4)", async () => {
+    test("CreateClosedTempOrder (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -654,13 +654,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.crearUnaOrdenCerradaVentaRapida({
+            return await client.endpoints.createClosedTempOrder({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.NotFoundError);
     });
 
-    test("crearUnaOrdenCerradaVentaRapida (5)", async () => {
+    test("CreateClosedTempOrder (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -681,13 +681,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.crearUnaOrdenCerradaVentaRapida({
+            return await client.endpoints.createClosedTempOrder({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
     });
 
-    test("listarMeseros (1)", async () => {
+    test("GetMeseros (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -732,13 +732,13 @@ describe("EndpointsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.endpoints.listarMeseros({
+        const response = await client.endpoints.getMeseros({
             licenseKey: "licenseKey",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("listarMeseros (2)", async () => {
+    test("GetMeseros (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -758,13 +758,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.listarMeseros({
+            return await client.endpoints.getMeseros({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
     });
 
-    test("listarMeseros (3)", async () => {
+    test("GetMeseros (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -784,13 +784,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.listarMeseros({
+            return await client.endpoints.getMeseros({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.NotFoundError);
     });
 
-    test("listarMeseros (4)", async () => {
+    test("GetMeseros (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -810,13 +810,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.listarMeseros({
+            return await client.endpoints.getMeseros({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
     });
 
-    test("listarEmpresas (1)", async () => {
+    test("GetEmpresas (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -877,13 +877,13 @@ describe("EndpointsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.endpoints.listarEmpresas({
+        const response = await client.endpoints.getEmpresas({
             licenseKey: "licenseKey",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("listarEmpresas (2)", async () => {
+    test("GetEmpresas (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -903,13 +903,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.listarEmpresas({
+            return await client.endpoints.getEmpresas({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
     });
 
-    test("listarEmpresas (3)", async () => {
+    test("GetEmpresas (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -929,13 +929,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.listarEmpresas({
+            return await client.endpoints.getEmpresas({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.NotFoundError);
     });
 
-    test("listarEmpresas (4)", async () => {
+    test("GetEmpresas (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -955,13 +955,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.listarEmpresas({
+            return await client.endpoints.getEmpresas({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
     });
 
-    test("listarOrdenesAbiertasDelTurnoActual (1)", async () => {
+    test("GetOpenOrders (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -1029,13 +1029,13 @@ describe("EndpointsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.endpoints.listarOrdenesAbiertasDelTurnoActual({
+        const response = await client.endpoints.getOpenOrders({
             licenseKey: "licenseKey",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("listarOrdenesAbiertasDelTurnoActual (2)", async () => {
+    test("GetOpenOrders (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -1055,13 +1055,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.listarOrdenesAbiertasDelTurnoActual({
+            return await client.endpoints.getOpenOrders({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
     });
 
-    test("listarOrdenesAbiertasDelTurnoActual (3)", async () => {
+    test("GetOpenOrders (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -1081,13 +1081,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.listarOrdenesAbiertasDelTurnoActual({
+            return await client.endpoints.getOpenOrders({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.NotFoundError);
     });
 
-    test("listarOrdenesAbiertasDelTurnoActual (4)", async () => {
+    test("GetOpenOrders (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -1107,13 +1107,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.listarOrdenesAbiertasDelTurnoActual({
+            return await client.endpoints.getOpenOrders({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
     });
 
-    test("listarDetallesDeOrdenesTemporales (1)", async () => {
+    test("GetTempOrderDetails (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -1176,13 +1176,13 @@ describe("EndpointsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.endpoints.listarDetallesDeOrdenesTemporales({
+        const response = await client.endpoints.getTempOrderDetails({
             licenseKey: "licenseKey",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("listarDetallesDeOrdenesTemporales (2)", async () => {
+    test("GetTempOrderDetails (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -1202,13 +1202,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.listarDetallesDeOrdenesTemporales({
+            return await client.endpoints.getTempOrderDetails({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
     });
 
-    test("listarDetallesDeOrdenesTemporales (3)", async () => {
+    test("GetTempOrderDetails (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -1228,13 +1228,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.listarDetallesDeOrdenesTemporales({
+            return await client.endpoints.getTempOrderDetails({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.NotFoundError);
     });
 
-    test("listarDetallesDeOrdenesTemporales (4)", async () => {
+    test("GetTempOrderDetails (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -1254,13 +1254,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.listarDetallesDeOrdenesTemporales({
+            return await client.endpoints.getTempOrderDetails({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
     });
 
-    test("listarTodasLasFormasDePagoEnUnaSucursal (1)", async () => {
+    test("GetPaymentMethods (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -1328,13 +1328,13 @@ describe("EndpointsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.endpoints.listarTodasLasFormasDePagoEnUnaSucursal({
+        const response = await client.endpoints.getPaymentMethods({
             licenseKey: "licenseKey",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("listarTodasLasFormasDePagoEnUnaSucursal (2)", async () => {
+    test("GetPaymentMethods (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -1354,13 +1354,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.listarTodasLasFormasDePagoEnUnaSucursal({
+            return await client.endpoints.getPaymentMethods({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
     });
 
-    test("listarTodasLasFormasDePagoEnUnaSucursal (3)", async () => {
+    test("GetPaymentMethods (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -1380,13 +1380,13 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.listarTodasLasFormasDePagoEnUnaSucursal({
+            return await client.endpoints.getPaymentMethods({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.NotFoundError);
     });
 
-    test("listarTodasLasFormasDePagoEnUnaSucursal (4)", async () => {
+    test("GetPaymentMethods (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -1406,7 +1406,7 @@ describe("EndpointsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.endpoints.listarTodasLasFormasDePagoEnUnaSucursal({
+            return await client.endpoints.getPaymentMethods({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
