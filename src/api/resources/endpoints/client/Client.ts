@@ -334,6 +334,8 @@ export class EndpointsClient {
      * @throws {@link WrestaurantApi.BadRequestError}
      * @throws {@link WrestaurantApi.UnauthorizedError}
      * @throws {@link WrestaurantApi.NotFoundError}
+     * @throws {@link WrestaurantApi.ConflictError}
+     * @throws {@link WrestaurantApi.UnprocessableEntityError}
      * @throws {@link WrestaurantApi.TooManyRequestsError}
      *
      * @example
@@ -352,12 +354,13 @@ export class EndpointsClient {
         request: WrestaurantApi.CreateOrderRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): Promise<core.WithRawResponse<WrestaurantApi.CreateOrderResponse>> {
-        const { licenseKey, ..._body } = request;
+        const { licenseKey, "Idempotency-Key": idempotencyKey, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
+                "Idempotency-Key": idempotencyKey,
                 "X-Api-Key": requestOptions?.apiKey ?? this._options?.apiKey,
                 "X-License-Key": requestOptions?.licenseKey ?? this._options?.licenseKey,
             }),
@@ -403,6 +406,16 @@ export class EndpointsClient {
                         _response.error.body as WrestaurantApi.ProblemDetails,
                         _response.rawResponse,
                     );
+                case 409:
+                    throw new WrestaurantApi.ConflictError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 422:
+                    throw new WrestaurantApi.UnprocessableEntityError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
                 case 429:
                     throw new WrestaurantApi.TooManyRequestsError(
                         _response.error.body as WrestaurantApi.ProblemDetails,
@@ -434,6 +447,8 @@ export class EndpointsClient {
      * @throws {@link WrestaurantApi.BadRequestError}
      * @throws {@link WrestaurantApi.UnauthorizedError}
      * @throws {@link WrestaurantApi.NotFoundError}
+     * @throws {@link WrestaurantApi.ConflictError}
+     * @throws {@link WrestaurantApi.UnprocessableEntityError}
      * @throws {@link WrestaurantApi.TooManyRequestsError}
      *
      * @example
@@ -452,12 +467,13 @@ export class EndpointsClient {
         request: WrestaurantApi.CreateClosedOrderRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): Promise<core.WithRawResponse<WrestaurantApi.CreateClosedOrderResponse>> {
-        const { licenseKey, ..._body } = request;
+        const { licenseKey, "Idempotency-Key": idempotencyKey, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
+                "Idempotency-Key": idempotencyKey,
                 "X-Api-Key": requestOptions?.apiKey ?? this._options?.apiKey,
                 "X-License-Key": requestOptions?.licenseKey ?? this._options?.licenseKey,
             }),
@@ -503,6 +519,16 @@ export class EndpointsClient {
                     );
                 case 404:
                     throw new WrestaurantApi.NotFoundError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 409:
+                    throw new WrestaurantApi.ConflictError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 422:
+                    throw new WrestaurantApi.UnprocessableEntityError(
                         _response.error.body as WrestaurantApi.ProblemDetails,
                         _response.rawResponse,
                     );

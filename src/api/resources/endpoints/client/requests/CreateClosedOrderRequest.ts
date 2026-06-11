@@ -10,6 +10,7 @@ import type * as WrestaurantApi from "../../../../index.js";
  */
 export interface CreateClosedOrderRequest {
     licenseKey: string;
+    "Idempotency-Key"?: string;
     turnDependent?: boolean;
     estacion?: string | null;
     serie?: string | null;

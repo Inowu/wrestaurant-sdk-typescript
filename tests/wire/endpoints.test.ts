@@ -542,6 +542,60 @@ describe("EndpointsClient", () => {
             .post("/api/v1/temp_ordenes/licenseKey")
             .jsonBody(rawRequestBody)
             .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.endpoints.createTempOrders({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.ConflictError);
+    });
+
+    test("CreateTempOrders (6)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/temp_ordenes/licenseKey")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.endpoints.createTempOrders({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.UnprocessableEntityError);
+    });
+
+    test("CreateTempOrders (7)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/temp_ordenes/licenseKey")
+            .jsonBody(rawRequestBody)
+            .respondWith()
             .statusCode(429)
             .jsonBody(rawResponseBody)
             .build();
@@ -661,6 +715,60 @@ describe("EndpointsClient", () => {
     });
 
     test("CreateClosedTempOrder (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/temp_ordenes_cerradas/licenseKey")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.endpoints.createClosedTempOrder({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.ConflictError);
+    });
+
+    test("CreateClosedTempOrder (6)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/temp_ordenes_cerradas/licenseKey")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.endpoints.createClosedTempOrder({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.UnprocessableEntityError);
+    });
+
+    test("CreateClosedTempOrder (7)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
