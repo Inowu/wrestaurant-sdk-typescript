@@ -3,4 +3,5 @@
 export interface CreateClosedOrderResponse {
     jobId?: string | undefined;
     folio?: number | undefined;
+    numcheque?: number | undefined;
 }

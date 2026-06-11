@@ -616,7 +616,7 @@ describe("EndpointsClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {};
-        const rawResponseBody = { jobId: "jobId", folio: 1 };
+        const rawResponseBody = { jobId: "jobId", folio: 1, numcheque: 1 };
 
         server
             .mockEndpoint()
