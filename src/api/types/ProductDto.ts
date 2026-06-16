@@ -13,6 +13,7 @@ export interface ProductDto {
     visibleMenu?: boolean | undefined;
     idProdServSat?: (string | null) | undefined;
     precio?: number | undefined;
+    precioSinImpuestos?: number | undefined;
     impuesto1?: number | undefined;
     impuesto2?: number | undefined;
     impuesto3?: number | undefined;

@@ -130,6 +130,71 @@ await client.endpoints.getStations({
 </dl>
 </details>
 
+<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">getGrupos</a>({ ...params }) -> WrestaurantApi.GruposQueryResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Devuelve los grupos (categorías de productos) configurados en una sucursal, con paginación y búsqueda opcional por id, descripción o clasificación.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.endpoints.getGrupos({
+    licenseKey: "licenseKey"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.GetGruposRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EndpointsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">getTempOrders</a>({ ...params }) -> WrestaurantApi.OrdersResponse</code></summary>
 <dl>
 <dd>

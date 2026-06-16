@@ -35,6 +35,7 @@ describe("EndpointsClient", () => {
                     visibleMenu: true,
                     idProdServSat: "idProdServSat",
                     precio: 1.1,
+                    precioSinImpuestos: 1.1,
                     impuesto1: 1.1,
                     impuesto2: 1.1,
                     impuesto3: 1.1,
@@ -258,6 +259,141 @@ describe("EndpointsClient", () => {
 
         await expect(async () => {
             return await client.endpoints.getStations({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
+    });
+
+    test("GetGrupos (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {
+            jobId: "jobId",
+            workerId: "workerId",
+            dispatchedAt: "2024-01-15T09:30:00Z",
+            page: 1,
+            pageSize: 1,
+            totalResults: 1,
+            totalPages: 1,
+            hasNextPage: true,
+            grupos: [
+                {
+                    idGrupo: "idGrupo",
+                    descripcion: "descripcion",
+                    clasificacion: "clasificacion",
+                    prioridad: 1,
+                    color: "color",
+                    colorLetra: "colorLetra",
+                    prioridadImpresion: 1,
+                    cambiaColorCuenta: true,
+                    colorCuenta: "colorCuenta",
+                    colorLetraCuenta: "colorLetraCuenta",
+                    solicitaAutorizacion: true,
+                    imagenMenuElectronico: "imagenMenuElectronico",
+                    extMenu: "extMenu",
+                    porcentajePropina: 1.1,
+                    imagenMenu: "imagenMenu",
+                    idEtiqueta: 1,
+                    workspaceId: 1,
+                    alcohol: true,
+                    serviceCode: "serviceCode",
+                },
+            ],
+        };
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/grupos/licenseKey")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.endpoints.getGrupos({
+            licenseKey: "licenseKey",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("GetGrupos (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/grupos/licenseKey")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.endpoints.getGrupos({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
+    });
+
+    test("GetGrupos (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/grupos/licenseKey")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.endpoints.getGrupos({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.NotFoundError);
+    });
+
+    test("GetGrupos (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/grupos/licenseKey")
+            .respondWith()
+            .statusCode(429)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.endpoints.getGrupos({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);

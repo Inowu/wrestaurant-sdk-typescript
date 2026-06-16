@@ -226,6 +226,101 @@ export class EndpointsClient {
     }
 
     /**
+     * Devuelve los grupos (categorías de productos) configurados en una sucursal, con paginación y búsqueda opcional por id, descripción o clasificación.
+     *
+     * @param {WrestaurantApi.GetGruposRequest} request
+     * @param {EndpointsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link WrestaurantApi.UnauthorizedError}
+     * @throws {@link WrestaurantApi.NotFoundError}
+     * @throws {@link WrestaurantApi.TooManyRequestsError}
+     *
+     * @example
+     *     await client.endpoints.getGrupos({
+     *         licenseKey: "licenseKey"
+     *     })
+     */
+    public getGrupos(
+        request: WrestaurantApi.GetGruposRequest,
+        requestOptions?: EndpointsClient.RequestOptions,
+    ): core.HttpResponsePromise<WrestaurantApi.GruposQueryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__getGrupos(request, requestOptions));
+    }
+
+    private async __getGrupos(
+        request: WrestaurantApi.GetGruposRequest,
+        requestOptions?: EndpointsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<WrestaurantApi.GruposQueryResponse>> {
+        const { licenseKey, page, pageSize, search } = request;
+        const _queryParams: Record<string, unknown> = {
+            page,
+            pageSize,
+            search,
+        };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "X-Api-Key": requestOptions?.apiKey ?? this._options?.apiKey,
+                "X-License-Key": requestOptions?.licenseKey ?? this._options?.licenseKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.WrestaurantApiEnvironment.Default,
+                `api/v1/grupos/${core.url.encodePathParam(licenseKey)}`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as WrestaurantApi.GruposQueryResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new WrestaurantApi.UnauthorizedError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new WrestaurantApi.NotFoundError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new WrestaurantApi.TooManyRequestsError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.WrestaurantApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/api/v1/grupos/{licenseKey}");
+    }
+
+    /**
      * Devuelve las órdenes abiertas del Punto de Venta de una sucursal, con filtro opcional por folio, número de cheque o total.
      *
      * @param {WrestaurantApi.GetTempOrdersRequest} request
