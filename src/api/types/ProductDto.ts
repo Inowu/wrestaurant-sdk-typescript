@@ -21,4 +21,5 @@ export interface ProductDto {
     permitirprodcompenmodif?: boolean | undefined;
     modificadores?: (WrestaurantApi.ModificadorDto[] | null) | undefined;
     gruposModificadores?: (WrestaurantApi.GruposModificadorDto[] | null) | undefined;
+    comentarios?: (WrestaurantApi.CommentDto[] | null) | undefined;
 }

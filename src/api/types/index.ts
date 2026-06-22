@@ -1,3 +1,4 @@
+export * from "./CommentDto.js";
 export * from "./CreateClosedOrderResponse.js";
 export * from "./CreateOrderResponse.js";
 export * from "./EmpresaDto.js";

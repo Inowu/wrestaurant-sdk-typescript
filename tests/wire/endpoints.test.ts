@@ -43,6 +43,7 @@ describe("EndpointsClient", () => {
                     permitirprodcompenmodif: true,
                     modificadores: [{}],
                     gruposModificadores: [{}],
+                    comentarios: [{}],
                 },
             ],
         };
