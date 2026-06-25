@@ -288,7 +288,37 @@ Crea una nueva cuenta y retorna el id.
 
 ```typescript
 await client.endpoints.createTempOrders({
-    licenseKey: "licenseKey"
+    licenseKey: "licenseKey",
+    turnDependent: true,
+    mesa: "5",
+    idMesero: "001",
+    estacion: "CAJA1",
+    serie: "A",
+    idEmpresa: "1",
+    noPersonas: 2,
+    productos: [{
+            idProducto: "01052",
+            descripcionProducto: "Hamburguesa doble carne",
+            idGrupo: "0007",
+            movimiento: 1,
+            cantidad: 2,
+            descripcionGrupo: "Hamburguesas",
+            clasificacion: "ALIMENTOS",
+            productoCompuestoPrincipal: 0,
+            nombreCorto: "Hamb. doble",
+            imagen: "",
+            visibleMenu: true,
+            idProdServSat: "50202306",
+            comentario: "Sin pepinillos",
+            precio: 89,
+            precioSinImpuestos: 76.72,
+            impuesto1: 12.28,
+            impuesto2: 0,
+            impuesto3: 0,
+            descuento: 0,
+            bloqueado: false,
+            permitirprodcompenmodif: false
+        }]
 });
 
 ```
@@ -353,7 +383,36 @@ Crea una nueva venta cerrada con su pago y retorna el folio generado.
 
 ```typescript
 await client.endpoints.createClosedTempOrder({
-    licenseKey: "licenseKey"
+    licenseKey: "licenseKey",
+    turnDependent: true,
+    estacion: "CAJA1",
+    serie: "A",
+    idEmpresa: "1",
+    noPersonas: 1,
+    productos: [{
+            idProducto: "01052",
+            descripcionProducto: "Hamburguesa doble carne",
+            idGrupo: "0007",
+            movimiento: 1,
+            cantidad: 1,
+            descripcionGrupo: "Hamburguesas",
+            clasificacion: "ALIMENTOS",
+            productoCompuestoPrincipal: 0,
+            nombreCorto: "Hamb. doble",
+            imagen: "",
+            visibleMenu: true,
+            idProdServSat: "50202306",
+            comentario: "",
+            precio: 89,
+            precioSinImpuestos: 76.72,
+            impuesto1: 12.28,
+            impuesto2: 0,
+            impuesto3: 0,
+            descuento: 0,
+            bloqueado: false,
+            permitirprodcompenmodif: false
+        }],
+    idFormaDePago: "001"
 });
 
 ```
@@ -704,6 +763,493 @@ await client.endpoints.getPaymentMethods({
 <dd>
 
 **requestOptions:** `EndpointsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Impresoras
+<details><summary><code>client.impresoras.<a href="/src/api/resources/impresoras/client/Client.ts">listPrinters</a>({ ...params }) -> WrestaurantApi.PrinterDto[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Devuelve las impresoras del usuario. Filtra por licenseKey para limitar a un solo punto de venta.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.impresoras.listPrinters();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.ListPrintersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ImpresorasClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.impresoras.<a href="/src/api/resources/impresoras/client/Client.ts">createPrinter</a>({ ...params }) -> WrestaurantApi.PrinterDto</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Registra una nueva impresora en uno de los puntos de venta del usuario.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.impresoras.createPrinter({
+    licenseKey: "DS5D2368HCME4O9X",
+    printerIp: "192.168.1.50",
+    displayName: "Cocina",
+    widthMm: 80,
+    source: "windows",
+    sourceId: "POS-01"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.CreatePrinterRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ImpresorasClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.impresoras.<a href="/src/api/resources/impresoras/client/Client.ts">getPrinter</a>({ ...params }) -> WrestaurantApi.PrinterDto</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Devuelve una impresora del usuario por su id.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.impresoras.getPrinter({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.GetPrinterRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ImpresorasClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.impresoras.<a href="/src/api/resources/impresoras/client/Client.ts">updatePrinter</a>({ ...params }) -> WrestaurantApi.PrinterDto</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Actualiza la configuración de una impresora existente del usuario.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.impresoras.updatePrinter({
+    id: "id",
+    printerIp: "192.168.1.51",
+    displayName: "Cocina (caliente)",
+    widthMm: 80,
+    source: "windows",
+    sourceId: "POS-01"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.UpdatePrinterRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ImpresorasClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.impresoras.<a href="/src/api/resources/impresoras/client/Client.ts">deletePrinter</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Elimina de forma permanente una impresora del usuario.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.impresoras.deletePrinter({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.DeletePrinterRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ImpresorasClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.impresoras.<a href="/src/api/resources/impresoras/client/Client.ts">printOrder</a>({ ...params }) -> WrestaurantApi.PrintOrderResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Renderiza tickets ESC/POS y los envía a las impresoras de la sucursal. Cada grupo apunta a una impresora por su id (printerId). Marca isReprint=true para reimpresiones.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.impresoras.printOrder({
+    licenseKey: "licenseKey",
+    orderFolio: "169",
+    isReprint: false,
+    price: 128.5,
+    paymentMethod: "CARD",
+    businessName: "Mi Restaurante",
+    businessSubtitle: "Sucursal Centro",
+    groups: [{
+            printerId: "00000000-b12a-405f-905d-dbf424c20000",
+            jobType: "order",
+            title: "COCINA",
+            items: [{
+                    idProduct: "01052",
+                    name: "Hamburguesa doble carne",
+                    quantity: 2,
+                    price: 89,
+                    modifiers: [{
+                            idModifier: "50110",
+                            name: "Sin cebolla",
+                            price: 0
+                        }],
+                    notes: "Sin pepinillos"
+                }]
+        }]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.PrintOrderRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ImpresorasClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.impresoras.<a href="/src/api/resources/impresoras/client/Client.ts">getPrinters</a>({ ...params }) -> WrestaurantApi.PrinterAssignmentsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Devuelve las impresoras configuradas para la sucursal (id, IP, nombre, ancho), para que el kiosko elija el printerId al imprimir.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.impresoras.getPrinters({
+    licenseKey: "licenseKey"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.GetPrintersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ImpresorasClient.RequestOptions` 
     
 </dd>
 </dl>

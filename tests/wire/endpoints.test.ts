@@ -564,7 +564,40 @@ describe("EndpointsClient", () => {
             licenseKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = {};
+        const rawRequestBody = {
+            turnDependent: true,
+            mesa: "5",
+            idMesero: "001",
+            estacion: "CAJA1",
+            serie: "A",
+            idEmpresa: "1",
+            noPersonas: 2,
+            productos: [
+                {
+                    idProducto: "01052",
+                    descripcionProducto: "Hamburguesa doble carne",
+                    idGrupo: "0007",
+                    movimiento: 1,
+                    cantidad: 2,
+                    descripcionGrupo: "Hamburguesas",
+                    clasificacion: "ALIMENTOS",
+                    productoCompuestoPrincipal: 0,
+                    nombreCorto: "Hamb. doble",
+                    imagen: "",
+                    visibleMenu: true,
+                    idProdServSat: "50202306",
+                    comentario: "Sin pepinillos",
+                    precio: 89,
+                    precioSinImpuestos: 76.72,
+                    impuesto1: 12.28,
+                    impuesto2: 0,
+                    impuesto3: 0,
+                    descuento: 0,
+                    bloqueado: false,
+                    permitirprodcompenmodif: false,
+                },
+            ],
+        };
         const rawResponseBody = { jobId: "jobId", folio: 1 };
 
         server
@@ -578,6 +611,38 @@ describe("EndpointsClient", () => {
 
         const response = await client.endpoints.createTempOrders({
             licenseKey: "licenseKey",
+            turnDependent: true,
+            mesa: "5",
+            idMesero: "001",
+            estacion: "CAJA1",
+            serie: "A",
+            idEmpresa: "1",
+            noPersonas: 2,
+            productos: [
+                {
+                    idProducto: "01052",
+                    descripcionProducto: "Hamburguesa doble carne",
+                    idGrupo: "0007",
+                    movimiento: 1,
+                    cantidad: 2,
+                    descripcionGrupo: "Hamburguesas",
+                    clasificacion: "ALIMENTOS",
+                    productoCompuestoPrincipal: 0,
+                    nombreCorto: "Hamb. doble",
+                    imagen: "",
+                    visibleMenu: true,
+                    idProdServSat: "50202306",
+                    comentario: "Sin pepinillos",
+                    precio: 89,
+                    precioSinImpuestos: 76.72,
+                    impuesto1: 12.28,
+                    impuesto2: 0,
+                    impuesto3: 0,
+                    descuento: 0,
+                    bloqueado: false,
+                    permitirprodcompenmodif: false,
+                },
+            ],
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -752,7 +817,39 @@ describe("EndpointsClient", () => {
             licenseKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = {};
+        const rawRequestBody = {
+            turnDependent: true,
+            estacion: "CAJA1",
+            serie: "A",
+            idEmpresa: "1",
+            noPersonas: 1,
+            productos: [
+                {
+                    idProducto: "01052",
+                    descripcionProducto: "Hamburguesa doble carne",
+                    idGrupo: "0007",
+                    movimiento: 1,
+                    cantidad: 1,
+                    descripcionGrupo: "Hamburguesas",
+                    clasificacion: "ALIMENTOS",
+                    productoCompuestoPrincipal: 0,
+                    nombreCorto: "Hamb. doble",
+                    imagen: "",
+                    visibleMenu: true,
+                    idProdServSat: "50202306",
+                    comentario: "",
+                    precio: 89,
+                    precioSinImpuestos: 76.72,
+                    impuesto1: 12.28,
+                    impuesto2: 0,
+                    impuesto3: 0,
+                    descuento: 0,
+                    bloqueado: false,
+                    permitirprodcompenmodif: false,
+                },
+            ],
+            idFormaDePago: "001",
+        };
         const rawResponseBody = { jobId: "jobId", folio: 1, numcheque: 1 };
 
         server
@@ -766,6 +863,37 @@ describe("EndpointsClient", () => {
 
         const response = await client.endpoints.createClosedTempOrder({
             licenseKey: "licenseKey",
+            turnDependent: true,
+            estacion: "CAJA1",
+            serie: "A",
+            idEmpresa: "1",
+            noPersonas: 1,
+            productos: [
+                {
+                    idProducto: "01052",
+                    descripcionProducto: "Hamburguesa doble carne",
+                    idGrupo: "0007",
+                    movimiento: 1,
+                    cantidad: 1,
+                    descripcionGrupo: "Hamburguesas",
+                    clasificacion: "ALIMENTOS",
+                    productoCompuestoPrincipal: 0,
+                    nombreCorto: "Hamb. doble",
+                    imagen: "",
+                    visibleMenu: true,
+                    idProdServSat: "50202306",
+                    comentario: "",
+                    precio: 89,
+                    precioSinImpuestos: 76.72,
+                    impuesto1: 12.28,
+                    impuesto2: 0,
+                    impuesto3: 0,
+                    descuento: 0,
+                    bloqueado: false,
+                    permitirprodcompenmodif: false,
+                },
+            ],
+            idFormaDePago: "001",
         });
         expect(response).toEqual(rawResponseBody);
     });

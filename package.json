@@ -1,6 +1,6 @@
 {
     "name": "@wrestaurant/sdk",
-    "version": "0.6.0",
+    "version": "0.7.0",
     "private": false,
     "repository": {
         "type": "git",
@@ -32,6 +32,17 @@
                 "default": "./dist/cjs/api/resources/endpoints/exports.js"
             },
             "default": "./dist/cjs/api/resources/endpoints/exports.js"
+        },
+        "./impresoras": {
+            "import": {
+                "types": "./dist/esm/api/resources/impresoras/exports.d.mts",
+                "default": "./dist/esm/api/resources/impresoras/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/impresoras/exports.d.ts",
+                "default": "./dist/cjs/api/resources/impresoras/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/impresoras/exports.js"
         },
         "./package.json": "./package.json"
     },
