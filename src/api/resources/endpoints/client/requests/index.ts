@@ -1,11 +1,15 @@
 export type { CreateClosedOrderRequest } from "./CreateClosedOrderRequest.js";
 export type { CreateOrderRequest } from "./CreateOrderRequest.js";
+export type { GetDayOrdersRequest } from "./GetDayOrdersRequest.js";
 export type { GetEmpresasRequest } from "./GetEmpresasRequest.js";
 export type { GetGruposRequest } from "./GetGruposRequest.js";
 export type { GetMeserosRequest } from "./GetMeserosRequest.js";
 export type { GetOpenOrdersRequest } from "./GetOpenOrdersRequest.js";
+export type { GetOrderDetailsRequest } from "./GetOrderDetailsRequest.js";
+export type { GetOrdersRequest } from "./GetOrdersRequest.js";
 export type { GetPaymentMethodsRequest } from "./GetPaymentMethodsRequest.js";
 export type { GetProductsRequest } from "./GetProductsRequest.js";
 export type { GetStationsRequest } from "./GetStationsRequest.js";
 export type { GetTempOrderDetailsRequest } from "./GetTempOrderDetailsRequest.js";
 export type { GetTempOrdersRequest } from "./GetTempOrdersRequest.js";
+export type { GetTurnosRequest } from "./GetTurnosRequest.js";

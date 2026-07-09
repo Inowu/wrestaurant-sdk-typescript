@@ -321,7 +321,102 @@ export class EndpointsClient {
     }
 
     /**
-     * Devuelve las órdenes abiertas del Punto de Venta de una sucursal, con filtro opcional por folio, número de cheque o total.
+     * Devuelve los turnos (cortes de caja) registrados en una sucursal, con paginación y búsqueda opcional.
+     *
+     * @param {WrestaurantApi.GetTurnosRequest} request
+     * @param {EndpointsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link WrestaurantApi.UnauthorizedError}
+     * @throws {@link WrestaurantApi.NotFoundError}
+     * @throws {@link WrestaurantApi.TooManyRequestsError}
+     *
+     * @example
+     *     await client.endpoints.getTurnos({
+     *         licenseKey: "licenseKey"
+     *     })
+     */
+    public getTurnos(
+        request: WrestaurantApi.GetTurnosRequest,
+        requestOptions?: EndpointsClient.RequestOptions,
+    ): core.HttpResponsePromise<WrestaurantApi.TurnosQueryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__getTurnos(request, requestOptions));
+    }
+
+    private async __getTurnos(
+        request: WrestaurantApi.GetTurnosRequest,
+        requestOptions?: EndpointsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<WrestaurantApi.TurnosQueryResponse>> {
+        const { licenseKey, page, pageSize, search } = request;
+        const _queryParams: Record<string, unknown> = {
+            page,
+            pageSize,
+            search,
+        };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "X-Api-Key": requestOptions?.apiKey ?? this._options?.apiKey,
+                "X-License-Key": requestOptions?.licenseKey ?? this._options?.licenseKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.WrestaurantApiEnvironment.Default,
+                `api/v1/turnos/${core.url.encodePathParam(licenseKey)}`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as WrestaurantApi.TurnosQueryResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new WrestaurantApi.UnauthorizedError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new WrestaurantApi.NotFoundError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new WrestaurantApi.TooManyRequestsError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.WrestaurantApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/api/v1/turnos/{licenseKey}");
+    }
+
+    /**
+     * Devuelve las órdenes del turno actual por punto de Venta de una sucursal, con filtro opcional por folio, número de cheque o total.
      *
      * @param {WrestaurantApi.GetTempOrdersRequest} request
      * @param {EndpointsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -1079,6 +1174,306 @@ export class EndpointsClient {
             _response.rawResponse,
             "GET",
             "/api/v1/temp_ordenes_det/{licenseKey}",
+        );
+    }
+
+    /**
+     * Devuelve las órdenes cerradas/históricas del Punto de Venta de una sucursal, con filtro opcional por folio, número de cheque o total.
+     *
+     * @param {WrestaurantApi.GetOrdersRequest} request
+     * @param {EndpointsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link WrestaurantApi.UnauthorizedError}
+     * @throws {@link WrestaurantApi.NotFoundError}
+     * @throws {@link WrestaurantApi.TooManyRequestsError}
+     *
+     * @example
+     *     await client.endpoints.getOrders({
+     *         licenseKey: "licenseKey"
+     *     })
+     */
+    public getOrders(
+        request: WrestaurantApi.GetOrdersRequest,
+        requestOptions?: EndpointsClient.RequestOptions,
+    ): core.HttpResponsePromise<WrestaurantApi.OrdersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__getOrders(request, requestOptions));
+    }
+
+    private async __getOrders(
+        request: WrestaurantApi.GetOrdersRequest,
+        requestOptions?: EndpointsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<WrestaurantApi.OrdersResponse>> {
+        const { licenseKey, search, page, pageSize } = request;
+        const _queryParams: Record<string, unknown> = {
+            search,
+            page,
+            pageSize,
+        };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "X-Api-Key": requestOptions?.apiKey ?? this._options?.apiKey,
+                "X-License-Key": requestOptions?.licenseKey ?? this._options?.licenseKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.WrestaurantApiEnvironment.Default,
+                `api/v1/ordenes/${core.url.encodePathParam(licenseKey)}`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as WrestaurantApi.OrdersResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new WrestaurantApi.UnauthorizedError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new WrestaurantApi.NotFoundError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new WrestaurantApi.TooManyRequestsError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.WrestaurantApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/api/v1/ordenes/{licenseKey}");
+    }
+
+    /**
+     * Devuelve las líneas de productos de órdenes cerradas/históricas de una sucursal, con paginación y filtros opcionales por folio de orden o búsqueda por producto.
+     *
+     * @param {WrestaurantApi.GetOrderDetailsRequest} request
+     * @param {EndpointsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link WrestaurantApi.UnauthorizedError}
+     * @throws {@link WrestaurantApi.NotFoundError}
+     * @throws {@link WrestaurantApi.TooManyRequestsError}
+     *
+     * @example
+     *     await client.endpoints.getOrderDetails({
+     *         licenseKey: "licenseKey"
+     *     })
+     */
+    public getOrderDetails(
+        request: WrestaurantApi.GetOrderDetailsRequest,
+        requestOptions?: EndpointsClient.RequestOptions,
+    ): core.HttpResponsePromise<WrestaurantApi.OrderDetailsQueryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__getOrderDetails(request, requestOptions));
+    }
+
+    private async __getOrderDetails(
+        request: WrestaurantApi.GetOrderDetailsRequest,
+        requestOptions?: EndpointsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<WrestaurantApi.OrderDetailsQueryResponse>> {
+        const { licenseKey, page, pageSize, folio, search } = request;
+        const _queryParams: Record<string, unknown> = {
+            page,
+            pageSize,
+            folio,
+            search,
+        };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "X-Api-Key": requestOptions?.apiKey ?? this._options?.apiKey,
+                "X-License-Key": requestOptions?.licenseKey ?? this._options?.licenseKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.WrestaurantApiEnvironment.Default,
+                `api/v1/ordenes_det/${core.url.encodePathParam(licenseKey)}`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as WrestaurantApi.OrderDetailsQueryResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new WrestaurantApi.UnauthorizedError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new WrestaurantApi.NotFoundError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new WrestaurantApi.TooManyRequestsError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.WrestaurantApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/api/v1/ordenes_det/{licenseKey}",
+        );
+    }
+
+    /**
+     * Devuelve todas las órdenes del día operativo actual (abiertas y cerradas), juntando las órdenes según los turnos que iniciaron y cerraron dentro de la ventana. Por defecto la ventana es 06:00–05:59:59 del día siguiente; el inicio es configurable vía dayStartHour.
+     *
+     * @param {WrestaurantApi.GetDayOrdersRequest} request
+     * @param {EndpointsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link WrestaurantApi.UnauthorizedError}
+     * @throws {@link WrestaurantApi.NotFoundError}
+     * @throws {@link WrestaurantApi.TooManyRequestsError}
+     *
+     * @example
+     *     await client.endpoints.getDayOrders({
+     *         licenseKey: "licenseKey"
+     *     })
+     */
+    public getDayOrders(
+        request: WrestaurantApi.GetDayOrdersRequest,
+        requestOptions?: EndpointsClient.RequestOptions,
+    ): core.HttpResponsePromise<WrestaurantApi.OrdersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__getDayOrders(request, requestOptions));
+    }
+
+    private async __getDayOrders(
+        request: WrestaurantApi.GetDayOrdersRequest,
+        requestOptions?: EndpointsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<WrestaurantApi.OrdersResponse>> {
+        const { licenseKey, search, page, pageSize, dayStartHour } = request;
+        const _queryParams: Record<string, unknown> = {
+            search,
+            page,
+            pageSize,
+            dayStartHour,
+        };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "X-Api-Key": requestOptions?.apiKey ?? this._options?.apiKey,
+                "X-License-Key": requestOptions?.licenseKey ?? this._options?.licenseKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.WrestaurantApiEnvironment.Default,
+                `api/v1/ordenes_dia/${core.url.encodePathParam(licenseKey)}`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as WrestaurantApi.OrdersResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new WrestaurantApi.UnauthorizedError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new WrestaurantApi.NotFoundError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new WrestaurantApi.TooManyRequestsError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.WrestaurantApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/api/v1/ordenes_dia/{licenseKey}",
         );
     }
 

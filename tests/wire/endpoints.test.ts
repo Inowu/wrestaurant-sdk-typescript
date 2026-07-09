@@ -400,6 +400,145 @@ describe("EndpointsClient", () => {
         }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
     });
 
+    test("GetTurnos (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {
+            jobId: "jobId",
+            workerId: "workerId",
+            dispatchedAt: "2024-01-15T09:30:00Z",
+            page: 1,
+            pageSize: 1,
+            totalResults: 1,
+            totalPages: 1,
+            hasNextPage: true,
+            turnos: [
+                {
+                    idTurnoInterno: 1000000,
+                    idTurno: 1000000,
+                    fondo: 1.1,
+                    apertura: "2024-01-15T09:30:00Z",
+                    cierre: "2024-01-15T09:30:00Z",
+                    idEstacion: "idEstacion",
+                    cajero: "cajero",
+                    efectivo: 1.1,
+                    tarjeta: 1.1,
+                    vales: 1.1,
+                    credito: 1.1,
+                    procesadoWeb: true,
+                    idEmpresa: "idEmpresa",
+                    enviadoACentral: true,
+                    fechaEnviado: "2024-01-15T09:30:00Z",
+                    usuarioEnvio: "usuarioEnvio",
+                    offline: true,
+                    enviadoAf: true,
+                    corteEnviado: true,
+                    eliminarTemporalesEnCierre: true,
+                    idMesero: "idMesero",
+                    fondoDolares: 1.1,
+                    procesado: true,
+                },
+            ],
+        };
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/turnos/licenseKey")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.endpoints.getTurnos({
+            licenseKey: "licenseKey",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("GetTurnos (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/turnos/licenseKey")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.endpoints.getTurnos({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
+    });
+
+    test("GetTurnos (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/turnos/licenseKey")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.endpoints.getTurnos({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.NotFoundError);
+    });
+
+    test("GetTurnos (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/turnos/licenseKey")
+            .respondWith()
+            .statusCode(429)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.endpoints.getTurnos({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
+    });
+
     test("GetTempOrders (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
@@ -1628,6 +1767,465 @@ describe("EndpointsClient", () => {
 
         await expect(async () => {
             return await client.endpoints.getTempOrderDetails({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
+    });
+
+    test("GetOrders (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {
+            workerId: "workerId",
+            dispatchedAt: "2024-01-15T09:30:00Z",
+            page: 1,
+            pageSize: 1,
+            totalResults: 1,
+            totalPages: 1,
+            hasNextPage: true,
+            orders: [
+                {
+                    folio: 1,
+                    serieFolio: "serieFolio",
+                    numcheque: 1,
+                    fecha: "2024-01-15T09:30:00Z",
+                    cierre: "2024-01-15T09:30:00Z",
+                    mesa: "mesa",
+                    noPersonas: 1,
+                    idMesero: "idMesero",
+                    pagado: true,
+                    cancelado: true,
+                    impreso: true,
+                    impresiones: 1,
+                    descuento: 1.1,
+                    razonCancelado: "razonCancelado",
+                    orden: "orden",
+                    facturado: true,
+                    idTurno: 1,
+                    usuarioCancelo: "usuarioCancelo",
+                    comentarioDescuento: "comentarioDescuento",
+                    usuarioPago: "usuarioPago",
+                    totalArticulos: 1.1,
+                    subtotal: 1.1,
+                    subtotalSinImpuestos: 1.1,
+                    total: 1.1,
+                    totalConPropina: 1.1,
+                    totalImpuestod1: 1.1,
+                    totalImpuestod2: 1.1,
+                    totalImpuestod3: 1.1,
+                    efectivo: 1.1,
+                    tarjeta: 1.1,
+                    vales: 1.1,
+                    otros: 1.1,
+                    propina: 1.1,
+                    totalSinDescuento: 1.1,
+                    totalAlimentos: 1.1,
+                    totalBebidas: 1.1,
+                    totalOtros: 1.1,
+                    totalDescuentos: 1.1,
+                    totalCortesias: 1.1,
+                    totalCortesiaAlimentos: 1.1,
+                    items: [{}],
+                },
+            ],
+        };
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/ordenes/licenseKey")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.endpoints.getOrders({
+            licenseKey: "licenseKey",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("GetOrders (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/ordenes/licenseKey")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.endpoints.getOrders({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
+    });
+
+    test("GetOrders (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/ordenes/licenseKey")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.endpoints.getOrders({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.NotFoundError);
+    });
+
+    test("GetOrders (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/ordenes/licenseKey")
+            .respondWith()
+            .statusCode(429)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.endpoints.getOrders({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
+    });
+
+    test("GetOrderDetails (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {
+            jobId: "jobId",
+            workerId: "workerId",
+            dispatchedAt: "2024-01-15T09:30:00Z",
+            page: 1,
+            pageSize: 1,
+            totalResults: 1,
+            totalPages: 1,
+            hasNextPage: true,
+            orderDetails: [
+                {
+                    folioDet: 1,
+                    movimiento: 1,
+                    comanda: "comanda",
+                    cantidad: 1.1,
+                    idProducto: "idProducto",
+                    descuento: 1.1,
+                    precio: 1.1,
+                    precioSinImpuestos: 1.1,
+                    comentario: "comentario",
+                    tiempo: "2024-01-15T09:30:00Z",
+                    mitad: 1.1,
+                    hora: "2024-01-15T09:30:00Z",
+                    modificador: 1,
+                    idEstacion: "idEstacion",
+                    impuesto1: 1.1,
+                    impuesto2: 1.1,
+                    impuesto3: 1.1,
+                    usuarioDescuento: "usuarioDescuento",
+                    comentarioDescuento: "comentarioDescuento",
+                    idTipoDescuento: "idTipoDescuento",
+                    idProductoCompuesto: "idProductoCompuesto",
+                    productoCompuestoPrincipal: 1,
+                    precioCatalogo: 1.1,
+                    marcar: 1,
+                    idMeseroProducto: "idMeseroProducto",
+                    idCortesia: "idCortesia",
+                    numeroTarjeta: "numeroTarjeta",
+                    folioProduccion: 1.1,
+                    nivel: 1,
+                    sistemaEnvio: 1,
+                    promoVolumen: 1,
+                },
+            ],
+        };
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/ordenes_det/licenseKey")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.endpoints.getOrderDetails({
+            licenseKey: "licenseKey",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("GetOrderDetails (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/ordenes_det/licenseKey")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.endpoints.getOrderDetails({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
+    });
+
+    test("GetOrderDetails (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/ordenes_det/licenseKey")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.endpoints.getOrderDetails({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.NotFoundError);
+    });
+
+    test("GetOrderDetails (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/ordenes_det/licenseKey")
+            .respondWith()
+            .statusCode(429)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.endpoints.getOrderDetails({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
+    });
+
+    test("GetDayOrders (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {
+            workerId: "workerId",
+            dispatchedAt: "2024-01-15T09:30:00Z",
+            page: 1,
+            pageSize: 1,
+            totalResults: 1,
+            totalPages: 1,
+            hasNextPage: true,
+            orders: [
+                {
+                    folio: 1,
+                    serieFolio: "serieFolio",
+                    numcheque: 1,
+                    fecha: "2024-01-15T09:30:00Z",
+                    cierre: "2024-01-15T09:30:00Z",
+                    mesa: "mesa",
+                    noPersonas: 1,
+                    idMesero: "idMesero",
+                    pagado: true,
+                    cancelado: true,
+                    impreso: true,
+                    impresiones: 1,
+                    descuento: 1.1,
+                    razonCancelado: "razonCancelado",
+                    orden: "orden",
+                    facturado: true,
+                    idTurno: 1,
+                    usuarioCancelo: "usuarioCancelo",
+                    comentarioDescuento: "comentarioDescuento",
+                    usuarioPago: "usuarioPago",
+                    totalArticulos: 1.1,
+                    subtotal: 1.1,
+                    subtotalSinImpuestos: 1.1,
+                    total: 1.1,
+                    totalConPropina: 1.1,
+                    totalImpuestod1: 1.1,
+                    totalImpuestod2: 1.1,
+                    totalImpuestod3: 1.1,
+                    efectivo: 1.1,
+                    tarjeta: 1.1,
+                    vales: 1.1,
+                    otros: 1.1,
+                    propina: 1.1,
+                    totalSinDescuento: 1.1,
+                    totalAlimentos: 1.1,
+                    totalBebidas: 1.1,
+                    totalOtros: 1.1,
+                    totalDescuentos: 1.1,
+                    totalCortesias: 1.1,
+                    totalCortesiaAlimentos: 1.1,
+                    items: [{}],
+                },
+            ],
+        };
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/ordenes_dia/licenseKey")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.endpoints.getDayOrders({
+            licenseKey: "licenseKey",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("GetDayOrders (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/ordenes_dia/licenseKey")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.endpoints.getDayOrders({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
+    });
+
+    test("GetDayOrders (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/ordenes_dia/licenseKey")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.endpoints.getDayOrders({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.NotFoundError);
+    });
+
+    test("GetDayOrders (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/ordenes_dia/licenseKey")
+            .respondWith()
+            .statusCode(429)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.endpoints.getDayOrders({
                 licenseKey: "licenseKey",
             });
         }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);

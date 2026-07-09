@@ -31,3 +31,5 @@ export * from "./ProductDto.js";
 export * from "./ProductsQueryResponse.js";
 export * from "./StationDto.js";
 export * from "./StationsQueryResponse.js";
+export * from "./TurnoDto.js";
+export * from "./TurnosQueryResponse.js";

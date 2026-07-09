@@ -195,6 +195,71 @@ await client.endpoints.getGrupos({
 </dl>
 </details>
 
+<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">getTurnos</a>({ ...params }) -> WrestaurantApi.TurnosQueryResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Devuelve los turnos (cortes de caja) registrados en una sucursal, con paginación y búsqueda opcional.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.endpoints.getTurnos({
+    licenseKey: "licenseKey"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.GetTurnosRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EndpointsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">getTempOrders</a>({ ...params }) -> WrestaurantApi.OrdersResponse</code></summary>
 <dl>
 <dd>
@@ -207,7 +272,7 @@ await client.endpoints.getGrupos({
 <dl>
 <dd>
 
-Devuelve las órdenes abiertas del Punto de Venta de una sucursal, con filtro opcional por folio, número de cheque o total.
+Devuelve las órdenes del turno actual por punto de Venta de una sucursal, con filtro opcional por folio, número de cheque o total.
 </dd>
 </dl>
 </dd>
@@ -690,6 +755,201 @@ await client.endpoints.getTempOrderDetails({
 <dd>
 
 **request:** `WrestaurantApi.GetTempOrderDetailsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EndpointsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">getOrders</a>({ ...params }) -> WrestaurantApi.OrdersResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Devuelve las órdenes cerradas/históricas del Punto de Venta de una sucursal, con filtro opcional por folio, número de cheque o total.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.endpoints.getOrders({
+    licenseKey: "licenseKey"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.GetOrdersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EndpointsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">getOrderDetails</a>({ ...params }) -> WrestaurantApi.OrderDetailsQueryResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Devuelve las líneas de productos de órdenes cerradas/históricas de una sucursal, con paginación y filtros opcionales por folio de orden o búsqueda por producto.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.endpoints.getOrderDetails({
+    licenseKey: "licenseKey"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.GetOrderDetailsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EndpointsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">getDayOrders</a>({ ...params }) -> WrestaurantApi.OrdersResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Devuelve todas las órdenes del día operativo actual (abiertas y cerradas), juntando las órdenes según los turnos que iniciaron y cerraron dentro de la ventana. Por defecto la ventana es 06:00–05:59:59 del día siguiente; el inicio es configurable vía dayStartHour.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.endpoints.getDayOrders({
+    licenseKey: "licenseKey"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.GetDayOrdersRequest` 
     
 </dd>
 </dl>
