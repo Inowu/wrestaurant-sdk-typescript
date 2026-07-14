@@ -2,7 +2,7 @@
 
 import type * as WrestaurantApi from "../index.js";
 
-export interface OrderDtoWithItems {
+export interface OrderDtoWithItemsAndPayments {
     folio?: number | undefined;
     serieFolio?: (string | null) | undefined;
     numcheque?: number | undefined;
@@ -28,9 +28,6 @@ export interface OrderDtoWithItems {
     subtotalSinImpuestos?: number | undefined;
     total?: number | undefined;
     totalConPropina?: number | undefined;
-    totalImpuestod1?: number | undefined;
-    totalImpuestod2?: number | undefined;
-    totalImpuestod3?: number | undefined;
     efectivo?: number | undefined;
     tarjeta?: number | undefined;
     vales?: number | undefined;
@@ -44,4 +41,6 @@ export interface OrderDtoWithItems {
     totalCortesias?: number | undefined;
     totalCortesiaAlimentos?: number | undefined;
     items?: (WrestaurantApi.OrderDetailDto[] | null) | undefined;
+    paymentMethods?: (WrestaurantApi.OrderPaymentMethodsDto[] | null) | undefined;
+    impuestos?: WrestaurantApi.ImpuestosDto | undefined;
 }

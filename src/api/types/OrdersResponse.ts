@@ -10,5 +10,5 @@ export interface OrdersResponse {
     totalResults?: number | undefined;
     totalPages?: number | undefined;
     hasNextPage?: boolean | undefined;
-    orders?: (WrestaurantApi.OrderDtoWithItems[] | null) | undefined;
+    orders?: (WrestaurantApi.OrderDtoWithItemsAndPayments[] | null) | undefined;
 }
