@@ -416,7 +416,7 @@ export class EndpointsClient {
     }
 
     /**
-     * Devuelve las órdenes del turno actual por punto de Venta de una sucursal, con filtro opcional por folio, número de cheque o total.
+     * Devuelve las órdenes del turno actual por punto de Venta de una sucursal, con filtro opcional por folio, número de cheque o total. Usa `facturado=true` para incluir solo órdenes ya facturadas, o `facturado=false` para incluir solo las no facturadas; si se omite, no se filtra por estado de facturación.
      *
      * @param {WrestaurantApi.GetTempOrdersRequest} request
      * @param {EndpointsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -441,11 +441,12 @@ export class EndpointsClient {
         request: WrestaurantApi.GetTempOrdersRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): Promise<core.WithRawResponse<WrestaurantApi.OrdersResponse>> {
-        const { licenseKey, search, page, pageSize } = request;
+        const { licenseKey, search, page, pageSize, facturado } = request;
         const _queryParams: Record<string, unknown> = {
             search,
             page,
             pageSize,
+            facturado,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -1178,7 +1179,7 @@ export class EndpointsClient {
     }
 
     /**
-     * Devuelve las órdenes cerradas/históricas del Punto de Venta de una sucursal, con filtro opcional por folio, número de cheque o total.
+     * Devuelve las órdenes cerradas/históricas del Punto de Venta de una sucursal, con filtro opcional por folio, número de cheque o total. Usa `facturado=true` para incluir solo órdenes ya facturadas, o `facturado=false` para incluir solo las no facturadas; si se omite, no se filtra por estado de facturación.
      *
      * @param {WrestaurantApi.GetOrdersRequest} request
      * @param {EndpointsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -1203,11 +1204,12 @@ export class EndpointsClient {
         request: WrestaurantApi.GetOrdersRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): Promise<core.WithRawResponse<WrestaurantApi.OrdersResponse>> {
-        const { licenseKey, search, page, pageSize } = request;
+        const { licenseKey, search, page, pageSize, facturado } = request;
         const _queryParams: Record<string, unknown> = {
             search,
             page,
             pageSize,
+            facturado,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -1377,7 +1379,7 @@ export class EndpointsClient {
     }
 
     /**
-     * Devuelve todas las órdenes del día operativo actual (abiertas y cerradas), juntando las órdenes según los turnos que iniciaron y cerraron dentro de la ventana. Por defecto la ventana es 06:00–05:59:59 del día siguiente; el inicio es configurable vía dayStartHour.
+     * Devuelve todas las órdenes del día operativo actual (abiertas y cerradas), juntando las órdenes según los turnos que iniciaron y cerraron dentro de la ventana. Por defecto la ventana es 06:00–05:59:59 del día siguiente; el inicio es configurable vía dayStartHour. Usa `facturado=true` para incluir solo órdenes ya facturadas, o `facturado=false` para incluir solo las no facturadas; si se omite, no se filtra por estado de facturación.
      *
      * @param {WrestaurantApi.GetDayOrdersRequest} request
      * @param {EndpointsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -1402,12 +1404,13 @@ export class EndpointsClient {
         request: WrestaurantApi.GetDayOrdersRequest,
         requestOptions?: EndpointsClient.RequestOptions,
     ): Promise<core.WithRawResponse<WrestaurantApi.OrdersResponse>> {
-        const { licenseKey, search, page, pageSize, dayStartHour } = request;
+        const { licenseKey, search, page, pageSize, dayStartHour, facturado } = request;
         const _queryParams: Record<string, unknown> = {
             search,
             page,
             pageSize,
             dayStartHour,
+            facturado,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

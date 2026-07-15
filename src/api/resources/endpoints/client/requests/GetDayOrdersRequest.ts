@@ -12,4 +12,5 @@ export interface GetDayOrdersRequest {
     page?: number;
     pageSize?: number;
     dayStartHour?: number;
+    facturado?: boolean;
 }

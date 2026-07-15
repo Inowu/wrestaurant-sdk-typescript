@@ -11,4 +11,5 @@ export interface GetOrdersRequest {
     search?: string;
     page?: number;
     pageSize?: number;
+    facturado?: boolean;
 }

@@ -11,4 +11,5 @@ export interface GetTempOrdersRequest {
     search?: string;
     page?: number;
     pageSize?: number;
+    facturado?: boolean;
 }

@@ -272,7 +272,7 @@ await client.endpoints.getTurnos({
 <dl>
 <dd>
 
-Devuelve las órdenes del turno actual por punto de Venta de una sucursal, con filtro opcional por folio, número de cheque o total.
+Devuelve las órdenes del turno actual por punto de Venta de una sucursal, con filtro opcional por folio, número de cheque o total. Usa `facturado=true` para incluir solo órdenes ya facturadas, o `facturado=false` para incluir solo las no facturadas; si se omite, no se filtra por estado de facturación.
 </dd>
 </dl>
 </dd>
@@ -786,7 +786,7 @@ await client.endpoints.getTempOrderDetails({
 <dl>
 <dd>
 
-Devuelve las órdenes cerradas/históricas del Punto de Venta de una sucursal, con filtro opcional por folio, número de cheque o total.
+Devuelve las órdenes cerradas/históricas del Punto de Venta de una sucursal, con filtro opcional por folio, número de cheque o total. Usa `facturado=true` para incluir solo órdenes ya facturadas, o `facturado=false` para incluir solo las no facturadas; si se omite, no se filtra por estado de facturación.
 </dd>
 </dl>
 </dd>
@@ -916,7 +916,7 @@ await client.endpoints.getOrderDetails({
 <dl>
 <dd>
 
-Devuelve todas las órdenes del día operativo actual (abiertas y cerradas), juntando las órdenes según los turnos que iniciaron y cerraron dentro de la ventana. Por defecto la ventana es 06:00–05:59:59 del día siguiente; el inicio es configurable vía dayStartHour.
+Devuelve todas las órdenes del día operativo actual (abiertas y cerradas), juntando las órdenes según los turnos que iniciaron y cerraron dentro de la ventana. Por defecto la ventana es 06:00–05:59:59 del día siguiente; el inicio es configurable vía dayStartHour. Usa `facturado=true` para incluir solo órdenes ya facturadas, o `facturado=false` para incluir solo las no facturadas; si se omite, no se filtra por estado de facturación.
 </dd>
 </dl>
 </dd>
