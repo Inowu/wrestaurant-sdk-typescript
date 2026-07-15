@@ -17,9 +17,6 @@ export interface OrderDetailDto {
     hora?: (string | null) | undefined;
     modificador?: number | undefined;
     idEstacion?: (string | null) | undefined;
-    impuesto1?: number | undefined;
-    impuesto2?: number | undefined;
-    impuesto3?: number | undefined;
     usuarioDescuento?: (string | null) | undefined;
     comentarioDescuento?: (string | null) | undefined;
     idTipoDescuento?: (string | null) | undefined;

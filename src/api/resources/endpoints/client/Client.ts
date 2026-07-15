@@ -1579,4 +1579,101 @@ export class EndpointsClient {
             "/api/v1/formasdepago/{licenseKey}",
         );
     }
+
+    /**
+     * Descarga el contenido XML (CFDI) de la factura asociada a un número de cheque, dentro de una empresa del Punto de Venta.
+     *
+     * @throws {@link WrestaurantApi.BadRequestError}
+     * @throws {@link WrestaurantApi.UnauthorizedError}
+     * @throws {@link WrestaurantApi.NotFoundError}
+     * @throws {@link WrestaurantApi.TooManyRequestsError}
+     */
+    public getFacturaXml(
+        request: WrestaurantApi.GetFacturaXmlRequest,
+        requestOptions?: EndpointsClient.RequestOptions,
+    ): core.HttpResponsePromise<core.BinaryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__getFacturaXml(request, requestOptions));
+    }
+
+    private async __getFacturaXml(
+        request: WrestaurantApi.GetFacturaXmlRequest,
+        requestOptions?: EndpointsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<core.BinaryResponse>> {
+        const { licenseKey, numCheque, idEmpresa } = request;
+        const _queryParams: Record<string, unknown> = {
+            idEmpresa,
+        };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "X-Api-Key": requestOptions?.apiKey ?? this._options?.apiKey,
+                "X-License-Key": requestOptions?.licenseKey ?? this._options?.licenseKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher<core.BinaryResponse>({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.WrestaurantApiEnvironment.Default,
+                `api/v1/facturas/xml/${core.url.encodePathParam(licenseKey)}/${core.url.encodePathParam(numCheque)}`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
+            responseType: "binary-response",
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new WrestaurantApi.BadRequestError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 401:
+                    throw new WrestaurantApi.UnauthorizedError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new WrestaurantApi.NotFoundError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new WrestaurantApi.TooManyRequestsError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.WrestaurantApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/api/v1/facturas/xml/{licenseKey}/{numCheque}",
+        );
+    }
 }

@@ -1034,6 +1034,72 @@ await client.endpoints.getPaymentMethods({
 </dl>
 </details>
 
+<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">getFacturaXml</a>({ ...params }) -> core.BinaryResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Descarga el contenido XML (CFDI) de la factura asociada a un número de cheque, dentro de una empresa del Punto de Venta.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.endpoints.getFacturaXml({
+    licenseKey: "licenseKey",
+    numCheque: 1
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.GetFacturaXmlRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EndpointsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Impresoras
 <details><summary><code>client.impresoras.<a href="/src/api/resources/impresoras/client/Client.ts">listPrinters</a>({ ...params }) -> WrestaurantApi.PrinterDto[]</code></summary>
 <dl>
