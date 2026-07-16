@@ -65,6 +65,86 @@ await client.endpoints.getProducts({
 </dl>
 </details>
 
+<details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">updateProduct</a>({ ...params }) -> WrestaurantApi.UpdateProductResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Actualiza los datos principales de un producto existente: descripción, grupo, nombre corto, precio,
+impuestos, bloqueo, visibilidad en menú electrónico y si permite producto compuesto en modificador.
+
+Es una actualización de reemplazo completo: se deben enviar todos los campos en cada solicitud
+(los valores omitidos no se conservan). El producto debe existir previamente — este endpoint no
+crea productos nuevos.
+
+Además del cambio en sí, la operación aplica automáticamente estos efectos:
+- Si el precio cambió, se registra en el historial de cambios de precio.
+- Si el producto también está registrado como modificador de sí mismo, su precio se sincroniza.
+- Se agrega una entrada de auditoría en la bitácora del sistema.
+- Se marca el producto para sincronización con otros sistemas conectados.
+
+No modifica grupos de modificadores, paquetes, costos, comentarios, asignaciones de estación/almacén
+ni configuración de monedero del producto — esa configuración, si existe, se conserva sin cambios.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.endpoints.updateProduct({
+    licenseKey: "licenseKey",
+    idProducto: "idProducto"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.UpdateProductRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EndpointsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.endpoints.<a href="/src/api/resources/endpoints/client/Client.ts">getStations</a>({ ...params }) -> WrestaurantApi.StationsQueryResponse</code></summary>
 <dl>
 <dd>

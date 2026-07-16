@@ -14,3 +14,4 @@ export type { GetStationsRequest } from "./GetStationsRequest.js";
 export type { GetTempOrderDetailsRequest } from "./GetTempOrderDetailsRequest.js";
 export type { GetTempOrdersRequest } from "./GetTempOrdersRequest.js";
 export type { GetTurnosRequest } from "./GetTurnosRequest.js";
+export type { UpdateProductRequest } from "./UpdateProductRequest.js";

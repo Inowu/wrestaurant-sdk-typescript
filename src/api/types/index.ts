@@ -35,3 +35,4 @@ export * from "./StationDto.js";
 export * from "./StationsQueryResponse.js";
 export * from "./TurnoDto.js";
 export * from "./TurnosQueryResponse.js";
+export * from "./UpdateProductResponse.js";

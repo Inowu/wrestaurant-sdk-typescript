@@ -126,6 +126,134 @@ export class EndpointsClient {
     }
 
     /**
+     * Actualiza los datos principales de un producto existente: descripción, grupo, nombre corto, precio,
+     * impuestos, bloqueo, visibilidad en menú electrónico y si permite producto compuesto en modificador.
+     *
+     * Es una actualización de reemplazo completo: se deben enviar todos los campos en cada solicitud
+     * (los valores omitidos no se conservan). El producto debe existir previamente — este endpoint no
+     * crea productos nuevos.
+     *
+     * Además del cambio en sí, la operación aplica automáticamente estos efectos:
+     * - Si el precio cambió, se registra en el historial de cambios de precio.
+     * - Si el producto también está registrado como modificador de sí mismo, su precio se sincroniza.
+     * - Se agrega una entrada de auditoría en la bitácora del sistema.
+     * - Se marca el producto para sincronización con otros sistemas conectados.
+     *
+     * No modifica grupos de modificadores, paquetes, costos, comentarios, asignaciones de estación/almacén
+     * ni configuración de monedero del producto — esa configuración, si existe, se conserva sin cambios.
+     *
+     * @param {WrestaurantApi.UpdateProductRequest} request
+     * @param {EndpointsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link WrestaurantApi.BadRequestError}
+     * @throws {@link WrestaurantApi.UnauthorizedError}
+     * @throws {@link WrestaurantApi.NotFoundError}
+     * @throws {@link WrestaurantApi.ConflictError}
+     * @throws {@link WrestaurantApi.UnprocessableEntityError}
+     * @throws {@link WrestaurantApi.TooManyRequestsError}
+     *
+     * @example
+     *     await client.endpoints.updateProduct({
+     *         licenseKey: "licenseKey",
+     *         idProducto: "idProducto"
+     *     })
+     */
+    public updateProduct(
+        request: WrestaurantApi.UpdateProductRequest,
+        requestOptions?: EndpointsClient.RequestOptions,
+    ): core.HttpResponsePromise<WrestaurantApi.UpdateProductResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__updateProduct(request, requestOptions));
+    }
+
+    private async __updateProduct(
+        request: WrestaurantApi.UpdateProductRequest,
+        requestOptions?: EndpointsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<WrestaurantApi.UpdateProductResponse>> {
+        const { licenseKey, idProducto, "Idempotency-Key": idempotencyKey, ..._body } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "Idempotency-Key": idempotencyKey,
+                "X-Api-Key": requestOptions?.apiKey ?? this._options?.apiKey,
+                "X-License-Key": requestOptions?.licenseKey ?? this._options?.licenseKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.WrestaurantApiEnvironment.Default,
+                `api/v1/productos/${core.url.encodePathParam(licenseKey)}/${core.url.encodePathParam(idProducto)}`,
+            ),
+            method: "PUT",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: _body,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as WrestaurantApi.UpdateProductResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new WrestaurantApi.BadRequestError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 401:
+                    throw new WrestaurantApi.UnauthorizedError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new WrestaurantApi.NotFoundError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 409:
+                    throw new WrestaurantApi.ConflictError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 422:
+                    throw new WrestaurantApi.UnprocessableEntityError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new WrestaurantApi.TooManyRequestsError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.WrestaurantApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "PUT",
+            "/api/v1/productos/{licenseKey}/{idProducto}",
+        );
+    }
+
+    /**
      * Devuelve las estaciones (mesas, áreas, terminales) configuradas en una sucursal, con paginación y búsqueda opcional.
      *
      * @param {WrestaurantApi.GetStationsRequest} request
