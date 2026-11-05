@@ -5,7 +5,7 @@ import { WrestaurantApiClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
 describe("ImpresorasClient", () => {
-    test("ListPrinters (1)", async () => {
+    test("listPrinters (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -21,7 +21,18 @@ describe("ImpresorasClient", () => {
                 licenseKey: "licenseKey",
                 printerIp: "printerIp",
                 displayName: "displayName",
+                kind: "thermal",
                 widthMm: 1,
+                label: {
+                    widthMm: 1.1,
+                    heightMm: 1.1,
+                    gapMm: 1.1,
+                    gapOffsetMm: 1.1,
+                    speed: 1,
+                    density: 1,
+                    direction: 1,
+                    copies: 1,
+                },
                 source: "source",
                 sourceId: "sourceId",
                 createdAt: "2024-01-15T09:30:00Z",
@@ -41,7 +52,7 @@ describe("ImpresorasClient", () => {
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("ListPrinters (2)", async () => {
+    test("listPrinters (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -65,7 +76,7 @@ describe("ImpresorasClient", () => {
         }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
     });
 
-    test("ListPrinters (3)", async () => {
+    test("listPrinters (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -89,7 +100,7 @@ describe("ImpresorasClient", () => {
         }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
     });
 
-    test("CreatePrinter (1)", async () => {
+    test("createPrinter (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -104,6 +115,7 @@ describe("ImpresorasClient", () => {
             widthMm: 80,
             source: "windows",
             sourceId: "POS-01",
+            kind: "thermal",
         };
         const rawResponseBody = {
             id: "id",
@@ -111,7 +123,18 @@ describe("ImpresorasClient", () => {
             licenseKey: "licenseKey",
             printerIp: "printerIp",
             displayName: "displayName",
+            kind: "thermal",
             widthMm: 1,
+            label: {
+                widthMm: 1.1,
+                heightMm: 1.1,
+                gapMm: 1.1,
+                gapOffsetMm: 1.1,
+                speed: 1,
+                density: 1,
+                direction: 1,
+                copies: 1,
+            },
             source: "source",
             sourceId: "sourceId",
             createdAt: "2024-01-15T09:30:00Z",
@@ -134,11 +157,12 @@ describe("ImpresorasClient", () => {
             widthMm: 80,
             source: "windows",
             sourceId: "POS-01",
+            kind: "thermal",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("CreatePrinter (2)", async () => {
+    test("createPrinter (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -167,7 +191,7 @@ describe("ImpresorasClient", () => {
         }).rejects.toThrow(WrestaurantApi.BadRequestError);
     });
 
-    test("CreatePrinter (3)", async () => {
+    test("createPrinter (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -196,7 +220,7 @@ describe("ImpresorasClient", () => {
         }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
     });
 
-    test("CreatePrinter (4)", async () => {
+    test("createPrinter (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -225,7 +249,7 @@ describe("ImpresorasClient", () => {
         }).rejects.toThrow(WrestaurantApi.NotFoundError);
     });
 
-    test("CreatePrinter (5)", async () => {
+    test("createPrinter (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -254,7 +278,7 @@ describe("ImpresorasClient", () => {
         }).rejects.toThrow(WrestaurantApi.ConflictError);
     });
 
-    test("CreatePrinter (6)", async () => {
+    test("createPrinter (6)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -283,7 +307,7 @@ describe("ImpresorasClient", () => {
         }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
     });
 
-    test("GetPrinter (1)", async () => {
+    test("getPrinter (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -298,7 +322,18 @@ describe("ImpresorasClient", () => {
             licenseKey: "licenseKey",
             printerIp: "printerIp",
             displayName: "displayName",
+            kind: "thermal",
             widthMm: 1,
+            label: {
+                widthMm: 1.1,
+                heightMm: 1.1,
+                gapMm: 1.1,
+                gapOffsetMm: 1.1,
+                speed: 1,
+                density: 1,
+                direction: 1,
+                copies: 1,
+            },
             source: "source",
             sourceId: "sourceId",
             createdAt: "2024-01-15T09:30:00Z",
@@ -319,7 +354,7 @@ describe("ImpresorasClient", () => {
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("GetPrinter (2)", async () => {
+    test("getPrinter (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -345,7 +380,7 @@ describe("ImpresorasClient", () => {
         }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
     });
 
-    test("GetPrinter (3)", async () => {
+    test("getPrinter (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -371,7 +406,7 @@ describe("ImpresorasClient", () => {
         }).rejects.toThrow(WrestaurantApi.NotFoundError);
     });
 
-    test("GetPrinter (4)", async () => {
+    test("getPrinter (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -397,7 +432,7 @@ describe("ImpresorasClient", () => {
         }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
     });
 
-    test("UpdatePrinter (1)", async () => {
+    test("updatePrinter (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -407,10 +442,21 @@ describe("ImpresorasClient", () => {
         });
         const rawRequestBody = {
             printerIp: "192.168.1.51",
-            displayName: "Cocina (caliente)",
-            widthMm: 80,
+            displayName: "Etiquetas barra",
+            widthMm: 58,
             source: "windows",
             sourceId: "POS-01",
+            kind: "label",
+            label: {
+                widthMm: 57.15,
+                heightMm: 31.75,
+                gapMm: 3.5,
+                gapOffsetMm: 1.5,
+                speed: 3,
+                density: 8,
+                direction: 0,
+                copies: 1,
+            },
         };
         const rawResponseBody = {
             id: "id",
@@ -418,7 +464,18 @@ describe("ImpresorasClient", () => {
             licenseKey: "licenseKey",
             printerIp: "printerIp",
             displayName: "displayName",
+            kind: "thermal",
             widthMm: 1,
+            label: {
+                widthMm: 1.1,
+                heightMm: 1.1,
+                gapMm: 1.1,
+                gapOffsetMm: 1.1,
+                speed: 1,
+                density: 1,
+                direction: 1,
+                copies: 1,
+            },
             source: "source",
             sourceId: "sourceId",
             createdAt: "2024-01-15T09:30:00Z",
@@ -437,15 +494,26 @@ describe("ImpresorasClient", () => {
         const response = await client.impresoras.updatePrinter({
             id: "id",
             printerIp: "192.168.1.51",
-            displayName: "Cocina (caliente)",
-            widthMm: 80,
+            displayName: "Etiquetas barra",
+            widthMm: 58,
             source: "windows",
             sourceId: "POS-01",
+            kind: "label",
+            label: {
+                widthMm: 57.15,
+                heightMm: 31.75,
+                gapMm: 3.5,
+                gapOffsetMm: 1.5,
+                speed: 3,
+                density: 8,
+                direction: 0,
+                copies: 1,
+            },
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("UpdatePrinter (2)", async () => {
+    test("updatePrinter (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -474,7 +542,7 @@ describe("ImpresorasClient", () => {
         }).rejects.toThrow(WrestaurantApi.BadRequestError);
     });
 
-    test("UpdatePrinter (3)", async () => {
+    test("updatePrinter (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -503,7 +571,7 @@ describe("ImpresorasClient", () => {
         }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
     });
 
-    test("UpdatePrinter (4)", async () => {
+    test("updatePrinter (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -532,7 +600,7 @@ describe("ImpresorasClient", () => {
         }).rejects.toThrow(WrestaurantApi.NotFoundError);
     });
 
-    test("UpdatePrinter (5)", async () => {
+    test("updatePrinter (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -561,7 +629,7 @@ describe("ImpresorasClient", () => {
         }).rejects.toThrow(WrestaurantApi.ConflictError);
     });
 
-    test("UpdatePrinter (6)", async () => {
+    test("updatePrinter (6)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -590,7 +658,7 @@ describe("ImpresorasClient", () => {
         }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
     });
 
-    test("DeletePrinter (1)", async () => {
+    test("deletePrinter (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -607,7 +675,7 @@ describe("ImpresorasClient", () => {
         expect(response).toEqual(undefined);
     });
 
-    test("DeletePrinter (2)", async () => {
+    test("deletePrinter (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -633,7 +701,7 @@ describe("ImpresorasClient", () => {
         }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
     });
 
-    test("DeletePrinter (3)", async () => {
+    test("deletePrinter (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -659,7 +727,7 @@ describe("ImpresorasClient", () => {
         }).rejects.toThrow(WrestaurantApi.NotFoundError);
     });
 
-    test("DeletePrinter (4)", async () => {
+    test("deletePrinter (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -685,7 +753,7 @@ describe("ImpresorasClient", () => {
         }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
     });
 
-    test("PrintOrder (1)", async () => {
+    test("printOrder (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -705,18 +773,37 @@ describe("ImpresorasClient", () => {
                     printerId: "00000000-b12a-405f-905d-dbf424c20000",
                     jobType: "order",
                     title: "COCINA",
-                    items: [
+                    sections: [
                         {
-                            idProduct: "01052",
-                            name: "Hamburguesa doble carne",
-                            quantity: 2,
-                            price: 89,
-                            modifiers: [{ idModifier: "50110", name: "Sin cebolla", price: 0 }],
-                            notes: "Sin pepinillos",
+                            label: "TITULAR",
+                            items: [
+                                {
+                                    idProduct: "01052",
+                                    name: "Hamburguesa doble carne",
+                                    quantity: 2,
+                                    price: 89,
+                                    modifiers: [{ idModifier: "50110", name: "Sin cebolla", price: 0 }],
+                                    notes: "Sin pepinillos",
+                                },
+                            ],
+                        },
+                        {
+                            label: "INVITADO 1",
+                            items: [
+                                {
+                                    idProduct: "01060",
+                                    name: "Ensalada César",
+                                    quantity: 1,
+                                    price: 75,
+                                    modifiers: [{ price: 1.1 }],
+                                },
+                            ],
                         },
                     ],
                 },
             ],
+            customer: { code: "A17", name: "Cliente Demo", type: "Socio", roomName: "Sala Terraza" },
+            orderNote: "Sin popote",
         };
         const rawResponseBody = {
             orderRef: "orderRef",
@@ -745,29 +832,57 @@ describe("ImpresorasClient", () => {
                     printerId: "00000000-b12a-405f-905d-dbf424c20000",
                     jobType: "order",
                     title: "COCINA",
-                    items: [
+                    sections: [
                         {
-                            idProduct: "01052",
-                            name: "Hamburguesa doble carne",
-                            quantity: 2,
-                            price: 89,
-                            modifiers: [
+                            label: "TITULAR",
+                            items: [
                                 {
-                                    idModifier: "50110",
-                                    name: "Sin cebolla",
-                                    price: 0,
+                                    idProduct: "01052",
+                                    name: "Hamburguesa doble carne",
+                                    quantity: 2,
+                                    price: 89,
+                                    modifiers: [
+                                        {
+                                            idModifier: "50110",
+                                            name: "Sin cebolla",
+                                            price: 0,
+                                        },
+                                    ],
+                                    notes: "Sin pepinillos",
                                 },
                             ],
-                            notes: "Sin pepinillos",
+                        },
+                        {
+                            label: "INVITADO 1",
+                            items: [
+                                {
+                                    idProduct: "01060",
+                                    name: "Ensalada C\u00E9sar",
+                                    quantity: 1,
+                                    price: 75,
+                                    modifiers: [
+                                        {
+                                            price: 1.1,
+                                        },
+                                    ],
+                                },
+                            ],
                         },
                     ],
                 },
             ],
+            customer: {
+                code: "A17",
+                name: "Cliente Demo",
+                type: "Socio",
+                roomName: "Sala Terraza",
+            },
+            orderNote: "Sin popote",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("PrintOrder (2)", async () => {
+    test("printOrder (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -797,7 +912,7 @@ describe("ImpresorasClient", () => {
         }).rejects.toThrow(WrestaurantApi.BadRequestError);
     });
 
-    test("PrintOrder (3)", async () => {
+    test("printOrder (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -827,7 +942,7 @@ describe("ImpresorasClient", () => {
         }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
     });
 
-    test("PrintOrder (4)", async () => {
+    test("printOrder (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -857,7 +972,37 @@ describe("ImpresorasClient", () => {
         }).rejects.toThrow(WrestaurantApi.NotFoundError);
     });
 
-    test("PrintOrder (5)", async () => {
+    test("printOrder (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { orderFolio: null, isReprint: true, groups: null };
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/print/licenseKey")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(424)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.impresoras.printOrder({
+                licenseKey: "licenseKey",
+                orderFolio: null,
+                isReprint: true,
+                groups: null,
+            });
+        }).rejects.toThrow(WrestaurantApi.FailedDependencyError);
+    });
+
+    test("printOrder (6)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -887,7 +1032,176 @@ describe("ImpresorasClient", () => {
         }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
     });
 
-    test("GetPrinters (1)", async () => {
+    test("printTest (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = {
+            orderRef: "orderRef",
+            results: [{ printerId: "printerId", jobId: "jobId", status: "status", error: "error" }],
+        };
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/print/licenseKey/test")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.impresoras.printTest({
+            licenseKey: "licenseKey",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("printTest (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { printerId: null };
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/print/licenseKey/test")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.impresoras.printTest({
+                licenseKey: "licenseKey",
+                printerId: null,
+            });
+        }).rejects.toThrow(WrestaurantApi.BadRequestError);
+    });
+
+    test("printTest (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { printerId: null };
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/print/licenseKey/test")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.impresoras.printTest({
+                licenseKey: "licenseKey",
+                printerId: null,
+            });
+        }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
+    });
+
+    test("printTest (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { printerId: null };
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/print/licenseKey/test")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.impresoras.printTest({
+                licenseKey: "licenseKey",
+                printerId: null,
+            });
+        }).rejects.toThrow(WrestaurantApi.NotFoundError);
+    });
+
+    test("printTest (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { printerId: null };
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/print/licenseKey/test")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(424)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.impresoras.printTest({
+                licenseKey: "licenseKey",
+                printerId: null,
+            });
+        }).rejects.toThrow(WrestaurantApi.FailedDependencyError);
+    });
+
+    test("printTest (6)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { printerId: null };
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/print/licenseKey/test")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(429)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.impresoras.printTest({
+                licenseKey: "licenseKey",
+                printerId: null,
+            });
+        }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
+    });
+
+    test("getPrinters (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -898,7 +1212,16 @@ describe("ImpresorasClient", () => {
 
         const rawResponseBody = {
             workerId: "workerId",
-            printers: [{ id: "id", printerIp: "printerIp", displayName: "displayName", widthMm: 1, source: "source" }],
+            printers: [
+                {
+                    id: "id",
+                    printerIp: "printerIp",
+                    displayName: "displayName",
+                    kind: "thermal",
+                    widthMm: 1,
+                    source: "source",
+                },
+            ],
         };
 
         server
@@ -915,7 +1238,7 @@ describe("ImpresorasClient", () => {
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("GetPrinters (2)", async () => {
+    test("getPrinters (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -941,7 +1264,7 @@ describe("ImpresorasClient", () => {
         }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
     });
 
-    test("GetPrinters (3)", async () => {
+    test("getPrinters (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,
@@ -967,7 +1290,33 @@ describe("ImpresorasClient", () => {
         }).rejects.toThrow(WrestaurantApi.NotFoundError);
     });
 
-    test("GetPrinters (4)", async () => {
+    test("getPrinters (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/print/licenseKey/printers")
+            .respondWith()
+            .statusCode(424)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.impresoras.getPrinters({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.FailedDependencyError);
+    });
+
+    test("getPrinters (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
             maxRetries: 0,

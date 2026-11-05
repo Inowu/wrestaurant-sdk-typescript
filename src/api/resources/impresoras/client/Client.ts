@@ -25,7 +25,7 @@ export class ImpresorasClient {
     /**
      * Devuelve las impresoras del usuario. Filtra por licenseKey para limitar a un solo punto de venta.
      *
-     * @param {WrestaurantApi.ListPrintersRequest} request
+     * @param {WrestaurantApi.ListPrintersImpresorasRequest} request
      * @param {ImpresorasClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link WrestaurantApi.UnauthorizedError}
@@ -35,14 +35,14 @@ export class ImpresorasClient {
      *     await client.impresoras.listPrinters()
      */
     public listPrinters(
-        request: WrestaurantApi.ListPrintersRequest = {},
+        request: WrestaurantApi.ListPrintersImpresorasRequest = {},
         requestOptions?: ImpresorasClient.RequestOptions,
     ): core.HttpResponsePromise<WrestaurantApi.PrinterDto[]> {
         return core.HttpResponsePromise.fromPromise(this.__listPrinters(request, requestOptions));
     }
 
     private async __listPrinters(
-        request: WrestaurantApi.ListPrintersRequest = {},
+        request: WrestaurantApi.ListPrintersImpresorasRequest = {},
         requestOptions?: ImpresorasClient.RequestOptions,
     ): Promise<core.WithRawResponse<WrestaurantApi.PrinterDto[]>> {
         const { licenseKey } = request;
@@ -126,7 +126,8 @@ export class ImpresorasClient {
      *         displayName: "Cocina",
      *         widthMm: 80,
      *         source: "windows",
-     *         sourceId: "POS-01"
+     *         sourceId: "POS-01",
+     *         kind: "thermal"
      *     })
      */
     public createPrinter(
@@ -215,7 +216,7 @@ export class ImpresorasClient {
     /**
      * Devuelve una impresora del usuario por su id.
      *
-     * @param {WrestaurantApi.GetPrinterRequest} request
+     * @param {WrestaurantApi.GetPrinterImpresorasRequest} request
      * @param {ImpresorasClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link WrestaurantApi.UnauthorizedError}
@@ -228,14 +229,14 @@ export class ImpresorasClient {
      *     })
      */
     public getPrinter(
-        request: WrestaurantApi.GetPrinterRequest,
+        request: WrestaurantApi.GetPrinterImpresorasRequest,
         requestOptions?: ImpresorasClient.RequestOptions,
     ): core.HttpResponsePromise<WrestaurantApi.PrinterDto> {
         return core.HttpResponsePromise.fromPromise(this.__getPrinter(request, requestOptions));
     }
 
     private async __getPrinter(
-        request: WrestaurantApi.GetPrinterRequest,
+        request: WrestaurantApi.GetPrinterImpresorasRequest,
         requestOptions?: ImpresorasClient.RequestOptions,
     ): Promise<core.WithRawResponse<WrestaurantApi.PrinterDto>> {
         const { id } = request;
@@ -314,10 +315,21 @@ export class ImpresorasClient {
      *     await client.impresoras.updatePrinter({
      *         id: "id",
      *         printerIp: "192.168.1.51",
-     *         displayName: "Cocina (caliente)",
-     *         widthMm: 80,
+     *         displayName: "Etiquetas barra",
+     *         widthMm: 58,
      *         source: "windows",
-     *         sourceId: "POS-01"
+     *         sourceId: "POS-01",
+     *         kind: "label",
+     *         label: {
+     *             widthMm: 57.15,
+     *             heightMm: 31.75,
+     *             gapMm: 3.5,
+     *             gapOffsetMm: 1.5,
+     *             speed: 3,
+     *             density: 8,
+     *             direction: 0,
+     *             copies: 1
+     *         }
      *     })
      */
     public updatePrinter(
@@ -407,7 +419,7 @@ export class ImpresorasClient {
     /**
      * Elimina de forma permanente una impresora del usuario.
      *
-     * @param {WrestaurantApi.DeletePrinterRequest} request
+     * @param {WrestaurantApi.DeletePrinterImpresorasRequest} request
      * @param {ImpresorasClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link WrestaurantApi.UnauthorizedError}
@@ -420,14 +432,14 @@ export class ImpresorasClient {
      *     })
      */
     public deletePrinter(
-        request: WrestaurantApi.DeletePrinterRequest,
+        request: WrestaurantApi.DeletePrinterImpresorasRequest,
         requestOptions?: ImpresorasClient.RequestOptions,
     ): core.HttpResponsePromise<void> {
         return core.HttpResponsePromise.fromPromise(this.__deletePrinter(request, requestOptions));
     }
 
     private async __deletePrinter(
-        request: WrestaurantApi.DeletePrinterRequest,
+        request: WrestaurantApi.DeletePrinterImpresorasRequest,
         requestOptions?: ImpresorasClient.RequestOptions,
     ): Promise<core.WithRawResponse<void>> {
         const { id } = request;
@@ -499,6 +511,7 @@ export class ImpresorasClient {
      * @throws {@link WrestaurantApi.BadRequestError}
      * @throws {@link WrestaurantApi.UnauthorizedError}
      * @throws {@link WrestaurantApi.NotFoundError}
+     * @throws {@link WrestaurantApi.FailedDependencyError}
      * @throws {@link WrestaurantApi.TooManyRequestsError}
      *
      * @example
@@ -514,19 +527,40 @@ export class ImpresorasClient {
      *                 printerId: "00000000-b12a-405f-905d-dbf424c20000",
      *                 jobType: "order",
      *                 title: "COCINA",
-     *                 items: [{
-     *                         idProduct: "01052",
-     *                         name: "Hamburguesa doble carne",
-     *                         quantity: 2,
-     *                         price: 89,
-     *                         modifiers: [{
-     *                                 idModifier: "50110",
-     *                                 name: "Sin cebolla",
-     *                                 price: 0
-     *                             }],
-     *                         notes: "Sin pepinillos"
+     *                 sections: [{
+     *                         label: "TITULAR",
+     *                         items: [{
+     *                                 idProduct: "01052",
+     *                                 name: "Hamburguesa doble carne",
+     *                                 quantity: 2,
+     *                                 price: 89,
+     *                                 modifiers: [{
+     *                                         idModifier: "50110",
+     *                                         name: "Sin cebolla",
+     *                                         price: 0
+     *                                     }],
+     *                                 notes: "Sin pepinillos"
+     *                             }]
+     *                     }, {
+     *                         label: "INVITADO 1",
+     *                         items: [{
+     *                                 idProduct: "01060",
+     *                                 name: "Ensalada C\u00E9sar",
+     *                                 quantity: 1,
+     *                                 price: 75,
+     *                                 modifiers: [{
+     *                                         price: 1.1
+     *                                     }]
+     *                             }]
      *                     }]
-     *             }]
+     *             }],
+     *         customer: {
+     *             code: "A17",
+     *             name: "Cliente Demo",
+     *             type: "Socio",
+     *             roomName: "Sala Terraza"
+     *         },
+     *         orderNote: "Sin popote"
      *     })
      */
     public printOrder(
@@ -591,6 +625,11 @@ export class ImpresorasClient {
                         _response.error.body as WrestaurantApi.ProblemDetails,
                         _response.rawResponse,
                     );
+                case 424:
+                    throw new WrestaurantApi.FailedDependencyError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
                 case 429:
                     throw new WrestaurantApi.TooManyRequestsError(
                         _response.error.body as WrestaurantApi.ProblemDetails,
@@ -609,13 +648,120 @@ export class ImpresorasClient {
     }
 
     /**
+     * Envía un ticket o etiqueta de prueba a una sola impresora para comprobar que la configuración llega al papel. Usa la misma ruta que una impresión real.
+     *
+     * @param {WrestaurantApi.PrintTestRequest} request
+     * @param {ImpresorasClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link WrestaurantApi.BadRequestError}
+     * @throws {@link WrestaurantApi.UnauthorizedError}
+     * @throws {@link WrestaurantApi.NotFoundError}
+     * @throws {@link WrestaurantApi.FailedDependencyError}
+     * @throws {@link WrestaurantApi.TooManyRequestsError}
+     *
+     * @example
+     *     await client.impresoras.printTest({
+     *         licenseKey: "licenseKey"
+     *     })
+     */
+    public printTest(
+        request: WrestaurantApi.PrintTestRequest,
+        requestOptions?: ImpresorasClient.RequestOptions,
+    ): core.HttpResponsePromise<WrestaurantApi.PrintOrderResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__printTest(request, requestOptions));
+    }
+
+    private async __printTest(
+        request: WrestaurantApi.PrintTestRequest,
+        requestOptions?: ImpresorasClient.RequestOptions,
+    ): Promise<core.WithRawResponse<WrestaurantApi.PrintOrderResponse>> {
+        const { licenseKey, ..._body } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "X-Api-Key": requestOptions?.apiKey ?? this._options?.apiKey,
+                "X-License-Key": requestOptions?.licenseKey ?? this._options?.licenseKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.WrestaurantApiEnvironment.Default,
+                `api/v1/print/${core.url.encodePathParam(licenseKey)}/test`,
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: _body,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as WrestaurantApi.PrintOrderResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new WrestaurantApi.BadRequestError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 401:
+                    throw new WrestaurantApi.UnauthorizedError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new WrestaurantApi.NotFoundError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 424:
+                    throw new WrestaurantApi.FailedDependencyError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new WrestaurantApi.TooManyRequestsError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.WrestaurantApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/api/v1/print/{licenseKey}/test",
+        );
+    }
+
+    /**
      * Devuelve las impresoras configuradas para la sucursal (id, IP, nombre, ancho), para que el kiosko elija el printerId al imprimir.
      *
-     * @param {WrestaurantApi.GetPrintersRequest} request
+     * @param {WrestaurantApi.GetPrintersImpresorasRequest} request
      * @param {ImpresorasClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link WrestaurantApi.UnauthorizedError}
      * @throws {@link WrestaurantApi.NotFoundError}
+     * @throws {@link WrestaurantApi.FailedDependencyError}
      * @throws {@link WrestaurantApi.TooManyRequestsError}
      *
      * @example
@@ -624,14 +770,14 @@ export class ImpresorasClient {
      *     })
      */
     public getPrinters(
-        request: WrestaurantApi.GetPrintersRequest,
+        request: WrestaurantApi.GetPrintersImpresorasRequest,
         requestOptions?: ImpresorasClient.RequestOptions,
     ): core.HttpResponsePromise<WrestaurantApi.PrinterAssignmentsResponse> {
         return core.HttpResponsePromise.fromPromise(this.__getPrinters(request, requestOptions));
     }
 
     private async __getPrinters(
-        request: WrestaurantApi.GetPrintersRequest,
+        request: WrestaurantApi.GetPrintersImpresorasRequest,
         requestOptions?: ImpresorasClient.RequestOptions,
     ): Promise<core.WithRawResponse<WrestaurantApi.PrinterAssignmentsResponse>> {
         const { licenseKey } = request;
@@ -677,6 +823,11 @@ export class ImpresorasClient {
                     );
                 case 404:
                     throw new WrestaurantApi.NotFoundError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 424:
+                    throw new WrestaurantApi.FailedDependencyError(
                         _response.error.body as WrestaurantApi.ProblemDetails,
                         _response.rawResponse,
                     );

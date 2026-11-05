@@ -1,6 +1,6 @@
 {
     "name": "@wrestaurant/sdk",
-    "version": "0.12.0",
+    "version": "1.0.0",
     "private": false,
     "repository": {
         "type": "git",
@@ -22,17 +22,6 @@
             },
             "default": "./dist/cjs/index.js"
         },
-        "./endpoints": {
-            "import": {
-                "types": "./dist/esm/api/resources/endpoints/exports.d.mts",
-                "default": "./dist/esm/api/resources/endpoints/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/endpoints/exports.d.ts",
-                "default": "./dist/cjs/api/resources/endpoints/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/endpoints/exports.js"
-        },
         "./impresoras": {
             "import": {
                 "types": "./dist/esm/api/resources/impresoras/exports.d.mts",
@@ -43,6 +32,171 @@
                 "default": "./dist/cjs/api/resources/impresoras/exports.js"
             },
             "default": "./dist/cjs/api/resources/impresoras/exports.js"
+        },
+        "./puntosDeVenta": {
+            "import": {
+                "types": "./dist/esm/api/resources/puntosDeVenta/exports.d.mts",
+                "default": "./dist/esm/api/resources/puntosDeVenta/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/puntosDeVenta/exports.d.ts",
+                "default": "./dist/cjs/api/resources/puntosDeVenta/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/puntosDeVenta/exports.js"
+        },
+        "./productos": {
+            "import": {
+                "types": "./dist/esm/api/resources/productos/exports.d.mts",
+                "default": "./dist/esm/api/resources/productos/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/productos/exports.d.ts",
+                "default": "./dist/cjs/api/resources/productos/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/productos/exports.js"
+        },
+        "./estaciones": {
+            "import": {
+                "types": "./dist/esm/api/resources/estaciones/exports.d.mts",
+                "default": "./dist/esm/api/resources/estaciones/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/estaciones/exports.d.ts",
+                "default": "./dist/cjs/api/resources/estaciones/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/estaciones/exports.js"
+        },
+        "./grupos": {
+            "import": {
+                "types": "./dist/esm/api/resources/grupos/exports.d.mts",
+                "default": "./dist/esm/api/resources/grupos/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/grupos/exports.d.ts",
+                "default": "./dist/cjs/api/resources/grupos/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/grupos/exports.js"
+        },
+        "./turnos": {
+            "import": {
+                "types": "./dist/esm/api/resources/turnos/exports.d.mts",
+                "default": "./dist/esm/api/resources/turnos/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/turnos/exports.d.ts",
+                "default": "./dist/cjs/api/resources/turnos/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/turnos/exports.js"
+        },
+        "./asistencias": {
+            "import": {
+                "types": "./dist/esm/api/resources/asistencias/exports.d.mts",
+                "default": "./dist/esm/api/resources/asistencias/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/asistencias/exports.d.ts",
+                "default": "./dist/cjs/api/resources/asistencias/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/asistencias/exports.js"
+        },
+        "./ordenes": {
+            "import": {
+                "types": "./dist/esm/api/resources/ordenes/exports.d.mts",
+                "default": "./dist/esm/api/resources/ordenes/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/ordenes/exports.d.ts",
+                "default": "./dist/cjs/api/resources/ordenes/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/ordenes/exports.js"
+        },
+        "./meseros": {
+            "import": {
+                "types": "./dist/esm/api/resources/meseros/exports.d.mts",
+                "default": "./dist/esm/api/resources/meseros/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/meseros/exports.d.ts",
+                "default": "./dist/cjs/api/resources/meseros/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/meseros/exports.js"
+        },
+        "./tiposDescuento": {
+            "import": {
+                "types": "./dist/esm/api/resources/tiposDescuento/exports.d.mts",
+                "default": "./dist/esm/api/resources/tiposDescuento/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/tiposDescuento/exports.d.ts",
+                "default": "./dist/cjs/api/resources/tiposDescuento/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/tiposDescuento/exports.js"
+        },
+        "./mesas": {
+            "import": {
+                "types": "./dist/esm/api/resources/mesas/exports.d.mts",
+                "default": "./dist/esm/api/resources/mesas/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/mesas/exports.d.ts",
+                "default": "./dist/cjs/api/resources/mesas/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/mesas/exports.js"
+        },
+        "./empresas": {
+            "import": {
+                "types": "./dist/esm/api/resources/empresas/exports.d.mts",
+                "default": "./dist/esm/api/resources/empresas/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/empresas/exports.d.ts",
+                "default": "./dist/cjs/api/resources/empresas/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/empresas/exports.js"
+        },
+        "./cheques": {
+            "import": {
+                "types": "./dist/esm/api/resources/cheques/exports.d.mts",
+                "default": "./dist/esm/api/resources/cheques/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/cheques/exports.d.ts",
+                "default": "./dist/cjs/api/resources/cheques/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/cheques/exports.js"
+        },
+        "./formasDePago": {
+            "import": {
+                "types": "./dist/esm/api/resources/formasDePago/exports.d.mts",
+                "default": "./dist/esm/api/resources/formasDePago/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/formasDePago/exports.d.ts",
+                "default": "./dist/cjs/api/resources/formasDePago/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/formasDePago/exports.js"
+        },
+        "./facturas": {
+            "import": {
+                "types": "./dist/esm/api/resources/facturas/exports.d.mts",
+                "default": "./dist/esm/api/resources/facturas/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/facturas/exports.d.ts",
+                "default": "./dist/cjs/api/resources/facturas/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/facturas/exports.js"
+        },
+        "./clientes": {
+            "import": {
+                "types": "./dist/esm/api/resources/clientes/exports.d.mts",
+                "default": "./dist/esm/api/resources/clientes/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/clientes/exports.d.ts",
+                "default": "./dist/cjs/api/resources/clientes/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/clientes/exports.js"
         },
         "./package.json": "./package.json"
     },

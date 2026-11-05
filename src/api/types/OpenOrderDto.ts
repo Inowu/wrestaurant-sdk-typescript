@@ -40,6 +40,18 @@ export interface OpenOrderDto {
     totalDescuentos?: number | undefined;
     totalCortesias?: number | undefined;
     totalCortesiaAlimentos?: number | undefined;
+    campoAdicional1?: (string | null) | undefined;
+    campoAdicional2?: (string | null) | undefined;
     nombreMesero?: (string | null) | undefined;
+    /**
+     * How many times the cashier reopened the account (`tempcheques.reabiertas`, an int). A
+     * printed account is editable again only when this is above zero.
+     */
+    reabiertas?: number | undefined;
+    /**
+     * The tip included in the account (`tempcheques.propinaincluida`), always an amount.
+     * Set in SoftRestaurant itself; this API only reads it.
+     */
+    propinaIncluida?: number | undefined;
     impuestos?: WrestaurantApi.ImpuestosDto | undefined;
 }

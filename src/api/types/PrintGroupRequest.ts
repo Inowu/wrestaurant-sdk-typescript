@@ -9,10 +9,12 @@ export interface PrintGroupRequest {
     jobType: PrintGroupRequest.JobType;
     /** Título del ticket — se imprime como la línea de destino (p. ej. "COCINA"). */
     title: string | null;
-    /** Artículos a imprimir en este ticket. */
-    items: WrestaurantApi.PrintLineRequest[] | null;
+    /** Artículos a imprimir en este ticket. Ignorado cuando se envían "sections". */
+    items?: (WrestaurantApi.PrintLineRequest[] | null) | undefined;
     /** QR del ticket si se requiere. Reservado para la futura plantilla de recibo. */
     qrData?: (string | null) | undefined;
+    /** Bloques de artículos con encabezado. Sustituye a "items" cuando se envía. */
+    sections?: (WrestaurantApi.PrintSectionRequest[] | null) | undefined;
 }
 
 export namespace PrintGroupRequest {

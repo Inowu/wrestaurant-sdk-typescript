@@ -40,6 +40,8 @@ export interface OrderDtoWithItemsAndPayments {
     totalDescuentos?: number | undefined;
     totalCortesias?: number | undefined;
     totalCortesiaAlimentos?: number | undefined;
+    campoAdicional1?: (string | null) | undefined;
+    campoAdicional2?: (string | null) | undefined;
     items?: (WrestaurantApi.OrderDetailDto[] | null) | undefined;
     paymentMethods?: (WrestaurantApi.OrderPaymentMethodsDto[] | null) | undefined;
     impuestos?: WrestaurantApi.ImpuestosDto | undefined;

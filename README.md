@@ -45,38 +45,14 @@ Instantiate and use the client with the following:
 import { WrestaurantApiClient } from "@wrestaurant/sdk";
 
 const client = new WrestaurantApiClient({ apiKey: "YOUR_API_KEY", apiKey: "YOUR_API_KEY", licenseKey: "YOUR_LICENSE_KEY" });
-await client.endpoints.createTempOrders({
-    licenseKey: "licenseKey",
-    turnDependent: true,
-    mesa: "5",
-    idMesero: "001",
-    estacion: "CAJA1",
-    serie: "A",
-    idEmpresa: "1",
-    noPersonas: 2,
-    productos: [{
-            idProducto: "01052",
-            descripcionProducto: "Hamburguesa doble carne",
-            idGrupo: "0007",
-            movimiento: 1,
-            cantidad: 2,
-            descripcionGrupo: "Hamburguesas",
-            clasificacion: "ALIMENTOS",
-            productoCompuestoPrincipal: 0,
-            nombreCorto: "Hamb. doble",
-            imagen: "",
-            visibleMenu: true,
-            idProdServSat: "50202306",
-            comentario: "Sin pepinillos",
-            precio: 89,
-            precioSinImpuestos: 76.72,
-            impuesto1: 12.28,
-            impuesto2: 0,
-            impuesto3: 0,
-            descuento: 0,
-            bloqueado: false,
-            permitirprodcompenmodif: false
-        }]
+await client.impresoras.createPrinter({
+    licenseKey: "DS5D2368HCME4O9X",
+    printerIp: "192.168.1.50",
+    displayName: "Cocina",
+    widthMm: 80,
+    source: "windows",
+    sourceId: "POS-01",
+    kind: "thermal"
 });
 ```
 
@@ -100,7 +76,7 @@ following namespace:
 ```typescript
 import { WrestaurantApi } from "@wrestaurant/sdk";
 
-const request: WrestaurantApi.GetProductsRequest = {
+const request: WrestaurantApi.ListPrintersImpresorasRequest = {
     ...
 };
 ```
@@ -114,7 +90,7 @@ will be thrown.
 import { WrestaurantApiError } from "@wrestaurant/sdk";
 
 try {
-    await client.endpoints.createTempOrders(...);
+    await client.impresoras.createPrinter(...);
 } catch (err) {
     if (err instanceof WrestaurantApiError) {
         console.log(err.statusCode);
@@ -130,7 +106,7 @@ try {
 You can consume binary data from endpoints using the `BinaryResponse` type which lets you choose how to consume the data:
 
 ```typescript
-const response = await client.endpoints.getFacturaXml(...);
+const response = await client.facturas.getFacturaXml(...);
 const stream: ReadableStream<Uint8Array> = response.stream();
 // const arrayBuffer: ArrayBuffer = await response.arrayBuffer();
 // const blob: Blob = response.blob();
@@ -155,7 +131,7 @@ import { createWriteStream } from 'fs';
 import { Readable } from 'stream';
 import { pipeline } from 'stream/promises';
 
-const response = await client.endpoints.getFacturaXml(...);
+const response = await client.facturas.getFacturaXml(...);
 
 const stream = response.stream();
 const nodeStream = Readable.fromWeb(stream);
@@ -174,7 +150,7 @@ await pipeline(nodeStream, writeStream);
 ```ts
 import { writeFile } from 'fs/promises';
 
-const response = await client.endpoints.getFacturaXml(...);
+const response = await client.facturas.getFacturaXml(...);
 
 const arrayBuffer = await response.arrayBuffer();
 await writeFile('path/to/file', Buffer.from(arrayBuffer));
@@ -190,7 +166,7 @@ await writeFile('path/to/file', Buffer.from(arrayBuffer));
 ```ts
 import { writeFile } from 'fs/promises';
 
-const response = await client.endpoints.getFacturaXml(...);
+const response = await client.facturas.getFacturaXml(...);
 
 const blob = await response.blob();
 const arrayBuffer = await blob.arrayBuffer();
@@ -207,7 +183,7 @@ await writeFile('output.bin', Buffer.from(arrayBuffer));
 ```ts
 import { writeFile } from 'fs/promises';
 
-const response = await client.endpoints.getFacturaXml(...);
+const response = await client.facturas.getFacturaXml(...);
 
 const bytes = await response.bytes();
 await writeFile('path/to/file', bytes);
@@ -228,7 +204,7 @@ await writeFile('path/to/file', bytes);
 <summary>ReadableStream (most-efficient)</summary>
 
 ```ts
-const response = await client.endpoints.getFacturaXml(...);
+const response = await client.facturas.getFacturaXml(...);
 
 const stream = response.stream();
 await Bun.write('path/to/file', stream);
@@ -242,7 +218,7 @@ await Bun.write('path/to/file', stream);
 <summary>ArrayBuffer</summary>
 
 ```ts
-const response = await client.endpoints.getFacturaXml(...);
+const response = await client.facturas.getFacturaXml(...);
 
 const arrayBuffer = await response.arrayBuffer();
 await Bun.write('path/to/file', arrayBuffer);
@@ -256,7 +232,7 @@ await Bun.write('path/to/file', arrayBuffer);
 <summary>Blob</summary>
 
 ```ts
-const response = await client.endpoints.getFacturaXml(...);
+const response = await client.facturas.getFacturaXml(...);
 
 const blob = await response.blob();
 await Bun.write('path/to/file', blob);
@@ -270,7 +246,7 @@ await Bun.write('path/to/file', blob);
 <summary>Bytes (UIntArray8)</summary>
 
 ```ts
-const response = await client.endpoints.getFacturaXml(...);
+const response = await client.facturas.getFacturaXml(...);
 
 const bytes = await response.bytes();
 await Bun.write('path/to/file', bytes);
@@ -291,7 +267,7 @@ await Bun.write('path/to/file', bytes);
 <summary>ReadableStream (most-efficient)</summary>
 
 ```ts
-const response = await client.endpoints.getFacturaXml(...);
+const response = await client.facturas.getFacturaXml(...);
 
 const stream = response.stream();
 const file = await Deno.open('path/to/file', { write: true, create: true });
@@ -306,7 +282,7 @@ await stream.pipeTo(file.writable);
 <summary>ArrayBuffer</summary>
 
 ```ts
-const response = await client.endpoints.getFacturaXml(...);
+const response = await client.facturas.getFacturaXml(...);
 
 const arrayBuffer = await response.arrayBuffer();
 await Deno.writeFile('path/to/file', new Uint8Array(arrayBuffer));
@@ -320,7 +296,7 @@ await Deno.writeFile('path/to/file', new Uint8Array(arrayBuffer));
 <summary>Blob</summary>
 
 ```ts
-const response = await client.endpoints.getFacturaXml(...);
+const response = await client.facturas.getFacturaXml(...);
 
 const blob = await response.blob();
 const arrayBuffer = await blob.arrayBuffer();
@@ -335,7 +311,7 @@ await Deno.writeFile('path/to/file', new Uint8Array(arrayBuffer));
 <summary>Bytes (UIntArray8)</summary>
 
 ```ts
-const response = await client.endpoints.getFacturaXml(...);
+const response = await client.facturas.getFacturaXml(...);
 
 const bytes = await response.bytes();
 await Deno.writeFile('path/to/file', bytes);
@@ -356,7 +332,7 @@ await Deno.writeFile('path/to/file', bytes);
 <summary>Blob (most-efficient)</summary>
 
 ```ts
-const response = await client.endpoints.getFacturaXml(...);
+const response = await client.facturas.getFacturaXml(...);
 
 const blob = await response.blob();
 const url = URL.createObjectURL(blob);
@@ -377,7 +353,7 @@ URL.revokeObjectURL(url);
 <summary>ReadableStream</summary>
 
 ```ts
-const response = await client.endpoints.getFacturaXml(...);
+const response = await client.facturas.getFacturaXml(...);
 
 const stream = response.stream();
 const reader = stream.getReader();
@@ -408,7 +384,7 @@ URL.revokeObjectURL(url);
 <summary>ArrayBuffer</summary>
 
 ```ts
-const response = await client.endpoints.getFacturaXml(...);
+const response = await client.facturas.getFacturaXml(...);
 
 const arrayBuffer = await response.arrayBuffer();
 const blob = new Blob([arrayBuffer]);
@@ -430,7 +406,7 @@ URL.revokeObjectURL(url);
 <summary>Bytes (UIntArray8)</summary>
 
 ```ts
-const response = await client.endpoints.getFacturaXml(...);
+const response = await client.facturas.getFacturaXml(...);
 
 const bytes = await response.bytes();
 const blob = new Blob([bytes]);
@@ -461,7 +437,7 @@ URL.revokeObjectURL(url);
 <summary>ReadableStream</summary>
 
 ```ts
-const response = await client.endpoints.getFacturaXml(...);
+const response = await client.facturas.getFacturaXml(...);
 
 const stream = response.stream();
 const text = await new Response(stream).text();
@@ -475,7 +451,7 @@ const text = await new Response(stream).text();
 <summary>ArrayBuffer</summary>
 
 ```ts
-const response = await client.endpoints.getFacturaXml(...);
+const response = await client.facturas.getFacturaXml(...);
 
 const arrayBuffer = await response.arrayBuffer();
 const text = new TextDecoder().decode(arrayBuffer);
@@ -489,7 +465,7 @@ const text = new TextDecoder().decode(arrayBuffer);
 <summary>Blob</summary>
 
 ```ts
-const response = await client.endpoints.getFacturaXml(...);
+const response = await client.facturas.getFacturaXml(...);
 
 const blob = await response.blob();
 const text = await blob.text();
@@ -503,7 +479,7 @@ const text = await blob.text();
 <summary>Bytes (UIntArray8)</summary>
 
 ```ts
-const response = await client.endpoints.getFacturaXml(...);
+const response = await client.facturas.getFacturaXml(...);
 
 const bytes = await response.bytes();
 const text = new TextDecoder().decode(bytes);
@@ -521,9 +497,9 @@ const text = new TextDecoder().decode(bytes);
 This SDK supports direct imports of subpackage clients, which allows JavaScript bundlers to tree-shake and include only the imported subpackage code. This results in much smaller bundle sizes.
 
 ```typescript
-import { EndpointsClient } from '@wrestaurant/sdk/endpoints';
+import { ImpresorasClient } from '@wrestaurant/sdk/impresoras';
 
-const client = new EndpointsClient({...});
+const client = new ImpresorasClient({...});
 ```
 
 ### Additional Headers
@@ -540,7 +516,7 @@ const client = new WrestaurantApiClient({
     }
 });
 
-const response = await client.endpoints.createTempOrders(..., {
+const response = await client.impresoras.createPrinter(..., {
     headers: {
         'X-Custom-Header': 'custom value'
     }
@@ -552,7 +528,7 @@ const response = await client.endpoints.createTempOrders(..., {
 If you would like to send additional query string parameters as part of the request, use the `queryParams` request option.
 
 ```typescript
-const response = await client.endpoints.createTempOrders(..., {
+const response = await client.impresoras.createPrinter(..., {
     queryParams: {
         'customQueryParamKey': 'custom query param value'
     }
@@ -582,7 +558,7 @@ Which status codes are retried depends on the `retryStatusCodes` generator confi
 Use the `maxRetries` request option to configure this behavior.
 
 ```typescript
-const response = await client.endpoints.createTempOrders(..., {
+const response = await client.impresoras.createPrinter(..., {
     maxRetries: 0 // override maxRetries at the request level
 });
 ```
@@ -592,7 +568,7 @@ const response = await client.endpoints.createTempOrders(..., {
 The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
 
 ```typescript
-const response = await client.endpoints.createTempOrders(..., {
+const response = await client.impresoras.createPrinter(..., {
     timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
@@ -603,7 +579,7 @@ The SDK allows users to abort requests at any point by passing in an abort signa
 
 ```typescript
 const controller = new AbortController();
-const response = await client.endpoints.createTempOrders(..., {
+const response = await client.impresoras.createPrinter(..., {
     abortSignal: controller.signal
 });
 controller.abort(); // aborts the request
@@ -615,7 +591,7 @@ The SDK provides access to raw response data, including headers, through the `.w
 The `.withRawResponse()` method returns a promise that results to an object with a `data` and a `rawResponse` property.
 
 ```typescript
-const { data, rawResponse } = await client.endpoints.createTempOrders(...).withRawResponse();
+const { data, rawResponse } = await client.impresoras.createPrinter(...).withRawResponse();
 
 console.log(data);
 console.log(rawResponse.headers['X-My-Header']);

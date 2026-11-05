@@ -7,7 +7,8 @@ export interface MeseroDto {
     contrasena?: (string | null) | undefined;
     tipo?: (number | null) | undefined;
     fotografia?: (string | null) | undefined;
-    visible?: boolean | undefined;
+    /** `meseros.visible` tal como lo guarda el punto de venta. NO es un booleano: la columna usa `1` para un mesero activo y `2` para uno dado de baja, y SoftRestaurant admite otros valores. Se devuelve sin interpretar: `visible == 1` es la única lectura válida de "activo", y le corresponde a quien consume el catálogo. */
+    visible?: (number | null) | undefined;
     idEmpresa?: (string | null) | undefined;
     tipoAcceso?: boolean | undefined;
     capturaRestringidaMesas?: boolean | undefined;

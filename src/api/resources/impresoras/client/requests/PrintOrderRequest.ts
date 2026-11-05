@@ -16,19 +16,40 @@ import type * as WrestaurantApi from "../../../../index.js";
  *                 printerId: "00000000-b12a-405f-905d-dbf424c20000",
  *                 jobType: "order",
  *                 title: "COCINA",
- *                 items: [{
- *                         idProduct: "01052",
- *                         name: "Hamburguesa doble carne",
- *                         quantity: 2,
- *                         price: 89,
- *                         modifiers: [{
- *                                 idModifier: "50110",
- *                                 name: "Sin cebolla",
- *                                 price: 0
- *                             }],
- *                         notes: "Sin pepinillos"
+ *                 sections: [{
+ *                         label: "TITULAR",
+ *                         items: [{
+ *                                 idProduct: "01052",
+ *                                 name: "Hamburguesa doble carne",
+ *                                 quantity: 2,
+ *                                 price: 89,
+ *                                 modifiers: [{
+ *                                         idModifier: "50110",
+ *                                         name: "Sin cebolla",
+ *                                         price: 0
+ *                                     }],
+ *                                 notes: "Sin pepinillos"
+ *                             }]
+ *                     }, {
+ *                         label: "INVITADO 1",
+ *                         items: [{
+ *                                 idProduct: "01060",
+ *                                 name: "Ensalada C\u00E9sar",
+ *                                 quantity: 1,
+ *                                 price: 75,
+ *                                 modifiers: [{
+ *                                         price: 1.1
+ *                                     }]
+ *                             }]
  *                     }]
- *             }]
+ *             }],
+ *         customer: {
+ *             code: "A17",
+ *             name: "Cliente Demo",
+ *             type: "Socio",
+ *             roomName: "Sala Terraza"
+ *         },
+ *         orderNote: "Sin popote"
  *     }
  */
 export interface PrintOrderRequest {
@@ -47,4 +68,7 @@ export interface PrintOrderRequest {
     businessSubtitle?: string | null;
     /** Un grupo de impresión por cada impresora destino. */
     groups: WrestaurantApi.PrintGroupRequest[] | null;
+    customer?: WrestaurantApi.PrintCustomerRequest;
+    /** Nota que aplica a toda la orden, impresa al final del ticket. */
+    orderNote?: string | null;
 }
