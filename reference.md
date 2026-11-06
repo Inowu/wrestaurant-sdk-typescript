@@ -2473,6 +2473,8 @@ Cobra una orden abierta y la convierte en una venta: registra las formas de pago
 
 **Cuentas sin productos.** Una cuenta vacía se puede cobrar: el total es 0.00 y se registra un pago de 0.00.
 
+**Mesas.** Al cobrar, la cuenta libera la mesa que tenía asignada (`idMesa` al abrirla, o asignada desde el punto de venta). Si la mesa tiene otra cuenta abierta, sigue ocupada.
+
 Requiere un turno abierto en la estación de la cuenta, y que la cuenta no esté pagada, cancelada ni en uso en una estación. Los totales se recalculan antes de cobrar, conservando el descuento general y los descuentos por producto.
 </dd>
 </dl>
@@ -2742,6 +2744,73 @@ await client.tiposDescuento.getTiposDescuento({
 </details>
 
 ## Mesas
+<details><summary><code>client.mesas.<a href="/src/api/resources/mesas/client/Client.ts">getMesaAreas</a>({ ...params }) -> WrestaurantApi.MesaAreasResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Devuelve todas las áreas del restaurante configuradas en el punto de venta, incluidas las que no tienen mesas o no tienen ninguna mesa en uso. Cada área indica su mapa actual, cuántas mesas tiene y cuántas están en uso.
+
+`idArea` es el valor que acepta `idAreaRestaurant` al abrir una orden. Envía idEmpresa para contar solo las mesas de esa empresa; la lista de áreas no cambia.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.mesas.getMesaAreas({
+    licenseKey: "licenseKey"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.GetMesaAreasMesasRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MesasClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.mesas.<a href="/src/api/resources/mesas/client/Client.ts">getMesas</a>({ ...params }) -> WrestaurantApi.MesasResponse</code></summary>
 <dl>
 <dd>

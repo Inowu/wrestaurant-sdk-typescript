@@ -1670,6 +1670,8 @@ export class OrdenesClient {
      *
      * **Cuentas sin productos.** Una cuenta vacía se puede cobrar: el total es 0.00 y se registra un pago de 0.00.
      *
+     * **Mesas.** Al cobrar, la cuenta libera la mesa que tenía asignada (`idMesa` al abrirla, o asignada desde el punto de venta). Si la mesa tiene otra cuenta abierta, sigue ocupada.
+     *
      * Requiere un turno abierto en la estación de la cuenta, y que la cuenta no esté pagada, cancelada ni en uso en una estación. Los totales se recalculan antes de cobrar, conservando el descuento general y los descuentos por producto.
      *
      * @param {WrestaurantApi.CloseOpenOrderRequest} request

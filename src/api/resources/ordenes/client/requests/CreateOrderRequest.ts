@@ -73,4 +73,16 @@ export interface CreateOrderRequest {
     idEmpresa?: string | null;
     noPersonas?: number;
     productos?: WrestaurantApi.PartialProductDto[] | null;
+    /**
+     * Opcional. Mesa física (`idMesa` de `GET /mesas`) que se ocupa al abrir la cuenta.
+     * Requiere que el punto de venta tenga activada la captura de mesa al abrir cuentas
+     * (`forzarcapturamesa`); la mesa no puede tener otra cuenta abierta. La cuenta toma el
+     * área de la mesa.
+     */
+    idMesa?: string | null;
+    /**
+     * Opcional. Área del restaurante de la cuenta. Si se envía junto con `idMesa`, debe ser el
+     * área de esa mesa. Si se omite, se usa el área de la mesa o, sin mesa, `01`.
+     */
+    idAreaRestaurant?: string | null;
 }

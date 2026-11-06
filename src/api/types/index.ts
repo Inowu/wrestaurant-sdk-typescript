@@ -23,6 +23,8 @@ export * from "./GruposModificadorDto.js";
 export * from "./GruposQueryResponse.js";
 export * from "./ImpuestosDto.js";
 export * from "./LabelSettingsDto.js";
+export * from "./MesaAreaDto.js";
+export * from "./MesaAreasResponse.js";
 export * from "./MesaCuentaDto.js";
 export * from "./MesaDto.js";
 export * from "./MesaPosicionDto.js";

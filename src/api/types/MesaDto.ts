@@ -14,7 +14,7 @@ export interface MesaDto {
     idTipoMesa?: (string | null) | undefined;
     /** Nombre del tipo de mesa, por ejemplo `REDONDA` o `CUADRADA`. */
     tipoMesa?: (string | null) | undefined;
-    /** Estatus de ocupación tal como lo guarda el punto de venta (1 = ocupada). */
+    /** Estatus de ocupación tal como lo guarda el punto de venta (0 = libre, 1 = ocupada, 3 = cuenta impresa). */
     estatusOcupacion?: number | undefined;
     /** `true` si la mesa tiene al menos una cuenta abierta o el punto de venta la marca como ocupada. */
     enUso?: boolean | undefined;
