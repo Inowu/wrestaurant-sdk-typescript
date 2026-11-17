@@ -788,6 +788,117 @@ await client.productos.getProducts({
 </dl>
 </details>
 
+<details><summary><code>client.productos.<a href="/src/api/resources/productos/client/Client.ts">createProducts</a>({ ...params }) -> WrestaurantApi.CreateProductsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Da de alta uno o varios productos (hasta 200 por solicitud) en una sola operación.
+
+La clave (`idProducto`) es opcional. Si se envía, se usa tal cual y no debe existir ya. Si se omite, se genera automaticamente sin repetir ninguna clave existente. La respuesta devuelve la clave de cada producto en el mismo orden de la solicitud.
+
+Se crean todos o ninguno. Si algún producto es inválido (clave ya existente o repetida, grupo, subgrupo, área o unidad inexistentes, o un subgrupo que no pertenece al grupo) la solicitud completa se rechaza con `400` y `errors` indica cada problema por su posición, por ejemplo `Productos[2].Subgrupos`.
+
+Los impuestos son tasas en porcentaje (`16` = 16%); si se omiten se usan las tasas por defecto del Punto de Venta. El precio sin impuestos se calcula automáticamente.
+
+Además, la operación:
+- Registra el producto para venta a domicilio y kiosko, y su configuración de monedero (inactiva).
+- Agrega una entrada de auditoría por producto en la bitácora del sistema.
+- Marca los productos para sincronización con otros sistemas conectados.
+- Avisa a las terminales del Punto de Venta que recarguen su catálogo.
+
+Se recomienda enviar el encabezado `Idempotency-Key`: reintentar sin él crea de nuevo los productos cuya clave se generó, con claves distintas.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.productos.createProducts({
+    licenseKey: "licenseKey",
+    idEmpresa: "1",
+    productos: [{
+            descripcion: "AGUA DE JAMAICA 1 LT",
+            idGrupo: "03",
+            subgrupos: ["11"],
+            nombreCorto: "JAMAICA 1LT",
+            precio: 55,
+            idArea: "1",
+            idUnidad: "PZA",
+            bloqueado: false,
+            visibleMenu: false,
+            usarComedor: true,
+            usarDomicilio: true,
+            usarRapido: true
+        }, {
+            idProducto: "CEB001",
+            descripcion: "CERVEZA CEBADA",
+            idGrupo: "03",
+            subgrupos: ["13"],
+            nombreCorto: "",
+            precio: 150,
+            impuesto1: 16,
+            impuesto2: 8,
+            impuesto3: 0,
+            idArea: "1",
+            idUnidad: "PZA",
+            bloqueado: false,
+            visibleMenu: false,
+            usarComedor: true,
+            usarDomicilio: true,
+            usarRapido: true
+        }]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.CreateProductsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProductosClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.productos.<a href="/src/api/resources/productos/client/Client.ts">updateProduct</a>({ ...params }) -> WrestaurantApi.UpdateProductResponse</code></summary>
 <dl>
 <dd>
@@ -809,6 +920,7 @@ Además del cambio en sí, la operación aplica automáticamente estos efectos:
 - Si el producto también está registrado como modificador de sí mismo, su precio se sincroniza.
 - Se agrega una entrada de auditoría en la bitácora del sistema.
 - Se marca el producto para sincronización con otros sistemas conectados.
+- Avisa a las terminales del Punto de Venta que recarguen su catálogo.
 
 No modifica grupos de modificadores, paquetes, costos, comentarios, asignaciones de estación/almacén ni configuración de monedero del producto — esa configuración, si existe, se conserva sin cambios.
 </dd>

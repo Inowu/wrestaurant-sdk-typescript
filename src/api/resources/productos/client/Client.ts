@@ -132,6 +132,174 @@ export class ProductosClient {
     }
 
     /**
+     * Da de alta uno o varios productos (hasta 200 por solicitud) en una sola operación.
+     *
+     * La clave (`idProducto`) es opcional. Si se envía, se usa tal cual y no debe existir ya. Si se omite, se genera automaticamente sin repetir ninguna clave existente. La respuesta devuelve la clave de cada producto en el mismo orden de la solicitud.
+     *
+     * Se crean todos o ninguno. Si algún producto es inválido (clave ya existente o repetida, grupo, subgrupo, área o unidad inexistentes, o un subgrupo que no pertenece al grupo) la solicitud completa se rechaza con `400` y `errors` indica cada problema por su posición, por ejemplo `Productos[2].Subgrupos`.
+     *
+     * Los impuestos son tasas en porcentaje (`16` = 16%); si se omiten se usan las tasas por defecto del Punto de Venta. El precio sin impuestos se calcula automáticamente.
+     *
+     * Además, la operación:
+     * - Registra el producto para venta a domicilio y kiosko, y su configuración de monedero (inactiva).
+     * - Agrega una entrada de auditoría por producto en la bitácora del sistema.
+     * - Marca los productos para sincronización con otros sistemas conectados.
+     * - Avisa a las terminales del Punto de Venta que recarguen su catálogo.
+     *
+     * Se recomienda enviar el encabezado `Idempotency-Key`: reintentar sin él crea de nuevo los productos cuya clave se generó, con claves distintas.
+     *
+     * @param {WrestaurantApi.CreateProductsRequest} request
+     * @param {ProductosClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link WrestaurantApi.BadRequestError}
+     * @throws {@link WrestaurantApi.UnauthorizedError}
+     * @throws {@link WrestaurantApi.NotFoundError}
+     * @throws {@link WrestaurantApi.ConflictError}
+     * @throws {@link WrestaurantApi.UnprocessableEntityError}
+     * @throws {@link WrestaurantApi.FailedDependencyError}
+     * @throws {@link WrestaurantApi.TooManyRequestsError}
+     *
+     * @example
+     *     await client.productos.createProducts({
+     *         licenseKey: "licenseKey",
+     *         idEmpresa: "1",
+     *         productos: [{
+     *                 descripcion: "AGUA DE JAMAICA 1 LT",
+     *                 idGrupo: "03",
+     *                 subgrupos: ["11"],
+     *                 nombreCorto: "JAMAICA 1LT",
+     *                 precio: 55,
+     *                 idArea: "1",
+     *                 idUnidad: "PZA",
+     *                 bloqueado: false,
+     *                 visibleMenu: false,
+     *                 usarComedor: true,
+     *                 usarDomicilio: true,
+     *                 usarRapido: true
+     *             }, {
+     *                 idProducto: "CEB001",
+     *                 descripcion: "CERVEZA CEBADA",
+     *                 idGrupo: "03",
+     *                 subgrupos: ["13"],
+     *                 nombreCorto: "",
+     *                 precio: 150,
+     *                 impuesto1: 16,
+     *                 impuesto2: 8,
+     *                 impuesto3: 0,
+     *                 idArea: "1",
+     *                 idUnidad: "PZA",
+     *                 bloqueado: false,
+     *                 visibleMenu: false,
+     *                 usarComedor: true,
+     *                 usarDomicilio: true,
+     *                 usarRapido: true
+     *             }]
+     *     })
+     */
+    public createProducts(
+        request: WrestaurantApi.CreateProductsRequest,
+        requestOptions?: ProductosClient.RequestOptions,
+    ): core.HttpResponsePromise<WrestaurantApi.CreateProductsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__createProducts(request, requestOptions));
+    }
+
+    private async __createProducts(
+        request: WrestaurantApi.CreateProductsRequest,
+        requestOptions?: ProductosClient.RequestOptions,
+    ): Promise<core.WithRawResponse<WrestaurantApi.CreateProductsResponse>> {
+        const { licenseKey, "Idempotency-Key": idempotencyKey, ..._body } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "Idempotency-Key": idempotencyKey,
+                "X-Api-Key": requestOptions?.apiKey ?? this._options?.apiKey,
+                "X-License-Key": requestOptions?.licenseKey ?? this._options?.licenseKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.WrestaurantApiEnvironment.Default,
+                `api/v1/productos/${core.url.encodePathParam(licenseKey)}`,
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: _body,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as WrestaurantApi.CreateProductsResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new WrestaurantApi.BadRequestError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 401:
+                    throw new WrestaurantApi.UnauthorizedError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new WrestaurantApi.NotFoundError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 409:
+                    throw new WrestaurantApi.ConflictError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 422:
+                    throw new WrestaurantApi.UnprocessableEntityError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 424:
+                    throw new WrestaurantApi.FailedDependencyError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new WrestaurantApi.TooManyRequestsError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.WrestaurantApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/api/v1/productos/{licenseKey}",
+        );
+    }
+
+    /**
      * Actualiza los datos principales de un producto existente: descripción, grupo, nombre corto, precio, impuestos, bloqueo, visibilidad en menú electrónico y si permite producto compuesto en modificador.
      *
      * Es una actualización de reemplazo completo: se deben enviar todos los campos en cada solicitud (los valores omitidos no se conservan). El producto debe existir previamente — este endpoint no crea productos nuevos.
@@ -141,6 +309,7 @@ export class ProductosClient {
      * - Si el producto también está registrado como modificador de sí mismo, su precio se sincroniza.
      * - Se agrega una entrada de auditoría en la bitácora del sistema.
      * - Se marca el producto para sincronización con otros sistemas conectados.
+     * - Avisa a las terminales del Punto de Venta que recarguen su catálogo.
      *
      * No modifica grupos de modificadores, paquetes, costos, comentarios, asignaciones de estación/almacén ni configuración de monedero del producto — esa configuración, si existe, se conserva sin cambios.
      *

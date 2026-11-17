@@ -166,6 +166,414 @@ describe("ProductosClient", () => {
         }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
     });
 
+    test("createProducts (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {
+            idEmpresa: "1",
+            productos: [
+                {
+                    descripcion: "AGUA DE JAMAICA 1 LT",
+                    idGrupo: "03",
+                    subgrupos: ["11"],
+                    nombreCorto: "JAMAICA 1LT",
+                    precio: 55,
+                    idArea: "1",
+                    idUnidad: "PZA",
+                    bloqueado: false,
+                    visibleMenu: false,
+                    usarComedor: true,
+                    usarDomicilio: true,
+                    usarRapido: true,
+                },
+                {
+                    idProducto: "CEB001",
+                    descripcion: "CERVEZA CEBADA",
+                    idGrupo: "03",
+                    subgrupos: ["13"],
+                    nombreCorto: "",
+                    precio: 150,
+                    impuesto1: 16,
+                    impuesto2: 8,
+                    impuesto3: 0,
+                    idArea: "1",
+                    idUnidad: "PZA",
+                    bloqueado: false,
+                    visibleMenu: false,
+                    usarComedor: true,
+                    usarDomicilio: true,
+                    usarRapido: true,
+                },
+            ],
+        };
+        const rawResponseBody = {
+            jobId: "jobId",
+            productos: [{ indice: 1, idProducto: "idProducto", descripcion: "descripcion" }],
+        };
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/productos/licenseKey")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.productos.createProducts({
+            licenseKey: "licenseKey",
+            idEmpresa: "1",
+            productos: [
+                {
+                    descripcion: "AGUA DE JAMAICA 1 LT",
+                    idGrupo: "03",
+                    subgrupos: ["11"],
+                    nombreCorto: "JAMAICA 1LT",
+                    precio: 55,
+                    idArea: "1",
+                    idUnidad: "PZA",
+                    bloqueado: false,
+                    visibleMenu: false,
+                    usarComedor: true,
+                    usarDomicilio: true,
+                    usarRapido: true,
+                },
+                {
+                    idProducto: "CEB001",
+                    descripcion: "CERVEZA CEBADA",
+                    idGrupo: "03",
+                    subgrupos: ["13"],
+                    nombreCorto: "",
+                    precio: 150,
+                    impuesto1: 16,
+                    impuesto2: 8,
+                    impuesto3: 0,
+                    idArea: "1",
+                    idUnidad: "PZA",
+                    bloqueado: false,
+                    visibleMenu: false,
+                    usarComedor: true,
+                    usarDomicilio: true,
+                    usarRapido: true,
+                },
+            ],
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("createProducts (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {
+            idEmpresa: "x",
+            productos: [
+                { descripcion: "x", idGrupo: "x" },
+                { descripcion: "x", idGrupo: "x" },
+            ],
+        };
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/productos/licenseKey")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.productos.createProducts({
+                licenseKey: "licenseKey",
+                idEmpresa: "x",
+                productos: [
+                    {
+                        descripcion: "x",
+                        idGrupo: "x",
+                    },
+                    {
+                        descripcion: "x",
+                        idGrupo: "x",
+                    },
+                ],
+            });
+        }).rejects.toThrow(WrestaurantApi.BadRequestError);
+    });
+
+    test("createProducts (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {
+            idEmpresa: "x",
+            productos: [
+                { descripcion: "x", idGrupo: "x" },
+                { descripcion: "x", idGrupo: "x" },
+            ],
+        };
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/productos/licenseKey")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.productos.createProducts({
+                licenseKey: "licenseKey",
+                idEmpresa: "x",
+                productos: [
+                    {
+                        descripcion: "x",
+                        idGrupo: "x",
+                    },
+                    {
+                        descripcion: "x",
+                        idGrupo: "x",
+                    },
+                ],
+            });
+        }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
+    });
+
+    test("createProducts (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {
+            idEmpresa: "x",
+            productos: [
+                { descripcion: "x", idGrupo: "x" },
+                { descripcion: "x", idGrupo: "x" },
+            ],
+        };
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/productos/licenseKey")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.productos.createProducts({
+                licenseKey: "licenseKey",
+                idEmpresa: "x",
+                productos: [
+                    {
+                        descripcion: "x",
+                        idGrupo: "x",
+                    },
+                    {
+                        descripcion: "x",
+                        idGrupo: "x",
+                    },
+                ],
+            });
+        }).rejects.toThrow(WrestaurantApi.NotFoundError);
+    });
+
+    test("createProducts (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {
+            idEmpresa: "x",
+            productos: [
+                { descripcion: "x", idGrupo: "x" },
+                { descripcion: "x", idGrupo: "x" },
+            ],
+        };
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/productos/licenseKey")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.productos.createProducts({
+                licenseKey: "licenseKey",
+                idEmpresa: "x",
+                productos: [
+                    {
+                        descripcion: "x",
+                        idGrupo: "x",
+                    },
+                    {
+                        descripcion: "x",
+                        idGrupo: "x",
+                    },
+                ],
+            });
+        }).rejects.toThrow(WrestaurantApi.ConflictError);
+    });
+
+    test("createProducts (6)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {
+            idEmpresa: "x",
+            productos: [
+                { descripcion: "x", idGrupo: "x" },
+                { descripcion: "x", idGrupo: "x" },
+            ],
+        };
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/productos/licenseKey")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.productos.createProducts({
+                licenseKey: "licenseKey",
+                idEmpresa: "x",
+                productos: [
+                    {
+                        descripcion: "x",
+                        idGrupo: "x",
+                    },
+                    {
+                        descripcion: "x",
+                        idGrupo: "x",
+                    },
+                ],
+            });
+        }).rejects.toThrow(WrestaurantApi.UnprocessableEntityError);
+    });
+
+    test("createProducts (7)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {
+            idEmpresa: "x",
+            productos: [
+                { descripcion: "x", idGrupo: "x" },
+                { descripcion: "x", idGrupo: "x" },
+            ],
+        };
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/productos/licenseKey")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(424)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.productos.createProducts({
+                licenseKey: "licenseKey",
+                idEmpresa: "x",
+                productos: [
+                    {
+                        descripcion: "x",
+                        idGrupo: "x",
+                    },
+                    {
+                        descripcion: "x",
+                        idGrupo: "x",
+                    },
+                ],
+            });
+        }).rejects.toThrow(WrestaurantApi.FailedDependencyError);
+    });
+
+    test("createProducts (8)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {
+            idEmpresa: "x",
+            productos: [
+                { descripcion: "x", idGrupo: "x" },
+                { descripcion: "x", idGrupo: "x" },
+            ],
+        };
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/productos/licenseKey")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(429)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.productos.createProducts({
+                licenseKey: "licenseKey",
+                idEmpresa: "x",
+                productos: [
+                    {
+                        descripcion: "x",
+                        idGrupo: "x",
+                    },
+                    {
+                        descripcion: "x",
+                        idGrupo: "x",
+                    },
+                ],
+            });
+        }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
+    });
+
     test("updateProduct (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WrestaurantApiClient({
