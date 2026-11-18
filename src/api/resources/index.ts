@@ -1,3 +1,5 @@
+export * from "./almacenes/client/requests/index.js";
+export * as almacenes from "./almacenes/index.js";
 export * from "./asistencias/client/requests/index.js";
 export * as asistencias from "./asistencias/index.js";
 export * from "./cheques/client/requests/index.js";

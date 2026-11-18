@@ -3724,3 +3724,69 @@ await client.clientes.getClientes({
 </dl>
 </details>
 
+## Almacenes
+<details><summary><code>client.almacenes.<a href="/src/api/resources/almacenes/client/Client.ts">getAlmacenes</a>({ ...params }) -> WrestaurantApi.AlmacenesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lista el catálogo de almacenes configurados en el punto de venta.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.almacenes.getAlmacenes({
+    licenseKey: "licenseKey"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.GetAlmacenesAlmacenesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AlmacenesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+

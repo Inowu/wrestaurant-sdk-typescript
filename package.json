@@ -1,6 +1,6 @@
 {
     "name": "@wrestaurant/sdk",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "private": false,
     "repository": {
         "type": "git",
@@ -208,6 +208,17 @@
                 "default": "./dist/cjs/api/resources/clientes/exports.js"
             },
             "default": "./dist/cjs/api/resources/clientes/exports.js"
+        },
+        "./almacenes": {
+            "import": {
+                "types": "./dist/esm/api/resources/almacenes/exports.d.mts",
+                "default": "./dist/esm/api/resources/almacenes/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/almacenes/exports.d.ts",
+                "default": "./dist/cjs/api/resources/almacenes/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/almacenes/exports.js"
         },
         "./package.json": "./package.json"
     },

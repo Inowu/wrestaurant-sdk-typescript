@@ -1,4 +1,6 @@
 export * from "./AddOrderItemsResponse.js";
+export * from "./AlmacenDto.js";
+export * from "./AlmacenesResponse.js";
 export * from "./ApplyDiscountResponse.js";
 export * from "./AreaMesasDto.js";
 export * from "./AsistenciaDto.js";
