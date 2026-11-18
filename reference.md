@@ -1251,6 +1251,208 @@ await client.grupos.getSubgrupos({
 </dl>
 </details>
 
+## Insumos
+<details><summary><code>client.insumos.<a href="/src/api/resources/insumos/client/Client.ts">getInsumos</a>({ ...params }) -> WrestaurantApi.InsumosQueryResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Devuelve el catálogo de insumos (materia prima) de una sucursal, ordenado por descripción, con paginación, búsqueda y filtros opcionales por grupo, empresa y estatus. Cada insumo incluye su unidad de medida, grupo, costo, costo promedio, costo con impuestos, tasas de impuesto (en porcentaje), merma y configuración de inventario.
+
+Solo se incluyen insumos simples: los insumos elaborados (recetas) no forman parte de este listado.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.insumos.getInsumos({
+    licenseKey: "licenseKey"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.GetInsumosInsumosRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `InsumosClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.insumos.<a href="/src/api/resources/insumos/client/Client.ts">getInsumoGrupos</a>({ ...params }) -> WrestaurantApi.InsumoGruposQueryResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Devuelve los grupos de insumos configurados en una sucursal, ordenados por descripción, con paginación y búsqueda opcional. Cada grupo incluye su clasificación (alimentos, bebidas u otros), su cuenta contable y su tipo de pedido, con id y descripción.
+
+El `idGrupo` de cada grupo es el valor que aceptan `GET /insumos` y `GET /insumos/elaborados` para filtrar por grupo.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.insumos.getInsumoGrupos({
+    licenseKey: "licenseKey"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.GetInsumoGruposInsumosRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `InsumosClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.insumos.<a href="/src/api/resources/insumos/client/Client.ts">getInsumosElaborados</a>({ ...params }) -> WrestaurantApi.InsumosElaboradosQueryResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Devuelve los insumos elaborados (recetas o preparaciones que a su vez se usan como insumo) de una sucursal, ordenados por descripción, con paginación, búsqueda y filtros opcionales por grupo, empresa y estatus. Cada insumo incluye su unidad de medida, rendimiento, tiempos de preparación y de alerta, área de producción, costo, costo promedio, costo con impuestos, tasas de impuesto (en porcentaje) y merma.
+
+Los insumos simples (materia prima) se consultan con `GET /insumos`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.insumos.getInsumosElaborados({
+    licenseKey: "licenseKey"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.GetInsumosElaboradosInsumosRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `InsumosClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Turnos
 <details><summary><code>client.turnos.<a href="/src/api/resources/turnos/client/Client.ts">getTurnos</a>({ ...params }) -> WrestaurantApi.TurnosQueryResponse</code></summary>
 <dl>

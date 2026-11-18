@@ -9,6 +9,7 @@ import { FacturasClient } from "./api/resources/facturas/client/Client.js";
 import { FormasDePagoClient } from "./api/resources/formasDePago/client/Client.js";
 import { GruposClient } from "./api/resources/grupos/client/Client.js";
 import { ImpresorasClient } from "./api/resources/impresoras/client/Client.js";
+import { InsumosClient } from "./api/resources/insumos/client/Client.js";
 import { MesasClient } from "./api/resources/mesas/client/Client.js";
 import { MeserosClient } from "./api/resources/meseros/client/Client.js";
 import { OrdenesClient } from "./api/resources/ordenes/client/Client.js";
@@ -33,6 +34,7 @@ export class WrestaurantApiClient {
     protected _productos: ProductosClient | undefined;
     protected _estaciones: EstacionesClient | undefined;
     protected _grupos: GruposClient | undefined;
+    protected _insumos: InsumosClient | undefined;
     protected _turnos: TurnosClient | undefined;
     protected _asistencias: AsistenciasClient | undefined;
     protected _ordenes: OrdenesClient | undefined;
@@ -67,6 +69,10 @@ export class WrestaurantApiClient {
 
     public get grupos(): GruposClient {
         return (this._grupos ??= new GruposClient(this._options));
+    }
+
+    public get insumos(): InsumosClient {
+        return (this._insumos ??= new InsumosClient(this._options));
     }
 
     public get turnos(): TurnosClient {
