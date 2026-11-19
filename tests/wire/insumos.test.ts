@@ -477,4 +477,168 @@ describe("InsumosClient", () => {
             });
         }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
     });
+
+    test("getInsumoPresentaciones (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {
+            jobId: "jobId",
+            workerId: "workerId",
+            dispatchedAt: "2024-01-15T09:30:00Z",
+            page: 1,
+            pageSize: 1,
+            totalResults: 1,
+            totalPages: 1,
+            hasNextPage: true,
+            presentaciones: [
+                {
+                    idPresentacion: "idPresentacion",
+                    descripcion: "descripcion",
+                    idInsumo: "idInsumo",
+                    descripcionInsumo: "descripcionInsumo",
+                    unidadInsumo: "unidadInsumo",
+                    idGrupo: "idGrupo",
+                    descripcionGrupo: "descripcionGrupo",
+                    rendimiento: 1.1,
+                    unidad: "unidad",
+                    idEmpresa: "idEmpresa",
+                    costo: 1.1,
+                    costoPromedio: 1.1,
+                    idProveedor: "idProveedor",
+                    nombreProveedor: "nombreProveedor",
+                    impuesto1: 1.1,
+                    impuesto2: 1.1,
+                    impuesto3: 1.1,
+                    stockMinimo: 1.1,
+                    stockMaximo: 1.1,
+                    ubicacion: "ubicacion",
+                    usarBasculaInv: true,
+                    activo: true,
+                },
+            ],
+        };
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/insumos/presentaciones/licenseKey")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.insumos.getInsumoPresentaciones({
+            licenseKey: "licenseKey",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("getInsumoPresentaciones (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/insumos/presentaciones/licenseKey")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.insumos.getInsumoPresentaciones({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
+    });
+
+    test("getInsumoPresentaciones (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/insumos/presentaciones/licenseKey")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.insumos.getInsumoPresentaciones({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.NotFoundError);
+    });
+
+    test("getInsumoPresentaciones (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/insumos/presentaciones/licenseKey")
+            .respondWith()
+            .statusCode(424)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.insumos.getInsumoPresentaciones({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.FailedDependencyError);
+    });
+
+    test("getInsumoPresentaciones (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/insumos/presentaciones/licenseKey")
+            .respondWith()
+            .statusCode(429)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.insumos.getInsumoPresentaciones({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
+    });
 });

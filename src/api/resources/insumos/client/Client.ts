@@ -352,4 +352,116 @@ export class InsumosClient {
             "/api/v1/insumos/elaborados/{licenseKey}",
         );
     }
+
+    /**
+     * Devuelve el catálogo de presentaciones de insumos (la forma en que se compra un insumo, p. ej. una caja de 12 piezas), ordenado por descripción, con paginación, búsqueda y filtros opcionales por grupo, insumo y estatus. Cada presentación incluye su rendimiento en unidades del insumo y, por empresa, su costo, proveedor, tasas de impuesto (en porcentaje) y stock mínimo y máximo.
+     *
+     * @param {WrestaurantApi.GetInsumoPresentacionesInsumosRequest} request
+     * @param {InsumosClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link WrestaurantApi.UnauthorizedError}
+     * @throws {@link WrestaurantApi.NotFoundError}
+     * @throws {@link WrestaurantApi.FailedDependencyError}
+     * @throws {@link WrestaurantApi.TooManyRequestsError}
+     *
+     * @example
+     *     await client.insumos.getInsumoPresentaciones({
+     *         licenseKey: "licenseKey"
+     *     })
+     */
+    public getInsumoPresentaciones(
+        request: WrestaurantApi.GetInsumoPresentacionesInsumosRequest,
+        requestOptions?: InsumosClient.RequestOptions,
+    ): core.HttpResponsePromise<WrestaurantApi.InsumoPresentacionesResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__getInsumoPresentaciones(request, requestOptions));
+    }
+
+    private async __getInsumoPresentaciones(
+        request: WrestaurantApi.GetInsumoPresentacionesInsumosRequest,
+        requestOptions?: InsumosClient.RequestOptions,
+    ): Promise<core.WithRawResponse<WrestaurantApi.InsumoPresentacionesResponse>> {
+        const { licenseKey, page, pageSize, search, idGrupo, idInsumo, activo } = request;
+        const _queryParams: Record<string, unknown> = {
+            page,
+            pageSize,
+            search,
+            idGrupo,
+            idInsumo,
+            activo,
+        };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "X-Api-Key": requestOptions?.apiKey ?? this._options?.apiKey,
+                "X-License-Key": requestOptions?.licenseKey ?? this._options?.licenseKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.WrestaurantApiEnvironment.Default,
+                `api/v1/insumos/presentaciones/${core.url.encodePathParam(licenseKey)}`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as WrestaurantApi.InsumoPresentacionesResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new WrestaurantApi.UnauthorizedError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new WrestaurantApi.NotFoundError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 424:
+                    throw new WrestaurantApi.FailedDependencyError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new WrestaurantApi.TooManyRequestsError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.WrestaurantApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/api/v1/insumos/presentaciones/{licenseKey}",
+        );
+    }
 }

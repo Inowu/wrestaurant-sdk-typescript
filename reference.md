@@ -1519,6 +1519,71 @@ await client.insumos.getInsumosElaborados({
 </dl>
 </details>
 
+<details><summary><code>client.insumos.<a href="/src/api/resources/insumos/client/Client.ts">getInsumoPresentaciones</a>({ ...params }) -> WrestaurantApi.InsumoPresentacionesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Devuelve el catálogo de presentaciones de insumos (la forma en que se compra un insumo, p. ej. una caja de 12 piezas), ordenado por descripción, con paginación, búsqueda y filtros opcionales por grupo, insumo y estatus. Cada presentación incluye su rendimiento en unidades del insumo y, por empresa, su costo, proveedor, tasas de impuesto (en porcentaje) y stock mínimo y máximo.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.insumos.getInsumoPresentaciones({
+    licenseKey: "licenseKey"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.GetInsumoPresentacionesInsumosRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `InsumosClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Turnos
 <details><summary><code>client.turnos.<a href="/src/api/resources/turnos/client/Client.ts">getTurnos</a>({ ...params }) -> WrestaurantApi.TurnosQueryResponse</code></summary>
 <dl>

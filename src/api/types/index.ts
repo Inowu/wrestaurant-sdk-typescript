@@ -30,6 +30,8 @@ export * from "./InsumoDto.js";
 export * from "./InsumoElaboradoDto.js";
 export * from "./InsumoGrupoDto.js";
 export * from "./InsumoGruposQueryResponse.js";
+export * from "./InsumoPresentacionDto.js";
+export * from "./InsumoPresentacionesResponse.js";
 export * from "./InsumosElaboradosQueryResponse.js";
 export * from "./InsumosQueryResponse.js";
 export * from "./InventarioFisicoAlmacenDto.js";
