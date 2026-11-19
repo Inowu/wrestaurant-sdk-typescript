@@ -20,6 +20,8 @@ export * from "./impresoras/client/requests/index.js";
 export * as impresoras from "./impresoras/index.js";
 export * from "./insumos/client/requests/index.js";
 export * as insumos from "./insumos/index.js";
+export * from "./inventario/client/requests/index.js";
+export * as inventario from "./inventario/index.js";
 export * from "./mesas/client/requests/index.js";
 export * as mesas from "./mesas/index.js";
 export * from "./meseros/client/requests/index.js";

@@ -3790,3 +3790,69 @@ await client.almacenes.getAlmacenes({
 </dl>
 </details>
 
+## Inventario
+<details><summary><code>client.inventario.<a href="/src/api/resources/inventario/client/Client.ts">getInventariosFisicos</a>({ ...params }) -> WrestaurantApi.InventariosFisicosResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lista los inventarios físicos capturados en el punto de venta, del folio más reciente al más antiguo. Cada inventario compara la existencia teórica contra la física en hasta dos almacenes.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.inventario.getInventariosFisicos({
+    licenseKey: "licenseKey"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.GetInventariosFisicosInventarioRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `InventarioClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
