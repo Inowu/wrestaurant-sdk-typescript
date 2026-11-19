@@ -1054,6 +1054,72 @@ await client.productos.getBestSellers({
 </dl>
 </details>
 
+<details><summary><code>client.productos.<a href="/src/api/resources/productos/client/Client.ts">getRecetas</a>({ ...params }) -> WrestaurantApi.RecetaResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Devuelve los insumos que componen la receta de un producto, con la cantidad que descuenta cada venta, sus costos por empresa y el almacén del que se descuenta en cada área del restaurante. Un producto sin receta responde con la lista de insumos vacía.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.productos.getRecetas({
+    licenseKey: "licenseKey",
+    idProducto: "idProducto"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.GetRecetasProductosRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProductosClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Estaciones
 <details><summary><code>client.estaciones.<a href="/src/api/resources/estaciones/client/Client.ts">getStations</a>({ ...params }) -> WrestaurantApi.StationsQueryResponse</code></summary>
 <dl>

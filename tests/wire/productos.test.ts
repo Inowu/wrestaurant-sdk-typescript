@@ -994,4 +994,159 @@ describe("ProductosClient", () => {
             });
         }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
     });
+
+    test("getRecetas (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {
+            jobId: "jobId",
+            workerId: "workerId",
+            dispatchedAt: "2024-01-15T09:30:00Z",
+            idProducto: "idProducto",
+            descripcion: "descripcion",
+            insumos: [
+                {
+                    idInsumo: "idInsumo",
+                    descripcion: "descripcion",
+                    unidad: "unidad",
+                    cantidad: 1.1,
+                    idEmpresa: "idEmpresa",
+                    costo: 1.1,
+                    costoPromedio: 1.1,
+                    merma: 1.1,
+                    elaborado: true,
+                    rendimientoElaborado: 1.1,
+                    almacenesPorArea: [{}],
+                },
+            ],
+        };
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/productos/licenseKey/idProducto/recetas")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.productos.getRecetas({
+            licenseKey: "licenseKey",
+            idProducto: "idProducto",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("getRecetas (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/productos/licenseKey/idProducto/recetas")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.productos.getRecetas({
+                licenseKey: "licenseKey",
+                idProducto: "idProducto",
+            });
+        }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
+    });
+
+    test("getRecetas (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/productos/licenseKey/idProducto/recetas")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.productos.getRecetas({
+                licenseKey: "licenseKey",
+                idProducto: "idProducto",
+            });
+        }).rejects.toThrow(WrestaurantApi.NotFoundError);
+    });
+
+    test("getRecetas (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/productos/licenseKey/idProducto/recetas")
+            .respondWith()
+            .statusCode(424)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.productos.getRecetas({
+                licenseKey: "licenseKey",
+                idProducto: "idProducto",
+            });
+        }).rejects.toThrow(WrestaurantApi.FailedDependencyError);
+    });
+
+    test("getRecetas (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/productos/licenseKey/idProducto/recetas")
+            .respondWith()
+            .statusCode(429)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.productos.getRecetas({
+                licenseKey: "licenseKey",
+                idProducto: "idProducto",
+            });
+        }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
+    });
 });

@@ -1,4 +1,5 @@
 export type { CreateProductsRequest } from "./CreateProductsRequest.js";
 export type { GetBestSellersProductosRequest } from "./GetBestSellersProductosRequest.js";
 export type { GetProductsProductosRequest } from "./GetProductsProductosRequest.js";
+export type { GetRecetasProductosRequest } from "./GetRecetasProductosRequest.js";
 export type { UpdateProductRequest } from "./UpdateProductRequest.js";

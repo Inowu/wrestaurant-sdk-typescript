@@ -554,4 +554,102 @@ export class ProductosClient {
             "/api/v1/productos/mas_vendidos/{licenseKey}",
         );
     }
+
+    /**
+     * Devuelve los insumos que componen la receta de un producto, con la cantidad que descuenta cada venta, sus costos por empresa y el almacén del que se descuenta en cada área del restaurante. Un producto sin receta responde con la lista de insumos vacía.
+     *
+     * @param {WrestaurantApi.GetRecetasProductosRequest} request
+     * @param {ProductosClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link WrestaurantApi.UnauthorizedError}
+     * @throws {@link WrestaurantApi.NotFoundError}
+     * @throws {@link WrestaurantApi.FailedDependencyError}
+     * @throws {@link WrestaurantApi.TooManyRequestsError}
+     *
+     * @example
+     *     await client.productos.getRecetas({
+     *         licenseKey: "licenseKey",
+     *         idProducto: "idProducto"
+     *     })
+     */
+    public getRecetas(
+        request: WrestaurantApi.GetRecetasProductosRequest,
+        requestOptions?: ProductosClient.RequestOptions,
+    ): core.HttpResponsePromise<WrestaurantApi.RecetaResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__getRecetas(request, requestOptions));
+    }
+
+    private async __getRecetas(
+        request: WrestaurantApi.GetRecetasProductosRequest,
+        requestOptions?: ProductosClient.RequestOptions,
+    ): Promise<core.WithRawResponse<WrestaurantApi.RecetaResponse>> {
+        const { licenseKey, idProducto } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "X-Api-Key": requestOptions?.apiKey ?? this._options?.apiKey,
+                "X-License-Key": requestOptions?.licenseKey ?? this._options?.licenseKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.WrestaurantApiEnvironment.Default,
+                `api/v1/productos/${core.url.encodePathParam(licenseKey)}/${core.url.encodePathParam(idProducto)}/recetas`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as WrestaurantApi.RecetaResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new WrestaurantApi.UnauthorizedError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new WrestaurantApi.NotFoundError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 424:
+                    throw new WrestaurantApi.FailedDependencyError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new WrestaurantApi.TooManyRequestsError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.WrestaurantApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/api/v1/productos/{licenseKey}/{idProducto}/recetas",
+        );
+    }
 }
