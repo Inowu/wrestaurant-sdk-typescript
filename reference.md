@@ -3987,3 +3987,135 @@ await client.inventario.getInventariosFisicos({
 </dl>
 </details>
 
+## Monitores
+<details><summary><code>client.monitores.<a href="/src/api/resources/monitores/client/Client.ts">getMonitores</a>({ ...params }) -> WrestaurantApi.MonitoresResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Devuelve el catálogo de monitores de cocina (KDS) configurados en el punto de venta. La clave idMonitor de cada elemento es la que asocia los productos con los monitores en que se visualizan.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.monitores.getMonitores({
+    licenseKey: "licenseKey"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.GetMonitoresMonitoresRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MonitoresClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.monitores.<a href="/src/api/resources/monitores/client/Client.ts">getMonitorOrdenes</a>({ ...params }) -> WrestaurantApi.MonitorOrdenesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Devuelve la cola de un monitor de cocina (KDS): las cuentas no canceladas con productos enviados a ese monitor, agrupadas por folio y ordenadas por hora de captura. estadoMonitor filtra por el estado del producto en el monitor, tal como lo guarda SoftRestaurant (0 = en cola).
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.monitores.getMonitorOrdenes({
+    licenseKey: "licenseKey",
+    idMonitor: "idMonitor"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.GetMonitorOrdenesMonitoresRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MonitoresClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+

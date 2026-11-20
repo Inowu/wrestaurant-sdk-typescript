@@ -26,6 +26,8 @@ export * from "./mesas/client/requests/index.js";
 export * as mesas from "./mesas/index.js";
 export * from "./meseros/client/requests/index.js";
 export * as meseros from "./meseros/index.js";
+export * from "./monitores/client/requests/index.js";
+export * as monitores from "./monitores/index.js";
 export * from "./ordenes/client/requests/index.js";
 export * as ordenes from "./ordenes/index.js";
 export * from "./productos/client/requests/index.js";
