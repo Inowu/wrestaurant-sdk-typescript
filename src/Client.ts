@@ -17,6 +17,7 @@ import { MeserosClient } from "./api/resources/meseros/client/Client.js";
 import { MonitoresClient } from "./api/resources/monitores/client/Client.js";
 import { OrdenesClient } from "./api/resources/ordenes/client/Client.js";
 import { ProductosClient } from "./api/resources/productos/client/Client.js";
+import { ProveedoresClient } from "./api/resources/proveedores/client/Client.js";
 import { PuntosDeVentaClient } from "./api/resources/puntosDeVenta/client/Client.js";
 import { TiposDescuentoClient } from "./api/resources/tiposDescuento/client/Client.js";
 import { TurnosClient } from "./api/resources/turnos/client/Client.js";
@@ -52,6 +53,7 @@ export class WrestaurantApiClient {
     protected _almacenes: AlmacenesClient | undefined;
     protected _inventario: InventarioClient | undefined;
     protected _monitores: MonitoresClient | undefined;
+    protected _proveedores: ProveedoresClient | undefined;
 
     constructor(options: WrestaurantApiClient.Options) {
         this._options = normalizeClientOptionsWithAuth(options);
@@ -135,6 +137,10 @@ export class WrestaurantApiClient {
 
     public get monitores(): MonitoresClient {
         return (this._monitores ??= new MonitoresClient(this._options));
+    }
+
+    public get proveedores(): ProveedoresClient {
+        return (this._proveedores ??= new ProveedoresClient(this._options));
     }
 
     /**

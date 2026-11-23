@@ -1584,6 +1584,71 @@ await client.insumos.getInsumoPresentaciones({
 </dl>
 </details>
 
+<details><summary><code>client.insumos.<a href="/src/api/resources/insumos/client/Client.ts">getUnidadesMedida</a>({ ...params }) -> WrestaurantApi.UnidadesMedidaResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Devuelve el catálogo de unidades de medida configuradas en el punto de venta, ordenado por clave. idUnidad es el valor que guardan los insumos en su campo unidad; idUnidadMedidaSat es la clave de unidad del SAT.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.insumos.getUnidadesMedida({
+    licenseKey: "licenseKey"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.GetUnidadesMedidaInsumosRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `InsumosClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Turnos
 <details><summary><code>client.turnos.<a href="/src/api/resources/turnos/client/Client.ts">getTurnos</a>({ ...params }) -> WrestaurantApi.TurnosQueryResponse</code></summary>
 <dl>
@@ -4108,6 +4173,72 @@ await client.monitores.getMonitorOrdenes({
 <dd>
 
 **requestOptions:** `MonitoresClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Proveedores
+<details><summary><code>client.proveedores.<a href="/src/api/resources/proveedores/client/Client.ts">getProveedores</a>({ ...params }) -> WrestaurantApi.ProveedoresResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lista el catálogo de proveedores configurados en el punto de venta, ordenado por nombre. search filtra por clave, nombre, razón social o RFC.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.proveedores.getProveedores({
+    licenseKey: "licenseKey"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.GetProveedoresProveedoresRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProveedoresClient.RequestOptions` 
     
 </dd>
 </dl>

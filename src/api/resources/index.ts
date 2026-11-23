@@ -32,6 +32,8 @@ export * from "./ordenes/client/requests/index.js";
 export * as ordenes from "./ordenes/index.js";
 export * from "./productos/client/requests/index.js";
 export * as productos from "./productos/index.js";
+export * from "./proveedores/client/requests/index.js";
+export * as proveedores from "./proveedores/index.js";
 export * from "./puntosDeVenta/client/requests/index.js";
 export * as puntosDeVenta from "./puntosDeVenta/index.js";
 export * from "./tiposDescuento/client/requests/index.js";

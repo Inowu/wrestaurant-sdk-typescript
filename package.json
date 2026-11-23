@@ -1,6 +1,6 @@
 {
     "name": "@wrestaurant/sdk",
-    "version": "1.8.0",
+    "version": "1.9.0",
     "private": false,
     "repository": {
         "type": "git",
@@ -241,6 +241,17 @@
                 "default": "./dist/cjs/api/resources/monitores/exports.js"
             },
             "default": "./dist/cjs/api/resources/monitores/exports.js"
+        },
+        "./proveedores": {
+            "import": {
+                "types": "./dist/esm/api/resources/proveedores/exports.d.mts",
+                "default": "./dist/esm/api/resources/proveedores/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/proveedores/exports.d.ts",
+                "default": "./dist/cjs/api/resources/proveedores/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/proveedores/exports.js"
         },
         "./package.json": "./package.json"
     },

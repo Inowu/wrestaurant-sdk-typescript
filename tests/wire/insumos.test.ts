@@ -641,4 +641,139 @@ describe("InsumosClient", () => {
             });
         }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
     });
+
+    test("getUnidadesMedida (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {
+            jobId: "jobId",
+            workerId: "workerId",
+            dispatchedAt: "2024-01-15T09:30:00Z",
+            totalResults: 1,
+            unidades: [{ idUnidad: "idUnidad", idUnidadMedidaSat: "idUnidadMedidaSat" }],
+        };
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/insumos/unidades/licenseKey")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.insumos.getUnidadesMedida({
+            licenseKey: "licenseKey",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("getUnidadesMedida (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/insumos/unidades/licenseKey")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.insumos.getUnidadesMedida({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.UnauthorizedError);
+    });
+
+    test("getUnidadesMedida (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/insumos/unidades/licenseKey")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.insumos.getUnidadesMedida({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.NotFoundError);
+    });
+
+    test("getUnidadesMedida (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/insumos/unidades/licenseKey")
+            .respondWith()
+            .statusCode(424)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.insumos.getUnidadesMedida({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.FailedDependencyError);
+    });
+
+    test("getUnidadesMedida (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WrestaurantApiClient({
+            maxRetries: 0,
+            apiKey: "test",
+            licenseKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/v1/insumos/unidades/licenseKey")
+            .respondWith()
+            .statusCode(429)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.insumos.getUnidadesMedida({
+                licenseKey: "licenseKey",
+            });
+        }).rejects.toThrow(WrestaurantApi.TooManyRequestsError);
+    });
 });

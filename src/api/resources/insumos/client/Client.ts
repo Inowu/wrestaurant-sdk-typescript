@@ -464,4 +464,104 @@ export class InsumosClient {
             "/api/v1/insumos/presentaciones/{licenseKey}",
         );
     }
+
+    /**
+     * Devuelve el catálogo de unidades de medida configuradas en el punto de venta, ordenado por clave. idUnidad es el valor que guardan los insumos en su campo unidad; idUnidadMedidaSat es la clave de unidad del SAT.
+     *
+     * @param {WrestaurantApi.GetUnidadesMedidaInsumosRequest} request
+     * @param {InsumosClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link WrestaurantApi.UnauthorizedError}
+     * @throws {@link WrestaurantApi.NotFoundError}
+     * @throws {@link WrestaurantApi.FailedDependencyError}
+     * @throws {@link WrestaurantApi.TooManyRequestsError}
+     *
+     * @example
+     *     await client.insumos.getUnidadesMedida({
+     *         licenseKey: "licenseKey"
+     *     })
+     */
+    public getUnidadesMedida(
+        request: WrestaurantApi.GetUnidadesMedidaInsumosRequest,
+        requestOptions?: InsumosClient.RequestOptions,
+    ): core.HttpResponsePromise<WrestaurantApi.UnidadesMedidaResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__getUnidadesMedida(request, requestOptions));
+    }
+
+    private async __getUnidadesMedida(
+        request: WrestaurantApi.GetUnidadesMedidaInsumosRequest,
+        requestOptions?: InsumosClient.RequestOptions,
+    ): Promise<core.WithRawResponse<WrestaurantApi.UnidadesMedidaResponse>> {
+        const { licenseKey } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "X-Api-Key": requestOptions?.apiKey ?? this._options?.apiKey,
+                "X-License-Key": requestOptions?.licenseKey ?? this._options?.licenseKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.WrestaurantApiEnvironment.Default,
+                `api/v1/insumos/unidades/${core.url.encodePathParam(licenseKey)}`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as WrestaurantApi.UnidadesMedidaResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new WrestaurantApi.UnauthorizedError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new WrestaurantApi.NotFoundError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 424:
+                    throw new WrestaurantApi.FailedDependencyError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new WrestaurantApi.TooManyRequestsError(
+                        _response.error.body as WrestaurantApi.ProblemDetails,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.WrestaurantApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/api/v1/insumos/unidades/{licenseKey}",
+        );
+    }
 }
