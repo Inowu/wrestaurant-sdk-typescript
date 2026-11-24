@@ -4,6 +4,7 @@ import { AlmacenesClient } from "./api/resources/almacenes/client/Client.js";
 import { AsistenciasClient } from "./api/resources/asistencias/client/Client.js";
 import { ChequesClient } from "./api/resources/cheques/client/Client.js";
 import { ClientesClient } from "./api/resources/clientes/client/Client.js";
+import { ComprasClient } from "./api/resources/compras/client/Client.js";
 import { EmpresasClient } from "./api/resources/empresas/client/Client.js";
 import { EstacionesClient } from "./api/resources/estaciones/client/Client.js";
 import { FacturasClient } from "./api/resources/facturas/client/Client.js";
@@ -54,6 +55,7 @@ export class WrestaurantApiClient {
     protected _inventario: InventarioClient | undefined;
     protected _monitores: MonitoresClient | undefined;
     protected _proveedores: ProveedoresClient | undefined;
+    protected _compras: ComprasClient | undefined;
 
     constructor(options: WrestaurantApiClient.Options) {
         this._options = normalizeClientOptionsWithAuth(options);
@@ -141,6 +143,10 @@ export class WrestaurantApiClient {
 
     public get proveedores(): ProveedoresClient {
         return (this._proveedores ??= new ProveedoresClient(this._options));
+    }
+
+    public get compras(): ComprasClient {
+        return (this._compras ??= new ComprasClient(this._options));
     }
 
     /**

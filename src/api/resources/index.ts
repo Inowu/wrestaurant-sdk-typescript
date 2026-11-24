@@ -6,6 +6,8 @@ export * from "./cheques/client/requests/index.js";
 export * as cheques from "./cheques/index.js";
 export * from "./clientes/client/requests/index.js";
 export * as clientes from "./clientes/index.js";
+export * from "./compras/client/requests/index.js";
+export * as compras from "./compras/index.js";
 export * from "./empresas/client/requests/index.js";
 export * as empresas from "./empresas/index.js";
 export * from "./estaciones/client/requests/index.js";

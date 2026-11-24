@@ -4250,3 +4250,135 @@ await client.proveedores.getProveedores({
 </dl>
 </details>
 
+## Compras
+<details><summary><code>client.compras.<a href="/src/api/resources/compras/client/Client.ts">getCompras</a>({ ...params }) -> WrestaurantApi.ComprasResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lista las compras a proveedores registradas en el punto de venta, de la más reciente a la más antigua por folio. idEmpresa limita el resultado a una empresa; search filtra por folio, folio de factura, nombre del proveedor o referencia; fechaStart/fechaEnd (inclusivos, ISO 8601) filtran por fecha de aplicación; cancelado filtra por estado de cancelación. Los impuestos del encabezado son importes. Para las partidas de una compra usa GET /compras/{licenseKey}/{idCompra}.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.compras.getCompras({
+    licenseKey: "licenseKey"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.GetComprasComprasRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComprasClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compras.<a href="/src/api/resources/compras/client/Client.ts">getCompra</a>({ ...params }) -> WrestaurantApi.CompraDetalleResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Devuelve el encabezado de una compra y sus partidas: presentación de insumo, almacén de entrada, cantidad, costo e impuestos. En las partidas, impuesto1..3 son tasas en porcentaje (16 = 16%) e impuestoNImporte son los importes. Responde 404 si la compra no existe.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.compras.getCompra({
+    licenseKey: "licenseKey",
+    idCompra: 1000000
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `WrestaurantApi.GetCompraComprasRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComprasClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
