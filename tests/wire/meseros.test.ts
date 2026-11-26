@@ -184,7 +184,6 @@ describe("MeserosClient", () => {
                     idMeseroInterno: 1000000,
                     idMesero: "idMesero",
                     nombre: "nombre",
-                    contrasena: "contrasena",
                     tipo: 1,
                     fotografia: "fotografia",
                     visible: 1,

@@ -4,6 +4,7 @@ export interface MeseroDto {
     idMeseroInterno?: number | undefined;
     idMesero?: (string | null) | undefined;
     nombre?: (string | null) | undefined;
+    /** Obsoleto: siempre vacío. El NIP del mesero ya no sale del punto de venta; para validarlo use `POST /meseros/login/{licenseKey}`. Este campo se eliminará en una versión futura. */
     contrasena?: (string | null) | undefined;
     tipo?: (number | null) | undefined;
     fotografia?: (string | null) | undefined;

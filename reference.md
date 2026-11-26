@@ -2979,7 +2979,7 @@ Cobra una orden abierta y la convierte en una venta: registra las formas de pago
 
 **Pagos.** Envíe una o más formas de pago en `pagos` (hasta 10). La suma de `importe × tipoDeCambio` debe cubrir el total de la cuenta; si es menor, no se cobra nada y se devuelve un error con el total esperado. El excedente se entrega como cambio y se descuenta del pago en efectivo, igual que en el punto de venta: por eso un excedente sin ningún pago en efectivo se rechaza, ya que sería un cobro de más y no un cambio.
 
-**Cobrar una cuenta no impresa se rechaza cuando la sucursal no permite cobrar sin imprimir; donde sí lo permite, la cuenta se cobra sin número de cheque, igual que en el punto de venta. El valor de esa configuración se devuelve en `pagarSinImprimir`.
+**Cobrar una cuenta no impresa se rechaza cuando la sucursal no permite cobrar sin imprimir; donde sí lo permite, el cobro marca la cuenta como impresa y le asigna su número de cheque, igual que el punto de venta (sin imprimir el ticket). El valor de esa configuración se devuelve en `pagarSinImprimir`.
 
 **Cuentas sin productos.** Una cuenta vacía se puede cobrar: el total es 0.00 y se registra un pago de 0.00.
 

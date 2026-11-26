@@ -17,6 +17,7 @@ export interface EmpresaDto {
     distribuidor?: (string | null) | undefined;
     numeroFactura?: (string | null) | undefined;
     numeroDeControl?: (string | null) | undefined;
+    /** Obsoleto: siempre vacío. La contraseña ya no sale del punto de venta. Este campo se eliminará en una versión futura. */
     contrasenaControl?: (string | null) | undefined;
     idHardware?: (string | null) | undefined;
     licenciaPrincipal?: (string | null) | undefined;
@@ -34,5 +35,6 @@ export interface EmpresaDto {
     pais?: (string | null) | undefined;
     ciudadSucursal?: (string | null) | undefined;
     estadoSucursal?: (string | null) | undefined;
+    /** Obsoleto: siempre vacío. La contraseña ya no sale del punto de venta. Este campo se eliminará en una versión futura. */
     passwordEmpresa?: (string | null) | undefined;
 }

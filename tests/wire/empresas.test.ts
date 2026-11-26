@@ -36,7 +36,6 @@ describe("EmpresasClient", () => {
                     distribuidor: "distribuidor",
                     numeroFactura: "numeroFactura",
                     numeroDeControl: "numeroDeControl",
-                    contrasenaControl: "contrasenaControl",
                     idHardware: "idHardware",
                     licenciaPrincipal: "licenciaPrincipal",
                     licenciaMonederoElectronico: "licenciaMonederoElectronico",
@@ -53,7 +52,6 @@ describe("EmpresasClient", () => {
                     pais: "pais",
                     ciudadSucursal: "ciudadSucursal",
                     estadoSucursal: "estadoSucursal",
-                    passwordEmpresa: "passwordEmpresa",
                 },
             ],
         };

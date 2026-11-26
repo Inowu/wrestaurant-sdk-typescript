@@ -21,7 +21,8 @@ export interface CloseOpenOrderResponse {
     /**
      * Valor de `pagarsinimprimir` en la configuración de la sucursal: indica si permite cobrar
      * una cuenta sin imprimirla. Cuando es `false`, cobrar una cuenta no impresa se rechaza y
-     * hay que llamar antes a `POST /temp_ordenes/imprimir/{licenseKey}/{folio}`.
+     * hay que llamar antes a `POST /temp_ordenes/imprimir/{licenseKey}/{folio}`. Cuando es
+     * `true`, el cobro asigna el número de cheque que habría asignado la impresión.
      */
     pagarSinImprimir?: boolean | undefined;
     totales?: WrestaurantApi.OrderDiscountTotalsDto | undefined;
