@@ -2648,7 +2648,12 @@ describe("OrdenesClient", () => {
             licenseKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { imprimirTicket: true, usuario: "05", includeOrderComments: true };
+        const rawRequestBody = {
+            imprimirTicket: true,
+            usuario: "05",
+            includeOrderComments: true,
+            includeCaptureTimes: true,
+        };
         const rawResponseBody = {
             jobId: "jobId",
             folio: 1,
@@ -2690,6 +2695,7 @@ describe("OrdenesClient", () => {
             imprimirTicket: true,
             usuario: "05",
             includeOrderComments: true,
+            includeCaptureTimes: true,
         });
         expect(response).toEqual(rawResponseBody);
     });

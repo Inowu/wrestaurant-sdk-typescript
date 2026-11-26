@@ -2926,7 +2926,8 @@ await client.ordenes.printOpenOrder({
     folio: 1,
     imprimirTicket: true,
     usuario: "05",
-    includeOrderComments: true
+    includeOrderComments: true,
+    includeCaptureTimes: true
 });
 
 ```

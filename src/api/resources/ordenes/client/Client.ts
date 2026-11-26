@@ -1555,7 +1555,8 @@ export class OrdenesClient {
      *         folio: 1,
      *         imprimirTicket: true,
      *         usuario: "05",
-     *         includeOrderComments: true
+     *         includeOrderComments: true,
+     *         includeCaptureTimes: true
      *     })
      */
     public printOpenOrder(

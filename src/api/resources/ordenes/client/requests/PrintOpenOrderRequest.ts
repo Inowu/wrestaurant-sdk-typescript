@@ -7,7 +7,8 @@
  *         folio: 1,
  *         imprimirTicket: true,
  *         usuario: "05",
- *         includeOrderComments: true
+ *         includeOrderComments: true,
+ *         includeCaptureTimes: true
  *     }
  */
 export interface PrintOpenOrderRequest {
@@ -40,4 +41,13 @@ export interface PrintOpenOrderRequest {
      * hecho desde SoftRestaurant. Un producto sin comentario no imprime renglón extra.
      */
     includeOrderComments?: boolean;
+    /**
+     * Si el ticket incluye la hora en que se capturó cada producto (`Capturado HH:mm`),
+     * impresa al cierre del renglón del producto, después de sus modificadores. Por omisión
+     * `false`, para no cambiar el ticket de quien ya consume este endpoint.
+     *
+     * La hora se lee de `tempcheqdet.hora` de la propia cuenta, en la hora local del punto
+     * de venta, tal como SoftRestaurant la guardó. Un renglón sin hora no imprime renglón extra.
+     */
+    includeCaptureTimes?: boolean;
 }
